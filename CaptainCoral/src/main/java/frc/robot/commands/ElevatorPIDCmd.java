@@ -18,8 +18,8 @@ public class ElevatorPIDCmd extends Command {
         this.setpoint = setpoint;
         
         TrapezoidProfile.Constraints constraints = new TrapezoidProfile.Constraints(2.25, 0.7);
-        profiledPIDController = new ProfiledPIDController(0.2, 0.0, 0.0, constraints);
-        feedforward = new ElevatorFeedforward(0.0, 0.1, 0.006);
+        profiledPIDController = new ProfiledPIDController(0.0001, 0.0, 0.0, constraints);
+        feedforward = new ElevatorFeedforward(0.0, 0.0, 0.0);
 
         addRequirements(elevator);
     }

@@ -5,6 +5,9 @@ public final class KinematicsConstants {
     public static final double absoluteZero = 0.0;
     public static final double jogSpeedMultiplier = -0.125;
 
+    //====================Drivetrain====================
+    public static final double drivetrainSpeedMultiplier = 0.3;
+
     //====================Intake====================
     public static final double Intake_kP = 0.05;
     public static final double Intake_kI = 0.0; 
@@ -20,11 +23,10 @@ public final class KinematicsConstants {
     public static final double EndEffector_kI = 0.0; 
     public static final double EndEffector_kD = 0.0; 
     
-    public static final double End_Effector_Wrist_L1_L2_L3_Setpoint = 5.0;  //Encoder Units
-    public static final double End_Effector_Wrist_L4_Setpoint = 10.0;  //Encoder Units
-    public static final double EndEffector_Wrist_Intake_Setpoint = 0.0;  //Encoder Units
+    public static final double End_Effector_Wrist_L1_L2_L3_Setpoint = 0.21;  //Encoder Units
+    public static final double End_Effector_Wrist_L4_Setpoint = 0.4;  //Encoder Units
 
-    public static final double scoreSpeed = -0.3; 
+    public static final double scoreSpeed = 0.3; 
 
     //====================Elevator====================
     public static final double Elevator_kP = 0.05;
@@ -37,9 +39,6 @@ public final class KinematicsConstants {
     public static final double Elevator_L4_Setpoint = 6.8; //Encoder Units
 
     //====================Climb====================
-    public static final double Climber_kP = 0.05; 
-    public static final double Climber_kI = 0.0; 
-    public static final double Climber_kD = 0.0; 
-
-    public static final double Climb_Setpoint = 5.0;  //Encoder Units
+    public static final double Climb_Up_Speed = 0.5;
+    public static final double Climb_Down_Speed = -0.5;
 }
