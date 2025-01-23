@@ -15,11 +15,12 @@ import frc.robot.subsystems.Drivetrain;
 
 //Intake Imports
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.IntakeRunCmd;
 
 //End Effector Imports
 import frc.robot.subsystems.EndEffector;
 import frc.robot.commands.EndEffectorRunCmd;
-
+import frc.robot.commands.EndEffectorWristCmd;
 //Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJogCmd;
@@ -27,28 +28,25 @@ import frc.robot.commands.ElevatorPIDCmd;
 
 //Climb Imports
 import frc.robot.subsystems.Climb;
+import frc.robot.commands.ClimbRunCmd;
 
 public class RobotContainer {
+    //====================GENERAL BINDINGS====================
+    private final SendableChooser<Command> autoChooser;
+    private final CommandXboxController DriverController = new CommandXboxController(DeviceConstants.CONTROLLER_DEVICE_ID);
+
+    //====================SWERVE SETUP====================
     private double MaxSpeed = SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
-    /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
-    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
-    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
     private final SwerveTelemetry logger = new SwerveTelemetry(MaxSpeed);
-
-    private final CommandXboxController DriverController = new CommandXboxController(0);
-
-    public final Drivetrain drivetrain = SwerveTunerConstants.createDrivetrain();
-
-    /* Path follower */
-    private final SendableChooser<Command> autoChooser;
+    public final Drivetrain drivetrain = SwerveTunerConstants.createDrivetrain();    
 
     public RobotContainer() {
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
@@ -58,17 +56,13 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
+        //====================SWERVE CANBUS BINDINGS====================
         drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
-            .withVelocityX(-DriverController.getLeftY() * 0.3 * MaxSpeed) // Drive forward with negative Y (forward)
-            .withVelocityY(-DriverController.getLeftX() * 0.3 * MaxSpeed) // Drive left with negative X (left)
+            .withVelocityX(-DriverController.getLeftY() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed) // Drive forward with negative Y (forward)
+            .withVelocityY(-DriverController.getLeftX() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-DriverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
-
-        DriverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        DriverController.b().whileTrue(drivetrain.applyRequest(() ->
-            point.withModuleDirection(new Rotation2d(-DriverController.getLeftY(), -DriverController.getLeftX()))
-        ));
 
         DriverController.pov(0).whileTrue(drivetrain.applyRequest(() ->
             forwardStraight.withVelocityX(0.5).withVelocityY(0))
@@ -77,56 +71,56 @@ public class RobotContainer {
             forwardStraight.withVelocityX(-0.5).withVelocityY(0))
         );
 
-        // Run SysId routines when holding back/start and X/Y.
-        // Note that each routine should be run exactly once in a single log.
         DriverController.back().and(DriverController.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
         DriverController.back().and(DriverController.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
         DriverController.start().and(DriverController.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        //Swerve Troubleshooting
-        DriverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
+        DriverController.povRight().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
         drivetrain.registerTelemetry(logger::telemeterize);
 
-        //Elevator Jog Command
-        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
+        //====================RIO CANBUS BINDINGS====================
+        //Elevator Jog Binding
+        DriverController.povLeft().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
 
-    //Level 1
-    DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 3.33));
-    // driverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.13));
-    // driverController.a().whileTrue(new EndEffectorWrist(EndEffector.getInstance(), 0.21));
-    // driverController.a().onFalse(new EndEffectorWrist(EndEffector.getInstance(), 0.0));
+        //Level 1 Sequential Command Binding
+        DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L1_Setpoint));
+        //DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        //DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L1_L2_L3_Setpoint));
+        //DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
-    // //Level 2
-    // driverController.b().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 2.5));
-    // driverController.b().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
-    // driverController.b().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
-    // driverController.b().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+        //Level 2 Sequential Command Binding
+        DriverController.b().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L2_Setpoint));
+        //DriverController.b().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        //DriverController.b().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L1_L2_L3_Setpoint));
+        //DriverController.b().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
-    // //Level 3
-    // driverController.x().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 4.60));
-    // driverController.x().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
-    // driverController.x().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
-    // driverController.x().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+        //Level 3 Sequential Command Binding
+        DriverController.x().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L3_Setpoint));
+        //DriverController.x().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        //DriverController.x().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L1_L2_L3_Setpoint));
+        //DriverController.x().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
-    // //Level 4
-    // driverController.y().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 6.80));
-    // driverController.y().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
-    // driverController.y().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
-    // driverController.y().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+        //Level 4 Sequential Command Binding
+        DriverController.y().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
+        //DriverController.y().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        //DriverController.y().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Setpoint));
+        //DriverController.y().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
-    //End Effector Run
-    DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
-    // driverController.button(DeviceConstants.INTAKE_BUTTON).whileTrue(new Score(EndEffectorSubsystem.getInstance(), -0.3));
+        //End Effector Run Binding
+        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+
+        //Intake Run Binding
+        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
+
+        //Climb Up Binding
+        DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.Climb_Up_Speed));
+
+        //Climb Down Binding
+        DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.Climb_Down_Speed));
+        }
+
+        public Command getAutonomousCommand() {
+            return autoChooser.getSelected();
+        }
     }
-
-    //Intake Run
-    //DriverController.leftBumper().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
-    // driverController.button(DeviceConstants.INTAKE_BUTTON).whileTrue(new Score(EndEffectorSubsystem.getInstance(), -0.3));
-    //}
-
-    //Runs auto path selected from chooser
-    public Command getAutonomousCommand() {
-        return autoChooser.getSelected();
-    }
-}
