@@ -86,3 +86,51 @@ public class RobotContainer {
         return autoChooser.getSelected();
     }
 }
+
+// package frc.robot;
+// import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
+
+// //End Effector Imports
+// import frc.robot.subsystems.EndEffector;
+// import frc.robot.commands.EndEffectorRunCmd;
+
+// //Elevator Imports
+// import frc.robot.subsystems.Elevator;
+// import frc.robot.commands.ElevatorJogCmd;
+// import frc.robot.commands.ElevatorPIDCmd;
+
+// public class RobotContainer {
+//     //Controller
+//     final CommandGenericHID driverController = new CommandGenericHID(DeviceConstants.CONTROLLER_DEVICE_ID);
+   
+//     public RobotContainer() {    
+//       configureBindings();
+//     } 
+  
+//     private void configureBindings() {    
+//     //Elevator Jog Command
+//     driverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * driverController.getRawAxis(DeviceConstants.RIGHT_STICK_VERTICAL_AXIS)));
+
+//       //Level 1
+//       driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 3.33));
+//       //driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).onFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.13));
+//       // driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).whileTrue(new EndEffectorWrist(EndEffector.getInstance(), 0.21));
+//       // driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).onFalse(new EndEffectorWrist(EndEffector.getInstance(), 0.0));
+
+//       // //Level 2
+//       // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 2.5));
+//       // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
+//       // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
+//       // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+
+//       // //Level 3
+//       // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 4.60));
+//       // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
+//       // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
+//       // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+
+//       //End Effector Run
+//       driverController.button(DeviceConstants.SCORE_BUTTON).whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
+//       // driverController.button(DeviceConstants.INTAKE_BUTTON).whileTrue(new Score(EndEffectorSubsystem.getInstance(), -0.3));
+//   }
+// }
