@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.Drivetrain;
 
 //Intake Imports
-//PENDING
+import frc.robot.subsystems.Intake;
 
 //End Effector Imports
 import frc.robot.subsystems.EndEffector;
@@ -26,7 +26,7 @@ import frc.robot.commands.ElevatorJogCmd;
 import frc.robot.commands.ElevatorPIDCmd;
 
 //Climb Imports
-//PENDING
+import frc.robot.subsystems.Climb;
 
 public class RobotContainer {
     private double MaxSpeed = SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -58,14 +58,10 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-        // Note that X is defined as forward according to WPILib convention,
-        // and Y is defined as to the left according to WPILib convention.
-        drivetrain.setDefaultCommand(
-            // Drivetrain will execute this command periodically
-            drivetrain.applyRequest(() ->
-                drive.withVelocityX(-DriverController.getLeftY() * 0.3 * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-DriverController.getLeftX() * 0.3 * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-DriverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+        drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
+            .withVelocityX(-DriverController.getLeftY() * 0.3 * MaxSpeed) // Drive forward with negative Y (forward)
+            .withVelocityY(-DriverController.getLeftX() * 0.3 * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-DriverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
 
@@ -88,39 +84,49 @@ public class RobotContainer {
         DriverController.start().and(DriverController.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        // reset the field-centric heading on left bumper press
-        DriverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-
+        //Swerve Troubleshooting
+        DriverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
         drivetrain.registerTelemetry(logger::telemeterize);
 
         //Elevator Jog Command
-        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRawAxis(DeviceConstants.RIGHT_STICK_VERTICAL_AXIS)));
+        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
 
     //Level 1
-    DriverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 3.33));
-    //driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).onFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.13));
-    // driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).whileTrue(new EndEffectorWrist(EndEffector.getInstance(), 0.21));
-    // driverController.button(DeviceConstants.ELEVATOR_L1_BUTTON).onFalse(new EndEffectorWrist(EndEffector.getInstance(), 0.0));
+    DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 3.33));
+    // driverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.13));
+    // driverController.a().whileTrue(new EndEffectorWrist(EndEffector.getInstance(), 0.21));
+    // driverController.a().onFalse(new EndEffectorWrist(EndEffector.getInstance(), 0.0));
 
     // //Level 2
-    // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 2.5));
-    // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
-    // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
-    // driverController.button(DeviceConstants.ELEVATOR_L2_BUTTON).onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+    // driverController.b().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 2.5));
+    // driverController.b().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
+    // driverController.b().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
+    // driverController.b().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
 
     // //Level 3
-    // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 4.60));
-    // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
-    // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
-    // driverController.button(DeviceConstants.ELEVATOR_L3_BUTTON).onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+    // driverController.x().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 4.60));
+    // driverController.x().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
+    // driverController.x().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
+    // driverController.x().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
+
+    // //Level 4
+    // driverController.y().whileTrue(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 6.80));
+    // driverController.y().onFalse(new ElevatorProfiledPID(ElevatorSubsystem.getInstance(), 0.0));
+    // driverController.y().whileTrue(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.21));
+    // driverController.y().onFalse(new EndEffectorWrist(EndEffectorWristSubsystem.getInstance(), 0.0));
 
     //End Effector Run
-    DriverController.button(DeviceConstants.SCORE_BUTTON).whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
+    DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
     // driverController.button(DeviceConstants.INTAKE_BUTTON).whileTrue(new Score(EndEffectorSubsystem.getInstance(), -0.3));
     }
 
+    //Intake Run
+    //DriverController.leftBumper().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), 0.3));
+    // driverController.button(DeviceConstants.INTAKE_BUTTON).whileTrue(new Score(EndEffectorSubsystem.getInstance(), -0.3));
+    //}
+
+    //Runs auto path selected from chooser
     public Command getAutonomousCommand() {
-        /* Run the path selected from the auto chooser */
         return autoChooser.getSelected();
     }
 }
