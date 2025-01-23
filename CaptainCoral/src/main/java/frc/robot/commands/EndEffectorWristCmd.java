@@ -26,13 +26,13 @@ public class EndEffectorWristCmd extends Command {
 
     @Override
     public void initialize() {
-        profiledPIDController.setGoal(setpoint); // Set the initial goal based on the encoder setpoint
+        profiledPIDController.setGoal(setpoint);
         System.out.println("ElevatorPIDCmd Started");
     }
 
     @Override
     public void execute() {
-        double currentPosition = endEffector.getEndEffectorWristEncoder(); // Get encoder distance
+        double currentPosition = endEffector.getEndEffectorWristEncoder();
             double output = profiledPIDController.calculate(currentPosition);
             double motorOutput = output + feedforward.calculate(profiledPIDController.getSetpoint().velocity);
             endEffector.setEndEffectorWristMotorSpeed(motorOutput);    

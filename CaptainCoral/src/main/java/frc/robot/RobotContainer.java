@@ -80,6 +80,14 @@ public class RobotContainer {
         drivetrain.registerTelemetry(logger::telemeterize);
 
         //====================RIO CANBUS BINDINGS====================
+        //Intake Sequential Command Binding
+        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
+        //DriverController.leftTrigger().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        //DriverController.leftTrigger().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        
+        //End Effector Run Binding
+        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+
         //Elevator Jog Binding
         DriverController.povLeft().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
 
@@ -107,17 +115,11 @@ public class RobotContainer {
         //DriverController.y().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Setpoint));
         //DriverController.y().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
-        //End Effector Run Binding
-        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
-
-        //Intake Run Binding
-        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
-
         //Climb Up Binding
-        DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.Climb_Up_Speed));
+        DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbUpSpeed));
 
         //Climb Down Binding
-        DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.Climb_Down_Speed));
+        DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbDownSpeed));
         }
 
         public Command getAutonomousCommand() {
