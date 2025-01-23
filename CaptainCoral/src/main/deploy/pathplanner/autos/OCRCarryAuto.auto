@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry5"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
