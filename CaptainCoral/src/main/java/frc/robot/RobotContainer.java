@@ -21,6 +21,7 @@ import frc.robot.commands.IntakeRunCmd;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.commands.EndEffectorRunCmd;
 import frc.robot.commands.EndEffectorWristCmd;
+
 //Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJogCmd;
@@ -31,7 +32,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.commands.ClimbRunCmd;
 
 public class RobotContainer {
-    //====================GENERAL BINDINGS====================
+    //====================GENERAL SETUP====================
     private final SendableChooser<Command> autoChooser;
     private final CommandXboxController DriverController = new CommandXboxController(DeviceConstants.CONTROLLER_DEVICE_ID);
 

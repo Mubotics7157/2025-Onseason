@@ -41,6 +41,7 @@ public class ElevatorPIDCmd extends Command {
     @Override
     public void end(boolean interrupted) {
         elevator.setElevatorMotorSpeed(KinematicsConstants.absoluteZero);
+        System.out.println("ElevatorPIDCmd Ended");
     }
 
     public void updateSetpoint(double newSetpoint) {

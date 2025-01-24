@@ -27,7 +27,7 @@ public class EndEffectorWristCmd extends Command {
     @Override
     public void initialize() {
         profiledPIDController.setGoal(setpoint);
-        System.out.println("ElevatorPIDCmd Started");
+        System.out.println("EndEffectorWristCmd Started");
     }
 
     @Override
@@ -41,6 +41,7 @@ public class EndEffectorWristCmd extends Command {
     @Override
     public void end(boolean interrupted) {
         endEffector.setEndEffectorWristMotorSpeed(KinematicsConstants.absoluteZero);
+        System.out.println("EndEffectorWristCmd Ended");
     }
 
     public void updateSetpoint(double newSetpoint) {
