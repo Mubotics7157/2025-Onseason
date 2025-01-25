@@ -30,9 +30,9 @@ public class Intake extends SubsystemBase {
         generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
         generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         generalSlotConfigs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
-        generalSlotConfigs.kP = 4.8; // A position error of 2.5 rotations results in 12 V output
+        generalSlotConfigs.kP = 0.0001; // A position error of 2.5 rotations results in 12 V output
         generalSlotConfigs.kI = 0; // no output for integrated error
-        generalSlotConfigs.kD = 0.1; // A velocity error of 1 rps results in 0.1 V output
+        generalSlotConfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
 
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 80; // Target cruise velocity of 80 rps

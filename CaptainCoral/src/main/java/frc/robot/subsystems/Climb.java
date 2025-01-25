@@ -26,15 +26,9 @@ public class Climb extends SubsystemBase {
     }
 
     @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Climb Encoder", getClimbEncoder());
-    }
+    public void periodic() {}
 
     //====================Climb Methods====================
-    public double getClimbEncoder() {
-        return Climb_Motor.getPosition().getValueAsDouble();
-    }
-
     public void setClimbMotorSpeed(double speed) {
         Climb_Motor.set(speed);
     }
