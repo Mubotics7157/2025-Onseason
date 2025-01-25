@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.DeviceConstants;
 
@@ -16,7 +17,32 @@ public class Intake extends SubsystemBase {
 
     private static Intake instance = new Intake();
 
-    public Intake() {}
+    public Intake() {
+        //====================Intake Wrist Current Limit Setup====================
+        var intakeWristConfigurator = Intake_Wrist_Motor.getConfigurator();
+        var intakeWristLimitConfigs = new CurrentLimitsConfigs();
+
+        intakeWristLimitConfigs.StatorCurrentLimit = 120;
+        intakeWristLimitConfigs.StatorCurrentLimitEnable = true;
+        intakeWristConfigurator.apply(intakeWristLimitConfigs);
+
+        //====================Intake Roller Current Limit Setup====================
+        var intakeRollerConfigurator = Intake_Roller_Motor.getConfigurator();
+        var intakeRollerLimitConfigs = new CurrentLimitsConfigs();
+
+        intakeRollerLimitConfigs.StatorCurrentLimit = 120;
+        intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;
+        intakeRollerConfigurator.apply(intakeRollerLimitConfigs);
+
+        //====================Intake Indexer Current Limit Setup====================
+        var intakeIndexerConfigurator = Intake_Indexer_Motor.getConfigurator();
+        var intakeIndexerLimitConfigs = new CurrentLimitsConfigs();
+
+        intakeIndexerLimitConfigs.StatorCurrentLimit = 120;
+        intakeIndexerLimitConfigs.StatorCurrentLimitEnable = true;
+        intakeIndexerConfigurator.apply(intakeIndexerLimitConfigs);
+    }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());

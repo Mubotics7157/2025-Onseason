@@ -3,6 +3,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.DeviceConstants;
 
@@ -21,7 +23,31 @@ public class EndEffector extends SubsystemBase {
 
     private static EndEffector instance = new EndEffector();
 
-    public EndEffector() {}
+    public EndEffector() {
+        //====================End Effector Wrist Current Limit====================
+        var endEffectorWristConfigurator = End_Effector_Wrist_Motor.getConfigurator();
+        var endEffectorLimitConfigs = new CurrentLimitsConfigs();
+
+        endEffectorLimitConfigs.StatorCurrentLimit = 120;
+        endEffectorLimitConfigs.StatorCurrentLimitEnable = true;
+        endEffectorWristConfigurator.apply(endEffectorLimitConfigs);
+
+        //====================End Effector Top Roller Current Limit====================
+        var endEffectorTopConfigurator = End_Effector_Top_Motor.getConfigurator();
+        var endEffectorTopLimitConfigs = new CurrentLimitsConfigs();
+
+        endEffectorTopLimitConfigs.StatorCurrentLimit = 120;
+        endEffectorTopLimitConfigs.StatorCurrentLimitEnable = true;
+        endEffectorTopConfigurator.apply(endEffectorTopLimitConfigs);
+
+        //====================End Effector Bottom Indexer Current Limit====================
+        var endEffectorBottomConfigurator = End_Effector_Bottom_Motor.getConfigurator();
+        var endEffectorBottomLimitConfigs = new CurrentLimitsConfigs();
+
+        endEffectorBottomLimitConfigs.StatorCurrentLimit = 120;
+        endEffectorBottomLimitConfigs.StatorCurrentLimitEnable = true;
+        endEffectorBottomConfigurator.apply(endEffectorBottomLimitConfigs);
+    }
 
     @Override
     public void periodic() {

@@ -22,7 +22,7 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
-        //====================Elevator Motion Magic Setup====================
+        //====================Elevator Motors Motion Magic Setup====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
@@ -41,7 +41,7 @@ public class Elevator extends SubsystemBase {
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
 
-        //====================Current Limit Setup====================
+        //====================Elevator Master Current Limit Setup====================
         var masterTalonFXConfigurator = Elevator_Master_Motor.getConfigurator();
         var masterLimitConfigs = new CurrentLimitsConfigs();
 
@@ -49,6 +49,7 @@ public class Elevator extends SubsystemBase {
         masterLimitConfigs.StatorCurrentLimitEnable = true;
         masterTalonFXConfigurator.apply(masterLimitConfigs);
 
+        //====================Elevator Slave Current Limit Setup====================
         var slaveTalonFXConfigurator = Elevator_Slave_Motor.getConfigurator();
         var slaveLimitConfigs = new CurrentLimitsConfigs();
 
