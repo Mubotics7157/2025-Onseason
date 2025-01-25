@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0,
-        "y": 6.182
+        "x": 1.707,
+        "y": 0.662
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0,
-        "y": 6.764166972186061
+        "x": 3.172286043862594,
+        "y": 1.591469081554786
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.0,
-        "y": 7.403
+        "x": 4.910513245033113,
+        "y": 2.840956125827814
       },
       "prevControl": {
-        "x": 2.0,
-        "y": 6.465715751411048
+        "x": 3.3611545041937396,
+        "y": 1.8097609119807039
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -62.30052719194487
   },
   "reversed": false,
-  "folder": null,
+  "folder": "OCRCarryAuto",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -127.59271698394879
   },
   "useDefaultConstraints": true
 }

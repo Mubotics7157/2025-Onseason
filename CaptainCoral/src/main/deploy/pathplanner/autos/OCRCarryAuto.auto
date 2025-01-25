@@ -33,6 +33,18 @@
           "data": {
             "pathName": "OCRCarry5"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry6"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "OCRCarry7"
+          }
         }
       ]
     }
