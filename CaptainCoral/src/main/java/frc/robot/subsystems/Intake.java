@@ -3,14 +3,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.DeviceConstants;
+import frc.robot.KinematicsConstants;
 
 public class Intake extends SubsystemBase {
     private final TalonFX Intake_Wrist_Motor = new TalonFX(DeviceConstants.INTAKE_WRIST_MOTOR_DEVICE_ID);
 
     private final TalonFX Intake_Roller_Motor = new TalonFX(DeviceConstants.INTAKE_ROLLER_MOTOR_DEVICE_ID);
     private final TalonFX Intake_Indexer_Motor = new TalonFX(DeviceConstants.INTAKE_INDEXER_MOTOR_DEVICE_ID);
+
+    private double setpoint;
     
     public static Intake getInstance() {
         return instance;
@@ -19,11 +23,11 @@ public class Intake extends SubsystemBase {
     private static Intake instance = new Intake();
 
     public Intake() {
-        //====================Elevator Motion Magic====================
+        //====================Intake Wrist Motion Magic====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.25; // Add 0.25 V output to overcome static friction
+        generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
         generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         generalSlotConfigs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
         generalSlotConfigs.kP = 4.8; // A position error of 2.5 rotations results in 12 V output
@@ -74,6 +78,15 @@ public class Intake extends SubsystemBase {
 
     public void setIntakeWristMotorSpeed(double speed) {
         Intake_Wrist_Motor.set(speed);
+    }
+
+    public void setSetpoint(double setpoint) {
+        this.setpoint = setpoint;
+    }
+
+    private void goToSetpoint() {
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
+        Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 
     //====================Intake Roller Methods====================

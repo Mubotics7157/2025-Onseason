@@ -22,11 +22,11 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
-        //====================Elevator Motors Motion Magic Setup====================
+        //====================Elevator Motion Magic====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.25; // Add 0.25 V output to overcome static friction
+        generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
         generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         generalSlotConfigs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
         generalSlotConfigs.kP = 4.8; // A position error of 2.5 rotations results in 12 V output
@@ -41,21 +41,21 @@ public class Elevator extends SubsystemBase {
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
 
-        //====================Elevator Master Current Limit Setup====================
-        var masterTalonFXConfigurator = Elevator_Master_Motor.getConfigurator();
-        var masterLimitConfigs = new CurrentLimitsConfigs();
+        //====================Elevator Master Current Limit====================
+        var elevatorMasterConfigurator = Elevator_Master_Motor.getConfigurator();
+        var elevatorMasterLimitConfigs = new CurrentLimitsConfigs();
 
-        masterLimitConfigs.StatorCurrentLimit = 120;
-        masterLimitConfigs.StatorCurrentLimitEnable = true;
-        masterTalonFXConfigurator.apply(masterLimitConfigs);
+        elevatorMasterLimitConfigs.StatorCurrentLimit = 120;
+        elevatorMasterLimitConfigs.StatorCurrentLimitEnable = true;
+        elevatorMasterConfigurator.apply(elevatorMasterLimitConfigs);
 
-        //====================Elevator Slave Current Limit Setup====================
-        var slaveTalonFXConfigurator = Elevator_Slave_Motor.getConfigurator();
-        var slaveLimitConfigs = new CurrentLimitsConfigs();
+        //====================Elevator Slave Current Limit====================
+        var elevatorSlaveConfigurator = Elevator_Slave_Motor.getConfigurator();
+        var elevatorSlaveLimitConfigs = new CurrentLimitsConfigs();
 
-        slaveLimitConfigs.StatorCurrentLimit = 120;
-        slaveLimitConfigs.StatorCurrentLimitEnable = true;
-        slaveTalonFXConfigurator.apply(slaveLimitConfigs);
+        elevatorSlaveLimitConfigs.StatorCurrentLimit = 120;
+        elevatorSlaveLimitConfigs.StatorCurrentLimitEnable = true;
+        elevatorSlaveConfigurator.apply(elevatorSlaveLimitConfigs);
     }
 
     @Override
@@ -81,5 +81,6 @@ public class Elevator extends SubsystemBase {
     private void goToSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
         Elevator_Master_Motor.setControl(m_request.withPosition(this.setpoint));
+        Elevator_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 }

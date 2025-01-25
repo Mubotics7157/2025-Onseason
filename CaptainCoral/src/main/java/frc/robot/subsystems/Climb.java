@@ -16,7 +16,7 @@ public class Climb extends SubsystemBase {
     private static Climb instance = new Climb();
 
     public Climb() {
-        //====================Climb Motor Current Limit Setup====================
+        //====================Climb Current Limit====================
         var climbConfigurator = Climb_Motor.getConfigurator();
         var climbLimitConfigs = new CurrentLimitsConfigs();
 

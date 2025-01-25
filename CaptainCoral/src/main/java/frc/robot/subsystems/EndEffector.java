@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.DeviceConstants;
+import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MOTOR_DEVICE_ID);
@@ -17,6 +19,8 @@ public class EndEffector extends SubsystemBase {
 
     private final DoubleSolenoid Claw_Solenoid_1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_1_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_1_REVERSE_CHANNEL);
     private final DoubleSolenoid Claw_Solenoid_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_2_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_2_REVERSE_CHANNEL);
+
+    private double setpoint;
 
     public static EndEffector getInstance() {
         return instance;
@@ -29,7 +33,7 @@ public class EndEffector extends SubsystemBase {
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.25; // Add 0.25 V output to overcome static friction
+        generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
         generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         generalSlotConfigs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
         generalSlotConfigs.kP = 4.8; // A position error of 2.5 rotations results in 12 V output
@@ -80,6 +84,15 @@ public class EndEffector extends SubsystemBase {
 
     public void setEndEffectorWristMotorSpeed(double speed) {
         End_Effector_Wrist_Motor.set(speed);
+    }
+
+    public void setSetpoint(double setpoint) {
+        this.setpoint = setpoint;
+    }
+
+    private void goToSetpoint() {
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
+        End_Effector_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 
     //====================End Effector Roller Methods====================
