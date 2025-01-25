@@ -3,7 +3,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -74,6 +73,7 @@ public class EndEffector extends SubsystemBase {
 
     @Override
     public void periodic() {
+        goToSetpoint();
         SmartDashboard.putNumber("End Effector Wrist Encoder", getEndEffectorWristEncoder());
     }
     

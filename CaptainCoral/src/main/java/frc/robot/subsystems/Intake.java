@@ -68,6 +68,7 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
+        goToSetpoint();
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
     }
     
