@@ -5,7 +5,12 @@ import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -30,6 +35,12 @@ import frc.robot.commands.ElevatorPIDCmd;
 //Climb Imports
 import frc.robot.subsystems.Climb;
 import frc.robot.commands.ClimbRunCmd;
+
+//Limelight Imports
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class RobotContainer {
     //====================GENERAL SETUP====================
@@ -58,10 +69,10 @@ public class RobotContainer {
 
     private void configureBindings() {
         //====================SWERVE CANBUS BINDINGS====================
-        drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
-            .withVelocityX(-DriverController.getLeftY() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed) // Drive forward with negative Y (forward)
-            .withVelocityY(-DriverController.getLeftX() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed) // Drive left with negative X (left)
-            .withRotationalRate(-DriverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
+            .withVelocityX(-1 * DriverController.getLeftY() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+            .withVelocityY(-1 * DriverController.getLeftX() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+            .withRotationalRate(-1 * DriverController.getRightX() * MaxAngularRate)
             )
         );
 
@@ -72,6 +83,10 @@ public class RobotContainer {
 
         DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
         drivetrain.registerTelemetry(logger::telemeterize);
+    
+
+        //====================SWERVE AUTO LINEUP BINDINGS====================
+        //INSERT NEW CODE HERE
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding
