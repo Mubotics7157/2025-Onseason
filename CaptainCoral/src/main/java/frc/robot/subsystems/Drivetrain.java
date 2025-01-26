@@ -26,12 +26,17 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.LimelightHelpers;
+import frc.robot.SwerveTunerConstants;
 import frc.robot.SwerveTunerConstants.TunerSwerveDrivetrain;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
  * Subsystem so it can easily be used in command-based projects.
  */
+
+//public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem
+
 public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;
@@ -289,4 +294,20 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         });
         m_simNotifier.startPeriodic(kSimLoopPeriod);
     }
+
+  double limelight_aim_proportional() {    
+    double kP = .035;
+    double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * kP;
+    targetingAngularVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+    targetingAngularVelocity *= -1.0;
+    return targetingAngularVelocity;
+  }
+
+  double limelight_range_proportional() {    
+    double kP = .1;
+    double targetingForwardSpeed = LimelightHelpers.getTY("limelight") * kP;
+    targetingForwardSpeed *= SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    targetingForwardSpeed *= -1.0;
+    return targetingForwardSpeed;
+  }
 }

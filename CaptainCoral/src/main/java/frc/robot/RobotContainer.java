@@ -5,7 +5,6 @@ import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTable;
@@ -86,7 +85,7 @@ public class RobotContainer {
     
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        //PENDING
+        //DriveController.leftBumper().whileTrue(new AlignCmd(Drivetrain.getInstance(), PARAMS));
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding
