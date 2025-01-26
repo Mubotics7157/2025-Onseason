@@ -70,9 +70,9 @@ public class RobotContainer {
     private void configureBindings() {
         //====================SWERVE CANBUS BINDINGS====================
             drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
-            .withVelocityX(-1 * DriverController.getLeftY() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-            .withVelocityY(-1 * DriverController.getLeftX() * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-            .withRotationalRate(-1 * DriverController.getRightX() * MaxAngularRate)
+            .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+            .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+            .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * MaxAngularRate)
             )
         );
 
@@ -86,7 +86,7 @@ public class RobotContainer {
     
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        //INSERT NEW CODE HERE
+        //PENDING
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding
