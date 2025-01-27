@@ -85,13 +85,13 @@ public class RobotContainer {
     
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        //DriveController.leftBumper().whileTrue(new AlignCmd(Drivetrain.getInstance(), PARAMS));
+        //DriverController.leftBumper().whileTrue(new AlignCmd(Drivetrain.getInstance(), 1, 1, 1));
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding
-        DriverController.leftTrigger().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.leftTrigger().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 5.0));
-        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), -0.3));
+        // DriverController.leftTrigger().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.leftTrigger().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 5.0));
+        // DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), -0.3));
         // DriverController.leftTrigger().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
         // DriverController.leftTrigger().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
         // DriverController.leftTrigger().onFalse(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
@@ -100,28 +100,28 @@ public class RobotContainer {
         DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
 
         //Level 1 Sequential Command Binding
-        DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.0));
+        // DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.0));
         DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
         //Level 2 Sequential Command Binding
-        DriverController.b().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 4.0));
-        DriverController.b().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.b().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 4.0));
+        // DriverController.b().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
+        // DriverController.b().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.b().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
         //Level 3 Sequential Command Binding
-        DriverController.x().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 6.0));
-        DriverController.x().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.x().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 6.0));
+        // DriverController.x().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
+        // DriverController.x().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.x().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
         //Level 4 Sequential Command Binding
-        DriverController.y().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 8.0));
-        DriverController.y().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.y().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 8.0));
+        // DriverController.y().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
+        // DriverController.y().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.y().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
         //Elevator Jog Binding
         DriverController.povRight().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));

@@ -295,7 +295,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         m_simNotifier.startPeriodic(kSimLoopPeriod);
     }
 
-  double limelight_aim_proportional() {    
+  public double limelight_aim_proportional() {    
     double kP = .035;
     double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * kP;
     targetingAngularVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond);
@@ -303,8 +303,8 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     return targetingAngularVelocity;
   }
 
-  double limelight_range_proportional() {    
-    double kP = .1;
+  public double limelight_range_proportional() {    
+    double kP = 0.1;
     double targetingForwardSpeed = LimelightHelpers.getTY("limelight") * kP;
     targetingForwardSpeed *= SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     targetingForwardSpeed *= -1.0;
