@@ -56,7 +56,6 @@ public class RobotContainer {
     private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
-    private final SwerveTelemetry logger = new SwerveTelemetry(MaxSpeed);
     public final Drivetrain drivetrain = SwerveTunerConstants.createDrivetrain();    
 
     public RobotContainer() {
@@ -81,8 +80,6 @@ public class RobotContainer {
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
-        drivetrain.registerTelemetry(logger::telemeterize);
-    
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
         //DriverController.leftBumper().whileTrue(new AlignCmd(Drivetrain.getInstance(), 1, 1, 1));
