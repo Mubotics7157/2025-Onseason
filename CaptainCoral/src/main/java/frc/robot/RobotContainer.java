@@ -83,12 +83,7 @@ public class RobotContainer {
         DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        DriverController.leftBumper().whileTrue(new AlignCmd(TunerConstants.createDrivetrain()));     
-        drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
-        .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-        .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-        .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * MaxAngularRate)
-        ));
+        DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding

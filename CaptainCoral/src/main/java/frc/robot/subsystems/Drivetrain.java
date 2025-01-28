@@ -296,10 +296,10 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
   public double limelight_aim_proportional() {    
-    double kP = .035;
+    double kP = 0.001;
     double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * kP;
     targetingAngularVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond);
-    targetingAngularVelocity *= -1.0;
+    //targetingAngularVelocity *= -1.0;
     return targetingAngularVelocity;
   }
 
@@ -307,7 +307,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     double kP = 0.1;
     double targetingForwardSpeed = LimelightHelpers.getTY("limelight") * kP;
     targetingForwardSpeed *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-    targetingForwardSpeed *= -1.0;
+    //targetingForwardSpeed *= -1.0;
     return targetingForwardSpeed;
   }
 }
