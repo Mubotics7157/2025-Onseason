@@ -33,6 +33,7 @@ import frc.robot.commands.ElevatorPIDCmd;
 
 //Climb Imports
 import frc.robot.subsystems.Climb;
+import frc.robot.commands.AlignCmd;
 import frc.robot.commands.ClimbRunCmd;
 
 //Limelight Imports
@@ -47,7 +48,7 @@ public class RobotContainer {
     private final CommandXboxController DriverController = new CommandXboxController(DeviceConstants.CONTROLLER_DEVICE_ID);
 
     //====================SWERVE SETUP====================
-    private double MaxSpeed = SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -56,7 +57,7 @@ public class RobotContainer {
     private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
-    public final Drivetrain drivetrain = SwerveTunerConstants.createDrivetrain();    
+    public final Drivetrain drivetrain = TunerConstants.createDrivetrain();    
 
     public RobotContainer() {
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
@@ -82,7 +83,12 @@ public class RobotContainer {
         DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        //DriverController.leftBumper().whileTrue(new AlignCmd(Drivetrain.getInstance(), 1, 1, 1));
+        DriverController.leftBumper().whileTrue(new AlignCmd(TunerConstants.createDrivetrain()));     
+        drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
+        .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+        .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
+        .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * MaxAngularRate)
+        ));
 
         //====================RIO CANBUS BINDINGS====================
         //Temporary Tai Lung Intake Command Binding

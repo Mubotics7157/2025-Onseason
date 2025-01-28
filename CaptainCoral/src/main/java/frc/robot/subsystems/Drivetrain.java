@@ -27,8 +27,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.LimelightHelpers;
-import frc.robot.SwerveTunerConstants;
-import frc.robot.SwerveTunerConstants.TunerSwerveDrivetrain;
+import frc.robot.TunerConstants;
+import frc.robot.TunerConstants.TunerSwerveDrivetrain;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -306,7 +306,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
   public double limelight_range_proportional() {    
     double kP = 0.1;
     double targetingForwardSpeed = LimelightHelpers.getTY("limelight") * kP;
-    targetingForwardSpeed *= SwerveTunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    targetingForwardSpeed *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     targetingForwardSpeed *= -1.0;
     return targetingForwardSpeed;
   }
