@@ -32,13 +32,13 @@ public class EndEffector extends SubsystemBase {
         //====================End Effector Wrist Motion Magic====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        var theslotconfigs = endEffectorWristMotorConfigs.Slot0;
-        theslotconfigs.kS = 1.0; // Add 0.25 V output to overcome static friction
-        theslotconfigs.kV = 4.0; // A velocity target of 1 rps results in 0.12 V output
-        theslotconfigs.kA = 2.0; // An acceleration of 1 rps/s requires 0.01 V output
-        theslotconfigs.kP = 25.0; // A position error of 2.5 rotations results in 12 V output
-        theslotconfigs.kI = 0; // no output for integrated error
-        theslotconfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
+        var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
+        generalSlotConfigs.kS = 1.0; // Add 0.25 V output to overcome static friction
+        generalSlotConfigs.kV = 4.0; // A velocity target of 1 rps results in 0.12 V output
+        generalSlotConfigs.kA = 2.0; // An acceleration of 1 rps/s requires 0.01 V output
+        generalSlotConfigs.kP = 25.0; // A position error of 2.5 rotations results in 12 V output
+        generalSlotConfigs.kI = 0; // no output for integrated error
+        generalSlotConfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
 
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 80; // Target cruise velocity of 80 rps
@@ -104,6 +104,7 @@ public class EndEffector extends SubsystemBase {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
         End_Effector_Wrist_Master_Motor.setControl(m_request.withPosition(this.setpoint));
         End_Effector_Wrist_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
+        System.out.println(setpoint);
     }
 
     //====================End Effector Roller Methods====================
@@ -113,13 +114,13 @@ public class EndEffector extends SubsystemBase {
     }
 
     //====================End Effector Claw Methods====================
-    public void openClaws() {
-        Claw_Solenoid_1.set(DoubleSolenoid.Value.kForward);
-        Claw_Solenoid_2.set(DoubleSolenoid.Value.kForward);
-    }
+    // public void openClaws() {
+    //     Claw_Solenoid_1.set(DoubleSolenoid.Value.kForward);
+    //     Claw_Solenoid_2.set(DoubleSolenoid.Value.kForward);
+    // }
 
-    public void closeClaws() {
-        Claw_Solenoid_1.set(DoubleSolenoid.Value.kReverse);
-        Claw_Solenoid_2.set(DoubleSolenoid.Value.kReverse);
-    }
+    // public void closeClaws() {
+    //     Claw_Solenoid_1.set(DoubleSolenoid.Value.kReverse);
+    //     Claw_Solenoid_2.set(DoubleSolenoid.Value.kReverse);
+    // }
 }

@@ -15,6 +15,7 @@ public class EndEffectorWristCmd extends Command {
     @Override
     public void initialize() {
         endEffector.setSetpoint(setpoint);
+        System.out.println(setpoint);
         System.out.println("EndEffectorWristCmd Started");
     }
 
