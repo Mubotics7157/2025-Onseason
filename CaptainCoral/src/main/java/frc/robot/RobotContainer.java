@@ -98,8 +98,8 @@ public class RobotContainer {
         DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
 
         //Level 1 Sequential Command Binding
-        // DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.0));
-        DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
+         DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.0));
+        //DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
         // DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
         // DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
 
