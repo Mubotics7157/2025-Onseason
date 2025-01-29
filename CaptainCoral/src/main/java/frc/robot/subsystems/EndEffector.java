@@ -11,7 +11,8 @@ import frc.robot.DeviceConstants;
 import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
-    private final TalonFX End_Effector_Wrist_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MASTER_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Wrist_Master_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MASTER_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Wrist_Slave_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID);
 
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
@@ -31,28 +32,36 @@ public class EndEffector extends SubsystemBase {
         //====================End Effector Wrist Motion Magic====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
-        generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        generalSlotConfigs.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
-        generalSlotConfigs.kP = 0.0001; // A position error of 2.5 rotations results in 12 V output
-        generalSlotConfigs.kI = 0; // no output for integrated error
-        generalSlotConfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
+        var theslotconfigs = endEffectorWristMotorConfigs.Slot0;
+        theslotconfigs.kS = 1.0; // Add 0.25 V output to overcome static friction
+        theslotconfigs.kV = 4.0; // A velocity target of 1 rps results in 0.12 V output
+        theslotconfigs.kA = 2.0; // An acceleration of 1 rps/s requires 0.01 V output
+        theslotconfigs.kP = 25.0; // A position error of 2.5 rotations results in 12 V output
+        theslotconfigs.kI = 0; // no output for integrated error
+        theslotconfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
 
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 80; // Target cruise velocity of 80 rps
         motionMagicConfigs.MotionMagicAcceleration = 160; // Target acceleration of 160 rps/s (0.5 seconds)
         motionMagicConfigs.MotionMagicJerk = 1600; // Target jerk of 1600 rps/s/s (0.1 seconds)
 
-        End_Effector_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
+        End_Effector_Wrist_Master_Motor.getConfigurator().apply(motionMagicConfigs);
+        End_Effector_Wrist_Slave_Motor.getConfigurator().apply(motionMagicConfigs);
 
         //====================End Effector Wrist Current Limit====================
-        var endEffectorWristConfigurator = End_Effector_Wrist_Motor.getConfigurator();
-        var endEffectorLimitConfigs = new CurrentLimitsConfigs();
+        var endEffectorWristMasterConfigurator = End_Effector_Wrist_Master_Motor.getConfigurator();
+        var endEffectorMasterLimitConfigs = new CurrentLimitsConfigs();
 
-        endEffectorLimitConfigs.StatorCurrentLimit = 120;
-        endEffectorLimitConfigs.StatorCurrentLimitEnable = true;
-        endEffectorWristConfigurator.apply(endEffectorLimitConfigs);
+        endEffectorMasterLimitConfigs.StatorCurrentLimit = 120;
+        endEffectorMasterLimitConfigs.StatorCurrentLimitEnable = true;
+        endEffectorWristMasterConfigurator.apply(endEffectorMasterLimitConfigs);
+
+        var endEffectorWristSlaveConfigurator = End_Effector_Wrist_Slave_Motor.getConfigurator();
+        var endEffectorSlaveLimitConfigs = new CurrentLimitsConfigs();
+
+        endEffectorSlaveLimitConfigs.StatorCurrentLimit = 120;
+        endEffectorSlaveLimitConfigs.StatorCurrentLimitEnable = true;
+        endEffectorWristSlaveConfigurator.apply(endEffectorSlaveLimitConfigs);
 
         //====================End Effector Top Roller Current Limit====================
         var endEffectorTopConfigurator = End_Effector_Top_Motor.getConfigurator();
@@ -79,11 +88,12 @@ public class EndEffector extends SubsystemBase {
     
     //====================End Effector Wrist Methods====================
     public double getEndEffectorWristEncoder() {
-        return End_Effector_Wrist_Motor.getPosition().getValueAsDouble();
+        return End_Effector_Wrist_Master_Motor.getPosition().getValueAsDouble();
     }
 
     public void setEndEffectorWristMotorSpeed(double speed) {
-        End_Effector_Wrist_Motor.set(speed);
+        End_Effector_Wrist_Master_Motor.set(speed);
+        End_Effector_Wrist_Slave_Motor.set(speed);
     }
 
     public void setSetpoint(double setpoint) {
@@ -92,7 +102,8 @@ public class EndEffector extends SubsystemBase {
 
     private void goToSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
-        End_Effector_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
+        End_Effector_Wrist_Master_Motor.setControl(m_request.withPosition(this.setpoint));
+        End_Effector_Wrist_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 
     //====================End Effector Roller Methods====================
