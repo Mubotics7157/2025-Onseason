@@ -17,8 +17,8 @@ public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
 
-    private final DoubleSolenoid Claw_Solenoid_1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_1_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_1_REVERSE_CHANNEL);
-    private final DoubleSolenoid Claw_Solenoid_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_2_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_2_REVERSE_CHANNEL);
+    // private final DoubleSolenoid Claw_Solenoid_1 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_1_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_1_REVERSE_CHANNEL);
+    // private final DoubleSolenoid Claw_Solenoid_2 = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DeviceConstants.CLAW_SOLENOID_2_FORWARD_CHANNEL, DeviceConstants.CLAW_SOLENOID_2_REVERSE_CHANNEL);
 
     private double setpoint;
 
@@ -48,7 +48,7 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(motionMagicConfigs);
         End_Effector_Wrist_Slave_Motor.getConfigurator().apply(motionMagicConfigs);
 
-        //====================End Effector Wrist Current Limit====================
+        //====================End Effector Wrist Current Limits====================
         var endEffectorWristMasterConfigurator = End_Effector_Wrist_Master_Motor.getConfigurator();
         var endEffectorMasterLimitConfigs = new CurrentLimitsConfigs();
 
