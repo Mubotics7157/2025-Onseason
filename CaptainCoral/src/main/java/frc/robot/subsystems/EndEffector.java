@@ -14,7 +14,7 @@ import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Master_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MASTER_MOTOR_DEVICE_ID);
-    //private final TalonFX End_Effector_Wrist_Slave_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Wrist_Slave_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID);
 
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
@@ -88,18 +88,23 @@ public class EndEffector extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("End Effector Wrist Encoder", getEndEffectorWristEncoder());
+        SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
+        SmartDashboard.putNumber("End Effector Wrist Slave Encoder", getEndEffectorWristSlaveEncoder());
     }
     
     //====================End Effector Wrist Methods====================
-    public double getEndEffectorWristEncoder() {
+    public double getEndEffectorWristMasterEncoder() {
         return End_Effector_Wrist_Master_Motor.getPosition().getValueAsDouble();
+    }
+
+    public double getEndEffectorWristSlaveEncoder() {
+        return End_Effector_Wrist_Slave_Motor.getPosition().getValueAsDouble();
     }
 
     public void setEndEffectorWristMotorSpeed(double speed) {
         System.out.println("End Effector Wrist Motor Speed: " + speed);
         End_Effector_Wrist_Master_Motor.set(speed);
-        //End_Effector_Wrist_Slave_Motor.set(speed);
+        End_Effector_Wrist_Slave_Motor.set(speed);
     }
 
     public void setEndEffectorSetpoint(double setpoint) {
