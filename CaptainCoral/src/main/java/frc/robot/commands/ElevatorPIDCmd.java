@@ -20,6 +20,7 @@ public class ElevatorPIDCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
+        elevator.goToElevatorSetpoint();
         System.out.println("ElevatorPIDCmd Ended");
     }
 

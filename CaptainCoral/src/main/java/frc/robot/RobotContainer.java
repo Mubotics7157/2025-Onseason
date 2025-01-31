@@ -13,13 +13,14 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.Drivetrain;
 
 //Intake Imports
-import frc.robot.subsystems.Intake;
-import frc.robot.commands.IntakeRunCmd;
+// import frc.robot.subsystems.Intake;
+// import frc.robot.commands.IntakeRunCmd;
 
 //End Effector Imports
 import frc.robot.subsystems.EndEffector;
@@ -86,49 +87,41 @@ public class RobotContainer {
         DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
 
         //====================RIO CANBUS BINDINGS====================
-        //Temporary Tai Lung Intake Command Binding
-        // DriverController.leftTrigger().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.leftTrigger().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 5.0));
-        // DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), -0.3));
-        // DriverController.leftTrigger().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.leftTrigger().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.leftTrigger().onFalse(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
-        
         //End Effector Run Binding
-        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+        // DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+
+        // DriverController.a().whileTrue(
+        // Commands.parallel(
+        //     new EndEffectorWristCmd(EndEffector.getInstance(), 4.75),
+        //     new ElevatorPIDCmd(Elevator.getInstance(), 6.29)
+        //     )
+        // );
+
+        // DriverController.a().onFalse(
+        //     Commands.parallel(
+        //         new ElevatorPIDCmd(Elevator.getInstance(), 0.3),
+        //         new EndEffectorWristCmd(EndEffector.getInstance(), 0.0)
+        //     )
+        // );
+
+        DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 4.75));
+        DriverController.a().whileFalse(new EndEffectorWristCmd(EndEffector.getInstance(), 0.0));
+
 
         //Level 1 Sequential Command Binding
-        //DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.0));
-        DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 5.0));
-        // DriverController.a().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.a().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.5));
+        // DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), -2.27));
+        // DriverController.a().whileFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.3));
+        // DriverController.a().whileFalse(new EndEffectorWristCmd(EndEffector.getInstance(), -7.35));
 
-        //Level 2 Sequential Command Binding
-        // DriverController.b().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 4.0));
-        // DriverController.b().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        // DriverController.b().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.b().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // //Elevator Jog Binding
+        // DriverController.povRight().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
 
-        //Level 3 Sequential Command Binding
-        // DriverController.x().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 6.0));
-        // DriverController.x().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        // DriverController.x().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.x().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        // //Climb Up Binding
+        // DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbUpSpeed));
 
-        //Level 4 Sequential Command Binding
-        // DriverController.y().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 8.0));
-        // DriverController.y().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 0.21));
-        // DriverController.y().onFalse(new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.absoluteZero));
-        // DriverController.y().onFalse(new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
-
-        //Elevator Jog Binding
-        DriverController.povRight().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
-
-        //Climb Up Binding
-        DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbUpSpeed));
-
-        //Climb Down Binding
-        DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbDownSpeed));
+        // //Climb Down Binding
+        // DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbDownSpeed));
         }
 
         public Command getAutonomousCommand() {

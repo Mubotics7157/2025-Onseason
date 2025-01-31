@@ -28,7 +28,6 @@ public class AlignCmd extends Command {
         double xSpeed = drivetrain.limelight_range_proportional();
         double ySpeed = drivetrain.limelight_aim_proportional();
 
-
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
@@ -36,20 +35,11 @@ public class AlignCmd extends Command {
         .withVelocityX(xSpeed) //CHANGE ME
         .withVelocityY(ySpeed)
         .withRotationalRate(0.0));
-        System.out.println(xSpeed);
-        System.out.println(ySpeed);
         System.out.println("Ongoing Align");
         }
 
     @Override
     public void end(boolean interrupted) {
-        // SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
-        // .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
-        // .withSteerRequestType(SteerRequestType.MotionMagicExpo);
-        // drivetrain.setControl(drivetrainRequest
-        // .withVelocityX(0.0)
-        // .withVelocityY(0.0)
-        // .withRotationalRate(0.0));
         System.out.println("AlignCmd Ended");
     }
 

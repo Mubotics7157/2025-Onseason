@@ -1,5 +1,6 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.KinematicsConstants;
 import frc.robot.subsystems.EndEffector;
 
 public class EndEffectorWristCmd extends Command {
@@ -14,8 +15,13 @@ public class EndEffectorWristCmd extends Command {
 
     @Override
     public void initialize() {
-        endEffector.setSetpoint(setpoint);
-        System.out.println(setpoint);
+        endEffector.setEndEffectorSetpoint(setpoint);
+        System.out.println("EndEffectorWristCmd Started");
+    }
+
+    @Override
+    public void execute() {
+        endEffector.goToEndEffectorSetpoint();
         System.out.println("EndEffectorWristCmd Started");
     }
 
