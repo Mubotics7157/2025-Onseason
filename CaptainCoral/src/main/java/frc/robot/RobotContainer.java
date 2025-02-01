@@ -21,13 +21,14 @@ import frc.robot.subsystems.Drivetrain;
 
 //Intake Imports
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.IntakeWristCmd;
 import frc.robot.commands.IntakeRunCmd;
 
 //End Effector Imports
 import frc.robot.subsystems.EndEffector;
-import frc.robot.commands.EndEffectorRunCmd;
 import frc.robot.commands.EndEffectorWristCmd;
-import frc.robot.commands.IntakeWristCmd;
+import frc.robot.commands.EndEffectorRunCmd;
+
 //Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJogCmd;
@@ -35,10 +36,10 @@ import frc.robot.commands.ElevatorPIDCmd;
 
 //Climb Imports
 import frc.robot.subsystems.Climb;
-import frc.robot.commands.AlignCmd;
 import frc.robot.commands.ClimbRunCmd;
 
 //Limelight Imports
+import frc.robot.commands.AlignCmd;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -82,7 +83,7 @@ public class RobotContainer {
         DriverController.start().and(DriverController.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
+        DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
         // DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
@@ -95,7 +96,7 @@ public class RobotContainer {
                 new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Deploy_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
     
         DriverController.leftBumper().onFalse(
                 Commands.parallel(
@@ -103,7 +104,7 @@ public class RobotContainer {
                 new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Stow_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
 
         //====================Gullet Intake====================
         DriverController.rightBumper().whileTrue(
@@ -111,14 +112,14 @@ public class RobotContainer {
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Gullet_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Gullet_Setpoint)
                 )
-            );
+        );
 
         DriverController.rightBumper().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
 
         //====================Intake Run====================
         DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
@@ -132,7 +133,7 @@ public class RobotContainer {
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Score_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L1_Setpoint)
                 )
-            );
+        );
 
         DriverController.a().onFalse(
                 Commands.parallel(
@@ -162,53 +163,47 @@ public class RobotContainer {
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Score_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L3_Setpoint)
                 )
-            );
+        );
     
-            DriverController.x().onFalse(
+        DriverController.x().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
 
         //====================Level 4 Coral Score====================
-          DriverController.y().whileTrue(
+        DriverController.y().whileTrue(
             Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint)
                 )
-            );
+        );
     
-            DriverController.y().onFalse(
+        DriverController.y().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
 
         //====================Algae DeScore====================
-          DriverController.povRight().whileTrue(
+        DriverController.povUp().whileTrue(
             Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Algae_Remove_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Bottom_Algae_Setpoint)
                 )
-            );
+        );
     
-            DriverController.povRight().onFalse(
+        DriverController.povUp().onFalse(
                 Commands.parallel(
-                    new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
-                    new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
-            );
+        );
 
-        //Elevator Jog Binding
+        //====================Elevator Jog====================
         // DriverController.povRight().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
-
-        // //Climb Up Binding
-        // DriverController.povUp().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbUpSpeed));
-
-        // //Climb Down Binding
-        // DriverController.povDown().whileTrue(new ClimbRunCmd(Climb.getInstance(), KinematicsConstants.climbDownSpeed));
         }
 
         public Command getAutonomousCommand() {
