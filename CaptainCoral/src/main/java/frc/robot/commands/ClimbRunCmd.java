@@ -22,6 +22,7 @@ public class ClimbRunCmd extends Command {
     public void execute() {
         double motorSpeed = speed;
         climb.setClimbMotorSpeed(motorSpeed);
+        System.out.println("ClimbRunCmd Ongoing");
     }
 
     @Override

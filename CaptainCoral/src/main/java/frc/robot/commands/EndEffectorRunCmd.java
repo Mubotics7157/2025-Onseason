@@ -22,6 +22,7 @@ public class EndEffectorRunCmd extends Command {
     public void execute() {
         double motorSpeed = speed;
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+        System.out.println("EndEffectorRunCmd Ongoing");
     }
 
     @Override

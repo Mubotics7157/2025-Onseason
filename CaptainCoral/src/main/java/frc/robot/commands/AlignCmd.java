@@ -32,10 +32,10 @@ public class AlignCmd extends Command {
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-        .withVelocityX(xSpeed) //CHANGE ME
+        .withVelocityX(xSpeed)
         .withVelocityY(ySpeed)
         .withRotationalRate(0.0));
-        System.out.println("Ongoing Align");
+        System.out.println("AlignCmd Ongoing");
         }
 
     @Override

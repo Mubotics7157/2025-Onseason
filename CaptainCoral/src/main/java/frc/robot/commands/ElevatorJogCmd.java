@@ -23,6 +23,7 @@ public class ElevatorJogCmd extends Command {
     public void execute() {
         double motorSpeed = speed.getAsDouble();
         elevator.setElevatorMotorSpeed(motorSpeed);
+        System.out.println("ElevatorJogCmd Ongoing");
     }
 
     @Override
