@@ -15,7 +15,7 @@ import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Master_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MASTER_MOTOR_DEVICE_ID);
-    private final TalonFX End_Effector_Wrist_Slave_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID);
+    // private final TalonFX End_Effector_Wrist_Slave_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID);
 
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
@@ -33,13 +33,13 @@ public class EndEffector extends SubsystemBase {
 
     public EndEffector() {
         ////====================Inverted Settings====================
-        var invertedConfiguration = new TalonFXConfiguration();
-        invertedConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-        End_Effector_Wrist_Slave_Motor.getConfigurator().apply(invertedConfiguration);
+        // var invertedConfiguration = new TalonFXConfiguration();
+        // invertedConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+        // End_Effector_Wrist_Slave_Motor.getConfigurator().apply(invertedConfiguration);
 
         //====================End Effector Wrist Motion Magic====================
         End_Effector_Wrist_Master_Motor.setPosition(0.0);
-        End_Effector_Wrist_Slave_Motor.setPosition(0.0);
+        // End_Effector_Wrist_Slave_Motor.setPosition(0.0);
 
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
@@ -57,7 +57,7 @@ public class EndEffector extends SubsystemBase {
         motionMagicConfigs.MotionMagicJerk = 64; // Target jerk of 1600 rps/s/s (0.1 seconds)
 
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
-        End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
+        // End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
 
         //====================End Effector Wrist Master Current Limit====================
         // var endEffectorWristMasterConfigurator = End_Effector_Wrist_Master_Motor.getConfigurator();
@@ -95,7 +95,7 @@ public class EndEffector extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
-        SmartDashboard.putNumber("End Effector Top Encoder", getEndEffectorWristSlaveEncoder());
+        // SmartDashboard.putNumber("End Effector Slave Encoder", getEndEffectorWristSlaveEncoder());
     }
     
     //====================End Effector Wrist Methods====================
@@ -103,14 +103,14 @@ public class EndEffector extends SubsystemBase {
         return End_Effector_Wrist_Master_Motor.getPosition().getValueAsDouble();
     }
 
-    public double getEndEffectorWristSlaveEncoder() {
-        return End_Effector_Wrist_Slave_Motor.getPosition().getValueAsDouble();
-    }
+    // public double getEndEffectorWristSlaveEncoder() {
+    //     return End_Effector_Wrist_Slave_Motor.getPosition().getValueAsDouble();
+    // }
 
     public void setEndEffectorWristMotorSpeed(double speed) {
         System.out.println("End Effector Wrist Motor Speed: " + speed);
         End_Effector_Wrist_Master_Motor.set(speed);
-        End_Effector_Wrist_Slave_Motor.set(speed);
+        // End_Effector_Wrist_Slave_Motor.set(speed);
     }
 
     public void setEndEffectorSetpoint(double setpoint) {
