@@ -19,11 +19,4 @@ public final class DeviceConstants {
     public static final int ELEVATOR_SLAVE_MOTOR_DEVICE_ID = 22;
 
     public static final int CLIMB_MOTOR_DEVICE_ID = 23;
-
-    //====================PNEUMATICS====================
-    public static final int COMPRESSOR_DEVICE_ID = 0;
-    public static final int CLAW_SOLENOID_1_FORWARD_CHANNEL = 0;
-    public static final int CLAW_SOLENOID_1_REVERSE_CHANNEL = 1; 
-    public static final int CLAW_SOLENOID_2_FORWARD_CHANNEL = 2;
-    public static final int CLAW_SOLENOID_2_REVERSE_CHANNEL = 3;
 }
