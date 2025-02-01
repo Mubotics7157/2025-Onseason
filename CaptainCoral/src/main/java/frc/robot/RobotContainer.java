@@ -88,11 +88,8 @@ public class RobotContainer {
         // DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
 
         //====================RIO CANBUS BINDINGS====================
-        //====================Intake Run====================
-        DriverController.leftBumper().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
-
         //====================Ground Intake====================
-        DriverController.leftTrigger().whileTrue(
+        DriverController.leftBumper().whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Deploy_Setpoint),
@@ -100,7 +97,7 @@ public class RobotContainer {
                 )
             );
     
-        DriverController.leftTrigger().onFalse(
+        DriverController.leftBumper().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Stow_Setpoint),
@@ -109,19 +106,22 @@ public class RobotContainer {
             );
 
         //====================Gullet Intake====================
-        DriverController.leftBumper().whileTrue(
+        DriverController.rightBumper().whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Gullet_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Gullet_Setpoint)
                 )
             );
 
-        DriverController.leftBumper().onFalse(
+        DriverController.rightBumper().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
                 )
             );
+
+        //====================Intake Run====================
+        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
 
         //====================End Effector Run====================
         DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
@@ -186,15 +186,15 @@ public class RobotContainer {
                 )
             );
 
-        //====================Level 4 Coral Score====================
-          DriverController.rightBumper().whileTrue(
+        //====================Algae DeScore====================
+          DriverController.povRight().whileTrue(
             Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Algae_Remove_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Bottom_Algae_Setpoint)
                 )
             );
     
-            DriverController.rightBumper().onFalse(
+            DriverController.povRight().onFalse(
                 Commands.parallel(
                     new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
                     new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
