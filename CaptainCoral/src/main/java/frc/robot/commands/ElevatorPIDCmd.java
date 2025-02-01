@@ -19,13 +19,18 @@ public class ElevatorPIDCmd extends Command {
     }
 
     @Override
-    public void end(boolean interrupted) {
+    public void execute() {
         elevator.goToElevatorSetpoint();
+        System.out.println("ElevatorPIDCmd Ongoing");
+    }
+
+    @Override
+    public void end(boolean interrupted) {
         System.out.println("ElevatorPIDCmd Ended");
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return Math.abs(elevator.getElevatorMasterEncoder() - setpoint) < 0.05; 
     }
 }

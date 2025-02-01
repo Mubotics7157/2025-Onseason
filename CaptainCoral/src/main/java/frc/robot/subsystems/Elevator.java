@@ -11,7 +11,7 @@ import frc.robot.KinematicsConstants;
 
 public class Elevator extends SubsystemBase {
     private final TalonFX Elevator_Master_Motor = new TalonFX(DeviceConstants.ELEVATOR_MASTER_MOTOR_DEVICE_ID);
-    //private final TalonFX Elevator_Slave_Motor = new TalonFX(DeviceConstants.ELEVATOR_SLAVE_MOTOR_DEVICE_ID);
+    private final TalonFX Elevator_Slave_Motor = new TalonFX(DeviceConstants.ELEVATOR_SLAVE_MOTOR_DEVICE_ID);
     private double setpoint;
 
     public static Elevator getInstance() {
@@ -21,6 +21,9 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
+        Elevator_Master_Motor.setPosition(0.0);
+        Elevator_Slave_Motor.setPosition(0.0);
+
         //====================Elevator Motion Magic====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
@@ -28,7 +31,7 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kS = 0.0; // Add 0.25 V output to overcome static friction
         generalSlotConfigs.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         generalSlotConfigs.kA = 0.05; // An acceleration of 1 rps/s requires 0.01 V output
-        generalSlotConfigs.kP = 2.5; // A position error of 2.5 rotations results in 12 V output
+        generalSlotConfigs.kP = 6.0; // A position error of 2.5 rotations results in 12 V output
         generalSlotConfigs.kI = 0.0; // no output for integrated error
         generalSlotConfigs.kD = 0.0; // A velocity error of 1 rps results in 0.1 V output
 
@@ -38,7 +41,7 @@ public class Elevator extends SubsystemBase {
         motionMagicConfigs.MotionMagicJerk = 64; // Target jerk of 1600 rps/s/s (0.1 seconds)
 
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
-        //Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
+        Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
 
         //====================Elevator Master Current Limit====================
         // var elevatorMasterConfigurator = Elevator_Master_Motor.getConfigurator();
@@ -59,17 +62,22 @@ public class Elevator extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Elevator Encoder", getElevatorEncoder());
+        SmartDashboard.putNumber("Elevator Master Encoder", getElevatorMasterEncoder());
+        SmartDashboard.putNumber("Elevator Slave Encoder", getElevatorSlaveEncoder());
     }
 
     //====================Elevator Methods====================
-    public double getElevatorEncoder() {
+    public double getElevatorMasterEncoder() {
         return Elevator_Master_Motor.getPosition().getValueAsDouble();
+    }
+
+    public double getElevatorSlaveEncoder() {
+        return Elevator_Slave_Motor.getPosition().getValueAsDouble();
     }
 
     public void setElevatorMotorSpeed(double speed) {
         Elevator_Master_Motor.set(speed);
-        //Elevator_Slave_Motor.set(speed);
+        Elevator_Slave_Motor.set(speed);
     }
 
     public void setSetpoint(double setpoint) {
@@ -79,6 +87,6 @@ public class Elevator extends SubsystemBase {
     public void goToElevatorSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
         Elevator_Master_Motor.setControl(m_request.withPosition(this.setpoint));
-        //Elevator_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
+        Elevator_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 }

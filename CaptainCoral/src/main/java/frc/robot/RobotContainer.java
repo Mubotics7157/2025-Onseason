@@ -81,40 +81,108 @@ public class RobotContainer {
         DriverController.start().and(DriverController.y()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
-        DriverController.povLeft().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
+        DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================SWERVE AUTO LINEUP BINDINGS====================
-        DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
+        // DriverController.leftBumper().whileTrue(new AlignCmd(drivetrain));     
 
         //====================RIO CANBUS BINDINGS====================
         //End Effector Run Binding
-        // DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed));
+        DriverController.povUp().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.L4scoreSpeed));
 
-        // DriverController.a().whileTrue(
-        // Commands.parallel(
-        //     new EndEffectorWristCmd(EndEffector.getInstance(), 4.75),
-        //     new ElevatorPIDCmd(Elevator.getInstance(), 6.29)
-        //     )
-        // );
+        //Level 1 Position Binding
+        DriverController.a().whileTrue(
+        Commands.parallel(
+            new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Score_Setpoint),
+            new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L1_Setpoint)
+            )
+        );
 
-        // DriverController.a().onFalse(
-        //     Commands.parallel(
-        //         new ElevatorPIDCmd(Elevator.getInstance(), 0.3),
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), 0.0)
-        //     )
-        // );
+        DriverController.a().onFalse(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+            )
+        );
 
-        DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), 4.75));
-        DriverController.a().whileFalse(new EndEffectorWristCmd(EndEffector.getInstance(), 0.0));
+        //Level 2 Position Binding
+        DriverController.b().whileTrue(
+        Commands.parallel(
+            new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Score_Setpoint),
+            new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L2_Setpoint)
+            )
+        );
 
+        DriverController.b().onFalse(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+            )
+        );
 
-        //Level 1 Sequential Command Binding
-        // DriverController.a().whileTrue(new ElevatorPIDCmd(Elevator.getInstance(), 2.5));
-        // DriverController.a().whileTrue(new EndEffectorWristCmd(EndEffector.getInstance(), -2.27));
-        // DriverController.a().whileFalse(new ElevatorPIDCmd(Elevator.getInstance(), 0.3));
-        // DriverController.a().whileFalse(new EndEffectorWristCmd(EndEffector.getInstance(), -7.35));
+          //Level 3 Position Binding
+          DriverController.x().whileTrue(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Score_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L3_Setpoint)
+                )
+            );
+    
+            DriverController.x().onFalse(
+                Commands.parallel(
+                    new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                    new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+                )
+            );
 
-        // //Elevator Jog Binding
+            //Level 4 Position Binding
+          DriverController.y().whileTrue(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint)
+                )
+            );
+    
+            DriverController.y().onFalse(
+                Commands.parallel(
+                    new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                    new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+                )
+            );
+
+            //Bottom Algae Removal
+          DriverController.rightBumper().whileTrue(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Algae_Remove_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Bottom_Algae_Setpoint)
+                )
+            );
+    
+            DriverController.rightBumper().onFalse(
+                Commands.parallel(
+                    new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                    new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+                )
+            );
+
+            //Gullet Intake with End Effector
+          DriverController.leftBumper().whileTrue(
+            Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Gullet_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Gullet_Setpoint)
+                )
+            );
+    
+            DriverController.leftBumper().onFalse(
+                Commands.parallel(
+                    new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Rest_Setpoint),
+                    new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Rest_Setpoint)
+                )
+            );
+
+        //Elevator Jog Binding
         // DriverController.povRight().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
 
         // //Climb Up Binding
