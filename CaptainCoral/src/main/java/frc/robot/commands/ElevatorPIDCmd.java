@@ -14,7 +14,7 @@ public class ElevatorPIDCmd extends Command {
 
     @Override
     public void initialize() {
-        elevator.setSetpoint(setpoint);
+        elevator.setElevatorSetpoint(setpoint);
         System.out.println("ElevatorPIDCmd Started");
     }
 

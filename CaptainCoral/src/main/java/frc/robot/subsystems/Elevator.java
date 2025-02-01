@@ -61,7 +61,7 @@ public class Elevator extends SubsystemBase {
         elevatorSlaveConfigurator.apply(elevatorSlaveLimitConfigs);
     }
 
-    public void setSetpoint(double setpoint) {
+    public void setElevatorSetpoint(double setpoint) {
         this.setpoint = setpoint;
     }
 

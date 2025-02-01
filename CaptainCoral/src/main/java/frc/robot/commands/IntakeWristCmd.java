@@ -14,17 +14,23 @@ public class IntakeWristCmd extends Command {
 
     @Override
     public void initialize() {
-        intake.setSetpoint(setpoint);
-        System.out.println("IntakeWristCmd Started");
+        intake.setIntakeSetpoint(setpoint);
+        System.out.println("EndEffectorWristCmd Started");
+    }
+
+    @Override
+    public void execute() {
+        intake.goToIntakeSetpoint();
+        System.out.println("EndEffectorWristCmd Ongoing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("IntakeWristCmd Ended");
+        System.out.println("EndEffectorWristCmd Ended");
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return Math.abs(intake.getIntakeWristEncoder() - setpoint) < 0.05; 
     }
 }

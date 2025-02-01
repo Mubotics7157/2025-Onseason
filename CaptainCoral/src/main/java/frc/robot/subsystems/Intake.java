@@ -78,18 +78,17 @@ public class Intake extends SubsystemBase {
         intakeSlaveIndexerConfigurator.apply(intakeSlaveIndexerLimitConfigs);
     }
 
-    public void setSetpoint(double setpoint) {
+    public void setIntakeSetpoint(double setpoint) {
         this.setpoint = setpoint;
     }
 
-    private void goToSetpoint() {
+    public void goToIntakeSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
         Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 
     @Override
     public void periodic() {
-        goToSetpoint();
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
     }
     
