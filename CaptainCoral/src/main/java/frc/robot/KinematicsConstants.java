@@ -9,7 +9,7 @@ public final class KinematicsConstants {
     public static final double drivetrainSpeedMultiplier = 0.2;
 
     //====================Intake====================
-    public static final double Intake_Stow_Setpoint = 5.0; //Encoder Units
+    public static final double Intake_Stow_Setpoint = 0.0; //Encoder Units
     public static final double Intake_Deploy_Setpoint = 21.5; //Encoder Units
     
     public static final double intakeSpeed = 0.75; 
@@ -22,9 +22,8 @@ public final class KinematicsConstants {
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 19.0;  //Encoder Units
     public static final double End_Effector_Wrist_Gullet_Setpoint = 1.2;  //Encoder Units
 
-    public static final double scoreSpeed = -0.3; 
-    public static final double L4scoreSpeed = -0.75; 
-    public static final double deScoreSpeed = 0.1; 
+    public static final double scoreSpeed = -0.7; 
+    public static final double deScoreSpeed = 0.7; 
 
     //====================Elevator====================
     public static final double Elevator_Rest_Setpoint = 0.0;
@@ -35,6 +34,7 @@ public final class KinematicsConstants {
 
     public static final double Elevator_Bottom_Algae_Setpoint = 15.0;
     public static final double Elevator_Gullet_Setpoint = 6.0;
+    public static final double Elevator_Coral_Ground_Intake_Setpoint = 0.0;
 
     //====================Climb====================
     public static final double climbUpSpeed = 0.75;
