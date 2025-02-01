@@ -32,6 +32,5 @@ public class EndEffectorWristCmd extends Command {
     @Override
     public boolean isFinished() {
         return Math.abs(endEffector.getEndEffectorWristMasterEncoder() - setpoint) < 0.05; 
-        //return false;  
     }
 }
