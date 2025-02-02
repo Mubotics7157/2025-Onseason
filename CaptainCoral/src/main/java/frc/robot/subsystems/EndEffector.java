@@ -108,7 +108,7 @@ public class EndEffector extends SubsystemBase {
 
     //====================End Effector Roller Methods====================
     public void setEndEffectorRollerMotorSpeed(double speed) {
-        End_Effector_Top_Motor.set(speed);
+        End_Effector_Top_Motor.set(-1 * speed);
         End_Effector_Bottom_Motor.set(speed);
     }
 }

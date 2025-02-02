@@ -8,6 +8,9 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +23,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
-
+  DutyCycleEncoder encoder = new DutyCycleEncoder(new DigitalInput(9));
+  
   private final boolean kUseLimelight = true;
 
   public Robot() {
@@ -30,6 +34,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+
+    double val = encoder.get();
+    SmartDashboard.putNumber("Encoder Reading", val);
   }
 
   @Override
@@ -64,7 +71,8 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void teleopExit() {}

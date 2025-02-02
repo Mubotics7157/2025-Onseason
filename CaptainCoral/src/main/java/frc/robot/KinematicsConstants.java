@@ -19,11 +19,11 @@ public final class KinematicsConstants {
     public static final double End_Effector_Wrist_Bottom_Algae_Remove_Setpoint = 19.0;
     public static final double End_Effector_Wrist_Gullet_Setpoint = 1.2;
 
-    public static final double End_Effector_Wrist_L1_L2_L3_Score_Setpoint = 5.8;
+    public static final double End_Effector_Wrist_L1_L2_L3_Score_Setpoint = 7.5; //WAS 5.8
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 7.5;
 
-    public static final double scoreSpeed = -0.7; 
-    public static final double deScoreSpeed = 0.7; 
+    public static final double scoreSpeed = -0.5; 
+    public static final double deScoreSpeed = 0.5; 
 
     //====================Elevator====================
     public static final double Elevator_Zero_Setpoint = 0.0;
@@ -33,7 +33,7 @@ public final class KinematicsConstants {
 
     public static final double Elevator_L1_Setpoint = 2.5;
     public static final double Elevator_L2_Setpoint = 8.0;
-    public static final double Elevator_L3_Setpoint = 14.0;
+    public static final double Elevator_L3_Setpoint = 15.0;
     public static final double Elevator_L4_Setpoint = 26.5;
 
     //====================Climb====================
