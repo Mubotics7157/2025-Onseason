@@ -307,9 +307,11 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         return targetingForwardSpeed;
       }
 
-    public double limelight_aim_proportional() {    
+    private double setpoint;
+
+    public double limelight_aim_proportional(double setpoint) {
         double kP = 0.015;
-        double targetingAngularVelocity = LimelightHelpers.getTX("limelight") * kP;
+        double targetingAngularVelocity = LimelightHelpers.getTX("limelight") + (setpoint) * kP;
         targetingAngularVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond);
 
         return targetingAngularVelocity;

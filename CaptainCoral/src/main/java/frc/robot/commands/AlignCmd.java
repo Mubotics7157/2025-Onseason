@@ -12,9 +12,11 @@ import frc.robot.subsystems.Drivetrain;
 
 public class AlignCmd extends Command {
     private final Drivetrain drivetrain;
+    private double setpoint;
     
-    public AlignCmd(Drivetrain drivetrain) {
+    public AlignCmd(Drivetrain drivetrain, double setpoint) {
         this.drivetrain = drivetrain;
+        this.setpoint = setpoint;
         addRequirements(drivetrain);
     }
 
@@ -26,7 +28,7 @@ public class AlignCmd extends Command {
     @Override
     public void execute() {
         double xSpeed = drivetrain.limelight_range_proportional();
-        double ySpeed = drivetrain.limelight_aim_proportional();
+        double ySpeed = drivetrain.limelight_aim_proportional(setpoint);
 
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)

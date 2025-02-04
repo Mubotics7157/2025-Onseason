@@ -92,10 +92,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================Align Left====================
-        // DriverController.povLeft().whileTrue(new AlignCmd(drivetrain)); //Align Left
+        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain, -2.5)); //Align Left
 
         //====================Align Right====================
-        // DriverController.povRight().whileTrue(new AlignCmd(drivetrain)); //Align Right       
+        DriverController.povRight().whileTrue(new AlignCmd(drivetrain, 2.5)); //Align Right       
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
