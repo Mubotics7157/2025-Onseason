@@ -38,7 +38,7 @@ public final class KinematicsConstants {
 
     public static final double Elevator_L1_Setpoint = 3.0;
     public static final double Elevator_L2_Setpoint = 8.15;
-    public static final double Elevator_L3_Setpoint = 14.8; //Was 15.25
+    public static final double Elevator_L3_Setpoint = 14.8;
     public static final double Elevator_L4_Setpoint = 26.5;
 
     public static final double Elevator_Processor_Score_Setpoint = 0.0;

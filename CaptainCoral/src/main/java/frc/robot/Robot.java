@@ -3,6 +3,7 @@ package frc.robot;
 import java.lang.ModuleLayer.Controller;
 
 import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
@@ -16,6 +17,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Elevator;
 import frc.robot.commands.EndEffectorWristCmd;
 import frc.robot.subsystems.EndEffector;
 

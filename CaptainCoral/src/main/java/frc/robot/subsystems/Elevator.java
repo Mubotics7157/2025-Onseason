@@ -6,6 +6,8 @@ import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import frc.robot.DeviceConstants;
 import frc.robot.KinematicsConstants;
 
@@ -23,6 +25,9 @@ public class Elevator extends SubsystemBase {
 
     public Elevator() {
         //====================Elevator Motion Magic====================
+        Elevator_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
+        Elevator_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
+
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);
 
@@ -89,5 +94,10 @@ public class Elevator extends SubsystemBase {
     public void setElevatorMotorSpeed(double speed) {
         Elevator_Master_Motor.set(speed);
         Elevator_Slave_Motor.set(speed);
+    }
+
+    public void brakeElevatorMotors() {
+        Elevator_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
+        Elevator_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
     }
 }
