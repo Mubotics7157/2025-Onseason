@@ -79,7 +79,7 @@ public class RobotContainer {
             drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
             .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
             .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-            .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * MaxAngularRate)
+            .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * KinematicsConstants.drivetrainTurnMultiplier * MaxAngularRate)
             )
         );
 
@@ -92,10 +92,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================Align Left====================
-        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain)); //-20.5
+        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain, 10.0));
 
         //====================Align Right====================
-        //DriverController.povRight().whileTrue(new AlignCmd(drivetrain, 2.5)); //20.5   
+        // DriverController.povRight().whileTrue(new AlignCmd(drivetrain));  
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================

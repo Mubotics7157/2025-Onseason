@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.KinematicsConstants;
 import frc.robot.LimelightHelpers;
 import frc.robot.TunerConstants;
 import frc.robot.TunerConstants.TunerSwerveDrivetrain;
@@ -295,23 +296,28 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         m_simNotifier.startPeriodic(kSimLoopPeriod);
     }
 
-    // public double limelight_range_proportional() {    
-    //     double kP = 0.0225;
-    //     double targetingForwardSpeed = (LimelightHelpers.getTY("limelight")) * kP;
-    //     targetingForwardSpeed *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    public double limelight_vertical_proportional() {   
+        double kP = KinematicsConstants.FBDriveKP;
+        double FBVelocity = (LimelightHelpers.getTY("limelight")) * kP;
+        FBVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         
-    //     if (LimelightHelpers.getTY("limelight") < 0.05) {
-    //         targetingForwardSpeed = 0;
-    //     }
+        if (LimelightHelpers.getTY("limelight") < 0.05) {
+            FBVelocity = 0;
+        }
 
-    //     return targetingForwardSpeed;
-    //   }
+        return FBVelocity;
+      }
 
-    public double limelight_aim_proportional() {
-        double kP = 0.0115; //0.015
-        double targetingAngularVelocity = LimelightHelpers.getTX("limelight")* kP;
-        targetingAngularVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond); //COULD BE THIS!
+    public double limelight_horizontal_proportional(double target_setpoint) {
+        double kP = KinematicsConstants.LRDriveKP;
+        
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + target_setpoint) * kP; //Adding goes left, subtracting goes right
+        LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        return targetingAngularVelocity;
+        if (LimelightHelpers.getTX("limelight") < 0.05) {
+            LRVelocity = 0;
+        }
+
+        return LRVelocity;
     }
 }

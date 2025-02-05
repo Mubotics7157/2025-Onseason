@@ -7,16 +7,27 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.KinematicsConstants;
+import frc.robot.LimelightHelpers;
 import frc.robot.TunerConstants;
 import frc.robot.subsystems.Drivetrain;
+import static edu.wpi.first.units.Units.*;
+
+import java.util.function.Supplier;
+
+import com.ctre.phoenix6.SignalLogger;
+import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
+import com.ctre.phoenix6.swerve.SwerveModuleConstants;
+import com.ctre.phoenix6.swerve.SwerveRequest;
 
 public class AlignCmd extends Command {
     private final Drivetrain drivetrain;
-    //private double setpoint;
+    private double target_setpoint;
     
-    public AlignCmd(Drivetrain drivetrain) {
+    public AlignCmd(Drivetrain drivetrain, double target_setpoint) {
         this.drivetrain = drivetrain;
-        //this.setpoint = setpoint;
+        this.target_setpoint = target_setpoint;
         addRequirements(drivetrain);
     }
 
@@ -27,8 +38,8 @@ public class AlignCmd extends Command {
 
     @Override
     public void execute() {
-        //double xSpeed = drivetrain.limelight_range_proportional();
-        double ySpeed = drivetrain.limelight_aim_proportional();
+        double xSpeed = drivetrain.limelight_vertical_proportional();
+        double ySpeed = drivetrain.limelight_horizontal_proportional(target_setpoint);
 
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
