@@ -6,7 +6,7 @@ public final class KinematicsConstants {
     public static final double jogSpeedMultiplier = -0.125;
 
     //====================Drivetrain====================
-    public static final double drivetrainSpeedMultiplier = 0.25;
+    public static final double drivetrainSpeedMultiplier = 0.1;
 
     //====================Intake====================
     public static final double Intake_Stow_Setpoint = 0.0;
