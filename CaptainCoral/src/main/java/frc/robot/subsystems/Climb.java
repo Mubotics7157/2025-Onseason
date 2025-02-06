@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import frc.robot.DeviceConstants;
 
 public class Climb extends SubsystemBase {
@@ -15,6 +17,9 @@ public class Climb extends SubsystemBase {
     private static Climb instance = new Climb();
 
     public Climb() {
+        Climb_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
+        Climb_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
+
         //====================Climb Current Limit====================
         var climbMasterConfigurator = Climb_Master_Motor.getConfigurator();
         var climbMasterLimitConfigs = new CurrentLimitsConfigs();

@@ -95,9 +95,4 @@ public class Elevator extends SubsystemBase {
         Elevator_Master_Motor.set(speed);
         Elevator_Slave_Motor.set(speed);
     }
-
-    public void brakeElevatorMotors() {
-        Elevator_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
-        Elevator_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
-    }
 }
