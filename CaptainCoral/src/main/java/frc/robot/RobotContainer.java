@@ -92,7 +92,7 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================Align Left====================
-        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain, 10.0));
+        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain));
 
         //====================Align Right====================
         // DriverController.povRight().whileTrue(new AlignCmd(drivetrain));  

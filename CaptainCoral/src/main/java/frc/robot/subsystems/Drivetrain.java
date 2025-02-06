@@ -308,13 +308,13 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         return FBVelocity;
       }
 
-    public double limelight_horizontal_proportional(double target_setpoint) {
+    public double limelight_horizontal_proportional() {
         double kP = KinematicsConstants.LRDriveKP;
         
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + target_setpoint) * kP; //Adding goes left, subtracting goes right
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.left_pole_setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        if (LimelightHelpers.getTX("limelight") < 0.05) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.05) {
             LRVelocity = 0;
         }
 

@@ -9,11 +9,11 @@ public final class KinematicsConstants {
     public static final double drivetrainSpeedMultiplier = 0.1;
     public static final double drivetrainTurnMultiplier = 0.5;
 
-    public static final double left_pole_setpoint = 10.0;
-    public static final double right_pole_setpoint = -10.0;
+    public static final double left_pole_setpoint = 20.0;
+    public static final double right_pole_setpoint = 0.0;
 
-    public static final double FBDriveKP = 0.015;
-    public static final double LRDriveKP = 0.0225;
+    public static final double FBDriveKP = 0.0225; //0.0225
+    public static final double LRDriveKP = 0.0075; //0.015
 
     //====================Intake====================
     public static final double Intake_Stow_Setpoint = 0.0;
