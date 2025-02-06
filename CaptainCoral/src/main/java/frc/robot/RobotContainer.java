@@ -43,7 +43,9 @@ import frc.robot.subsystems.Climb;
 import frc.robot.commands.ClimbRunCmd;
 
 //Limelight Imports
-import frc.robot.commands.AlignCmd;
+import frc.robot.commands.LeftAlignCmd;
+import frc.robot.commands.RightAlignCmd;
+import frc.robot.commands.RightAlignCmd;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -92,10 +94,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================Align Left====================
-        DriverController.povLeft().whileTrue(new AlignCmd(drivetrain));
+        DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
 
         //====================Align Right====================
-        // DriverController.povRight().whileTrue(new AlignCmd(drivetrain));  
+        DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));  
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================

@@ -27,6 +27,7 @@ public class Elevator extends SubsystemBase {
         //====================Elevator Motion Magic====================
         Elevator_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
         Elevator_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
+        System.out.println("Brake Mode Enabled");
 
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);

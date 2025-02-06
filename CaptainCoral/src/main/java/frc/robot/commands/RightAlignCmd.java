@@ -21,11 +21,11 @@ import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
-public class AlignCmd extends Command {
+public class RightAlignCmd extends Command {
     private final Drivetrain drivetrain;
     private double target_setpoint;
     
-    public AlignCmd(Drivetrain drivetrain) {
+    public RightAlignCmd(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
@@ -38,7 +38,7 @@ public class AlignCmd extends Command {
     @Override
     public void execute() {
         double xSpeed = drivetrain.limelight_vertical_proportional();
-        double ySpeed = drivetrain.limelight_horizontal_proportional();
+        double ySpeed = drivetrain.right_pole_limelight_horizontal_proportional();
 
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
