@@ -34,6 +34,8 @@ public class Intake extends SubsystemBase {
 
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
+        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
@@ -30,13 +31,12 @@ public class EndEffector extends SubsystemBase {
 
     public EndEffector() {
         //====================End Effector Wrist Motion Magic====================
-        End_Effector_Wrist_Master_Motor.setNeutralMode(NeutralModeValue.Brake);
-        End_Effector_Wrist_Slave_Motor.setNeutralMode(NeutralModeValue.Brake);
-
         End_Effector_Wrist_Master_Motor.setPosition(0.0);
         End_Effector_Wrist_Slave_Motor.setPosition(0.0);
 
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
+
+        endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;

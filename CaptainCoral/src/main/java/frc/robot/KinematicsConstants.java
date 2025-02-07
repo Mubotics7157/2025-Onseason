@@ -6,13 +6,14 @@ public final class KinematicsConstants {
     public static final double jogSpeedMultiplier = -0.125;
 
     //====================Drivetrain====================
-    public static final double drivetrainSpeedMultiplier = 0.1;
+    public static final double drivetrainSpeedMultiplier = 0.2;
     public static final double drivetrainTurnMultiplier = 0.5;
 
-    public static final double left_pole_setpoint = 18.5;
-    public static final double right_pole_setpoint = -20.5;
+    public static final double left_pole_setpoint = 10.0; //Square Up: 18.5 | Triangle: 10.0
+    public static final double right_pole_setpoint = -19.5; //Square Up: -21.0 | Triangle: 20.0
+    public static final double square_up_setpoint = 0.0;
 
-    public static final double FBDriveKP = 0.0225;
+    public static final double FBDriveKP = 0.015;
     public static final double LRDriveKP = 0.0075;
 
     //====================Intake====================
@@ -34,7 +35,7 @@ public final class KinematicsConstants {
     public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
 
     public static final double scoreSpeed = -0.4; 
-    public static final double deScoreSpeed = 0.05; 
+    public static final double deScoreSpeed = 0.05;
 
     //====================Elevator====================
     public static final double Elevator_Zero_Setpoint = 0.0;
