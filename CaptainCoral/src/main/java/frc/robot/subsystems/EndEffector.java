@@ -39,17 +39,21 @@ public class EndEffector extends SubsystemBase {
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0;
-        generalSlotConfigs.kV = 0.12;
-        generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 2.5;
-        generalSlotConfigs.kI = 0.0;
-        generalSlotConfigs.kD = 0.0;
+        generalSlotConfigs.kS = 0.0; //0.0
+        generalSlotConfigs.kV = 0.12; //0.12
+        generalSlotConfigs.kA = 0.05; //0.05
+        generalSlotConfigs.kP = 10.0; //2.5
+        generalSlotConfigs.kI = 0.0; //0.0
+        generalSlotConfigs.kD = 0.0; //0.0
+
+    // public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
+    // public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 4.25;
+    // public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
 
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 16;
-        motionMagicConfigs.MotionMagicAcceleration = 32;
-        motionMagicConfigs.MotionMagicJerk = 64;
+        motionMagicConfigs.MotionMagicCruiseVelocity = 32; //16
+        motionMagicConfigs.MotionMagicAcceleration = 64; //32
+        motionMagicConfigs.MotionMagicJerk = 128; //64
 
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
         End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs); //POINT OF ERROR

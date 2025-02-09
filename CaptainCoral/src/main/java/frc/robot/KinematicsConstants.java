@@ -1,12 +1,14 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public final class KinematicsConstants {
     //====================General====================
     public static final double absoluteZero = 0.0;
     public static final double jogSpeedMultiplier = -0.125;
 
     //====================Drivetrain====================
-    public static final double drivetrainSpeedMultiplier = 0.2;
+    public static final double drivetrainSpeedMultiplier = 0.1;
     public static final double drivetrainTurnMultiplier = 0.5;
 
     public static final double left_pole_setpoint = 10.0; //Square Up: 18.5 | Triangle: 10.0
@@ -23,18 +25,18 @@ public final class KinematicsConstants {
     public static final double intakeSpeed = 0.75;
 
     //====================End Effector====================
-    public static final double End_Effector_Wrist_Zero_Setpoint = 0.02;
+    public static final double End_Effector_Wrist_Zero_Setpoint = 0.1;
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 19.0;
     public static final double End_Effector_Wrist_Gullet_Setpoint = 0.02;
 
-    public static final double End_Effector_Wrist_L1_Score_Setpoint = 5.0;
+    public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 4.25;
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
 
     public static final double End_Effector_Wrist_Processor_Score_Setpoint = 19.0;
     public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
 
-    public static final double scoreSpeed = -0.4; 
+    public static final double scoreSpeed = -0.4; //WAS 0.4
     public static final double deScoreSpeed = 0.05;
 
     //====================Elevator====================

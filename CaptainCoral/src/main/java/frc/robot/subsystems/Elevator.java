@@ -25,25 +25,30 @@ public class Elevator extends SubsystemBase {
 
     public Elevator() {
         //====================Elevator Motion Magic====================
-        //ADD NEUTRAL MODE TO ME
-
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);
 
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
+        elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
         generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 6.0;
+        generalSlotConfigs.kP = 12.5; //6.0, 17.5
         generalSlotConfigs.kI = 0.0;
-        generalSlotConfigs.kD = 0.0;
+        generalSlotConfigs.kD = 0.0; 
+
+        // public static final double Elevator_L1_Setpoint = 3.0;
+        // public static final double Elevator_L2_Setpoint = 8.15;
+        // public static final double Elevator_L3_Setpoint = 14.8;
+        // public static final double Elevator_L4_Setpoint = 26.5;
 
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 16;
-        motionMagicConfigs.MotionMagicAcceleration = 32;
-        motionMagicConfigs.MotionMagicJerk = 64;
+        motionMagicConfigs.MotionMagicCruiseVelocity = 20; //16, 32
+        motionMagicConfigs.MotionMagicAcceleration = 40; //32, 64
+        motionMagicConfigs.MotionMagicJerk = 80; //64, 128
 
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
