@@ -39,12 +39,12 @@ public class EndEffector extends SubsystemBase {
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0; //0.0
-        generalSlotConfigs.kV = 0.12; //0.12
-        generalSlotConfigs.kA = 0.05; //0.05
-        generalSlotConfigs.kP = 10.0; //2.5
-        generalSlotConfigs.kI = 0.0; //0.0
-        generalSlotConfigs.kD = 0.0; //0.0
+        generalSlotConfigs.kS = 0.0;
+        generalSlotConfigs.kV = 0.12;
+        generalSlotConfigs.kA = 0.05;
+        generalSlotConfigs.kP = 10.0;
+        generalSlotConfigs.kI = 0.0;
+        generalSlotConfigs.kD = 0.0;
 
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 32;
@@ -75,7 +75,7 @@ public class EndEffector extends SubsystemBase {
     public void goToEndEffectorSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
         End_Effector_Wrist_Master_Motor.setControl(m_request.withPosition(this.setpoint));
-        End_Effector_Wrist_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint)); //POINT OF ERROR
+        End_Effector_Wrist_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
     @Override

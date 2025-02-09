@@ -24,7 +24,6 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
-        //====================Elevator Motion Magic====================
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);
 
