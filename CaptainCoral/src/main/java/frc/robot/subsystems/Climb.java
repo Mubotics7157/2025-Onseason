@@ -18,28 +18,24 @@ public class Climb extends SubsystemBase {
     private static Climb instance = new Climb();
 
     public Climb() {
-      
+        System.out.println("====================Climb Subsystem Initialized====================");
 
-        //====================Climb Current Limit====================
+        //====================Climb Subsystem====================
+        Climb_Master_Motor.setPosition(0.0);
+        Climb_Slave_Motor.setPosition(0.0);
+
         var climbMotorConfigs = new TalonFXConfiguration();
+
         climbMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
-        var climbMasterConfigurator = Climb_Master_Motor.getConfigurator();
+        //Current Limits
+        var climbLimitConfigs = climbMotorConfigs.CurrentLimits;
+        climbLimitConfigs.StatorCurrentLimit = 120;
+        climbLimitConfigs.StatorCurrentLimitEnable = true;    
 
-        var climbMasterLimitConfigs = new CurrentLimitsConfigs();
-
-        climbMasterLimitConfigs.StatorCurrentLimit = 120;
-        climbMasterLimitConfigs.StatorCurrentLimitEnable = true;
-        climbMasterConfigurator.apply(climbMasterLimitConfigs);
-
-          //====================Climb Current Limit====================
-          var climbSlaveConfigurator = Climb_Slave_Motor.getConfigurator();
-          var climbSlaveLimitConfigs = new CurrentLimitsConfigs();
-  
-          climbSlaveLimitConfigs.StatorCurrentLimit = 120;
-          climbSlaveLimitConfigs.StatorCurrentLimitEnable = true;
-          climbSlaveConfigurator.apply(climbSlaveLimitConfigs);
-          climbSlaveConfigurator.apply(climbMotorConfigs);
+        //Applies Configs
+        Climb_Master_Motor.getConfigurator().apply(climbMotorConfigs);
+        Climb_Slave_Motor.getConfigurator().apply(climbMotorConfigs);
     }
 
     @Override
