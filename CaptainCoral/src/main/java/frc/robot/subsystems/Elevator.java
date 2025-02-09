@@ -36,38 +36,21 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
         generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 12.5; //6.0, 17.5
+        generalSlotConfigs.kP = 12.0; //6.0
         generalSlotConfigs.kI = 0.0;
         generalSlotConfigs.kD = 0.0; 
 
-        // public static final double Elevator_L1_Setpoint = 3.0;
-        // public static final double Elevator_L2_Setpoint = 8.15;
-        // public static final double Elevator_L3_Setpoint = 14.8;
-        // public static final double Elevator_L4_Setpoint = 26.5;
-
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 20; //16, 32
-        motionMagicConfigs.MotionMagicAcceleration = 40; //32, 64
-        motionMagicConfigs.MotionMagicJerk = 80; //64, 128
+        motionMagicConfigs.MotionMagicCruiseVelocity = 16; //16, 20
+        motionMagicConfigs.MotionMagicAcceleration = 32; //32, 40
+        motionMagicConfigs.MotionMagicJerk = 64; //64. 80
+
+        var limitConfigs = elevatorMotorConfigs.CurrentLimits;
+        limitConfigs.StatorCurrentLimit = 80;
+        limitConfigs.StatorCurrentLimitEnable = true;
 
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
-
-        //====================Elevator Master Current Limit====================
-        var elevatorMasterConfigurator = Elevator_Master_Motor.getConfigurator();
-        var elevatorMasterLimitConfigs = new CurrentLimitsConfigs();
-
-        elevatorMasterLimitConfigs.StatorCurrentLimit = 120;
-        elevatorMasterLimitConfigs.StatorCurrentLimitEnable = true;
-        elevatorMasterConfigurator.apply(elevatorMasterLimitConfigs);
-
-        //====================Elevator Slave Current Limit====================
-        var elevatorSlaveConfigurator = Elevator_Slave_Motor.getConfigurator();
-        var elevatorSlaveLimitConfigs = new CurrentLimitsConfigs();
-
-        elevatorSlaveLimitConfigs.StatorCurrentLimit = 120;
-        elevatorSlaveLimitConfigs.StatorCurrentLimitEnable = true;
-        elevatorSlaveConfigurator.apply(elevatorSlaveLimitConfigs);
     }
 
     public void setElevatorSetpoint(double setpoint) {
