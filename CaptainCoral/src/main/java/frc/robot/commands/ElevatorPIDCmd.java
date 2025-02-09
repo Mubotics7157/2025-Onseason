@@ -32,12 +32,5 @@ public class ElevatorPIDCmd extends Command {
     @Override
     public boolean isFinished() {
         return elevator.getElevatorMasterEncoder() - setpoint < 0.05;
-
-    //     if (Math.abs(elevator.getElevatorMasterEncoder() - setpoint) < 0.1) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
     }
 }

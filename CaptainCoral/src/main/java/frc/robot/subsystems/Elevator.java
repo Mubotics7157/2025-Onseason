@@ -26,10 +26,11 @@ public class Elevator extends SubsystemBase {
     public Elevator() {
         System.out.println("====================Elevator Subsystem Initialized====================");
 
+        //====================Elevator Subsystem====================
+        var elevatorMotorConfigs = new TalonFXConfiguration();
+
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);
-
-        var elevatorMotorConfigs = new TalonFXConfiguration();
 
         //Brake Mode
         elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;

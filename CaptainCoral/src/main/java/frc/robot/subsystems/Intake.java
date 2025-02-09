@@ -27,61 +27,51 @@ public class Intake extends SubsystemBase {
     private static Intake instance = new Intake();
 
     public Intake() {
-        //====================Intake Wrist Motion Magic====================
-        Intake_Wrist_Motor.setNeutralMode(NeutralModeValue.Brake);
+        System.out.println("====================Intake Subsystem Initialized====================");
+
+        //====================Intake Wrist====================
+        var intakeWristMotorConfigs = new TalonFXConfiguration();
 
         Intake_Wrist_Motor.setPosition(0.0);
 
-        var intakeWristMotorConfigs = new TalonFXConfiguration();
-
+        //Brake Mode
         intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
+        //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
         generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 0.001;
-        generalSlotConfigs.kI = 0;
+        generalSlotConfigs.kP = 10.0;
+        generalSlotConfigs.kI = 0.0;
         generalSlotConfigs.kD = 0.0;
 
+        //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 16;
-        motionMagicConfigs.MotionMagicAcceleration = 32;
-        motionMagicConfigs.MotionMagicJerk = 64;
+        motionMagicConfigs.MotionMagicCruiseVelocity = 32;
+        motionMagicConfigs.MotionMagicAcceleration = 64;
+        motionMagicConfigs.MotionMagicJerk = 128;
 
+        //Current Limits
+        var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
+        intakeWristLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        intakeWristLimitConfigs.StatorCurrentLimitEnable = true;
+
+        //Applies Configs
         Intake_Wrist_Motor.getConfigurator().apply(intakeWristMotorConfigs);
 
-        //====================Intake Wrist Current Limit====================
-        var intakeWristConfigurator = Intake_Wrist_Motor.getConfigurator();
-        var intakeWristLimitConfigs = new CurrentLimitsConfigs();
+        //====================Intake Rollers====================
+        var intakeRollersMotorConfigs = new TalonFXConfiguration();
 
-        intakeWristLimitConfigs.StatorCurrentLimit = 120;
-        intakeWristLimitConfigs.StatorCurrentLimitEnable = true;
-        intakeWristConfigurator.apply(intakeWristLimitConfigs);
+        //Current Limits
+        var intakeRollerLimitConfigs = intakeRollersMotorConfigs.CurrentLimits;
+        intakeRollerLimitConfigs.StatorCurrentLimit = 30; //120, 80
+        intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
-        //====================Intake Roller Current Limit====================
-        var intakeRollerConfigurator = Intake_Roller_Motor.getConfigurator();
-        var intakeRollerLimitConfigs = new CurrentLimitsConfigs();
-
-        intakeRollerLimitConfigs.StatorCurrentLimit = 120;
-        intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;
-        intakeRollerConfigurator.apply(intakeRollerLimitConfigs);
-
-        //====================Intake Indexer Current Limit====================
-        var intakeMasterIndexerConfigurator = Intake_Indexer_Master_Motor.getConfigurator();
-        var intakeMasterIndexerLimitConfigs = new CurrentLimitsConfigs();
-
-        intakeMasterIndexerLimitConfigs.StatorCurrentLimit = 120;
-        intakeMasterIndexerLimitConfigs.StatorCurrentLimitEnable = true;
-        intakeMasterIndexerConfigurator.apply(intakeMasterIndexerLimitConfigs);
-
-        //====================Intake Indexer Current Limit====================
-        var intakeSlaveIndexerConfigurator = Intake_Indexer_Slave_Motor.getConfigurator();
-        var intakeSlaveIndexerLimitConfigs = new CurrentLimitsConfigs();
-
-        intakeSlaveIndexerLimitConfigs.StatorCurrentLimit = 120;
-        intakeSlaveIndexerLimitConfigs.StatorCurrentLimitEnable = true;
-        intakeSlaveIndexerConfigurator.apply(intakeSlaveIndexerLimitConfigs);
+        //Applies Configs
+        Intake_Roller_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
+        Intake_Indexer_Master_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
+        Intake_Indexer_Slave_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
     }
 
     public void setIntakeSetpoint(double setpoint) {

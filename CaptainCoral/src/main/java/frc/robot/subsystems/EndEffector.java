@@ -32,10 +32,11 @@ public class EndEffector extends SubsystemBase {
     public EndEffector() {
         System.out.println("====================EndEffector Subsystem Initialized====================");
 
+        //====================End Effector Wrist====================
+        var endEffectorWristMotorConfigs = new TalonFXConfiguration();
+
         End_Effector_Wrist_Master_Motor.setPosition(0.0);
         End_Effector_Wrist_Slave_Motor.setPosition(0.0);
-
-        var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
         //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
@@ -64,7 +65,7 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
         End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
 
-        //========================================
+        //====================End Effector Rollers====================
         var endEffectorRollersMotorConfigs = new TalonFXConfiguration();
 
         //Current Limits
