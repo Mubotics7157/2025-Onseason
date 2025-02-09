@@ -36,17 +36,17 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
         generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 12.0; //6.0
+        generalSlotConfigs.kP = 9.0; //6.0
         generalSlotConfigs.kI = 0.0;
         generalSlotConfigs.kD = 0.0; 
 
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 16; //16, 20
-        motionMagicConfigs.MotionMagicAcceleration = 32; //32, 40
-        motionMagicConfigs.MotionMagicJerk = 64; //64. 80
+        motionMagicConfigs.MotionMagicCruiseVelocity = 20; //16, 20
+        motionMagicConfigs.MotionMagicAcceleration = 40; //32, 40
+        motionMagicConfigs.MotionMagicJerk = 80; //64, 80
 
         var limitConfigs = elevatorMotorConfigs.CurrentLimits;
-        limitConfigs.StatorCurrentLimit = 80;
+        limitConfigs.StatorCurrentLimit = 80; //120, 80
         limitConfigs.StatorCurrentLimitEnable = true;
 
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);

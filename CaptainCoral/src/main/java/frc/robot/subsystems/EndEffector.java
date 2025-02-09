@@ -46,49 +46,26 @@ public class EndEffector extends SubsystemBase {
         generalSlotConfigs.kI = 0.0; //0.0
         generalSlotConfigs.kD = 0.0; //0.0
 
-    // public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
-    // public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 4.25;
-    // public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
-
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 32; //16
-        motionMagicConfigs.MotionMagicAcceleration = 64; //32
-        motionMagicConfigs.MotionMagicJerk = 128; //64
+        motionMagicConfigs.MotionMagicCruiseVelocity = 32;
+        motionMagicConfigs.MotionMagicAcceleration = 64;
+        motionMagicConfigs.MotionMagicJerk = 128;
+
+        var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
+        endEffectorWristLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
-        End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs); //POINT OF ERROR
+        End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
 
-        //====================End Effector Wrist Master Current Limit====================
-        var endEffectorWristMasterConfigurator = End_Effector_Wrist_Master_Motor.getConfigurator();
-        var endEffectorMasterLimitConfigs = new CurrentLimitsConfigs();
+        var endEffectorRollersMotorConfigs = new TalonFXConfiguration();
 
-        endEffectorMasterLimitConfigs.StatorCurrentLimit = 120;
-        endEffectorMasterLimitConfigs.StatorCurrentLimitEnable = true;
-        endEffectorWristMasterConfigurator.apply(endEffectorMasterLimitConfigs);
-
-        //====================End Effector Wrist Slave Current Limit====================
-        var endEffectorWristSlaveConfigurator = End_Effector_Wrist_Slave_Motor.getConfigurator();
-        var endEffectorSlaveLimitConfigs = new CurrentLimitsConfigs();
-
-        endEffectorSlaveLimitConfigs.StatorCurrentLimit = 120;
-        endEffectorSlaveLimitConfigs.StatorCurrentLimitEnable = true;
-        endEffectorWristSlaveConfigurator.apply(endEffectorSlaveLimitConfigs);
-
-        // //====================End Effector Top Roller Current Limit====================
-        var endEffectorTopConfigurator = End_Effector_Top_Motor.getConfigurator();
-        var endEffectorTopLimitConfigs = new CurrentLimitsConfigs();
-
-        endEffectorTopLimitConfigs.StatorCurrentLimit = 120;
-        endEffectorTopLimitConfigs.StatorCurrentLimitEnable = true;
-        endEffectorTopConfigurator.apply(endEffectorTopLimitConfigs);
-
-        //====================End Effector Bottom Roller Current Limit====================
-        var endEffectorBottomConfigurator = End_Effector_Bottom_Motor.getConfigurator();
-        var endEffectorBottomLimitConfigs = new CurrentLimitsConfigs();
-
-        endEffectorBottomLimitConfigs.StatorCurrentLimit = 120;
-        endEffectorBottomLimitConfigs.StatorCurrentLimitEnable = true;
-        endEffectorBottomConfigurator.apply(endEffectorBottomLimitConfigs);
+        var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
+        endEffectorRollerLimitConfigs.StatorCurrentLimit = 30; //120, 80
+        endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
+        
+        End_Effector_Top_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
+        End_Effector_Bottom_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
     }
 
     public void setEndEffectorSetpoint(double setpoint) {
