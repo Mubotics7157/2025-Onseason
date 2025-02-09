@@ -24,13 +24,17 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
+        System.out.println("====================Elevator Subsystem Initialized====================");
+
         Elevator_Master_Motor.setPosition(0.0);
         Elevator_Slave_Motor.setPosition(0.0);
 
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
+        //Brake Mode
         elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
+        //General Configurations
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
@@ -39,15 +43,18 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kI = 0.0;
         generalSlotConfigs.kD = 0.0; 
 
+        //Motion Magic
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 20; //16, 20
         motionMagicConfigs.MotionMagicAcceleration = 40; //32, 40
         motionMagicConfigs.MotionMagicJerk = 80; //64, 80
 
+        //Current limits
         var limitConfigs = elevatorMotorConfigs.CurrentLimits;
         limitConfigs.StatorCurrentLimit = 80; //120, 80
         limitConfigs.StatorCurrentLimitEnable = true;
 
+        //Applies Configs
         Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
     }

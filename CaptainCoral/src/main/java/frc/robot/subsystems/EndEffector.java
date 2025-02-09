@@ -30,14 +30,17 @@ public class EndEffector extends SubsystemBase {
     private static EndEffector instance = new EndEffector();
 
     public EndEffector() {
-        //====================End Effector Wrist Motion Magic====================
+        System.out.println("====================EndEffector Subsystem Initialized====================");
+
         End_Effector_Wrist_Master_Motor.setPosition(0.0);
         End_Effector_Wrist_Slave_Motor.setPosition(0.0);
 
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
+        //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
+        //General Configurations
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
         generalSlotConfigs.kS = 0.0;
         generalSlotConfigs.kV = 0.12;
@@ -46,24 +49,30 @@ public class EndEffector extends SubsystemBase {
         generalSlotConfigs.kI = 0.0;
         generalSlotConfigs.kD = 0.0;
 
+        //Motion Magic
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = 32;
         motionMagicConfigs.MotionMagicAcceleration = 64;
         motionMagicConfigs.MotionMagicJerk = 128;
 
+        //Current Limits
         var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
         endEffectorWristLimitConfigs.StatorCurrentLimit = 80; //120, 80
         endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
+        //Applies Configs
         End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
         End_Effector_Wrist_Slave_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
 
+        //========================================
         var endEffectorRollersMotorConfigs = new TalonFXConfiguration();
 
+        //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
         endEffectorRollerLimitConfigs.StatorCurrentLimit = 30; //120, 80
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
-        
+
+        //Applies Configs
         End_Effector_Top_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
         End_Effector_Bottom_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
     }
