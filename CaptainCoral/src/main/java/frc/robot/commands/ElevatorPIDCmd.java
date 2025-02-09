@@ -1,5 +1,6 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.KinematicsConstants;
 import frc.robot.subsystems.Elevator;
 
 public class ElevatorPIDCmd extends Command {
@@ -31,6 +32,6 @@ public class ElevatorPIDCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return elevator.getElevatorMasterEncoder() - setpoint < 0.05;
+        return elevator.getElevatorMasterEncoder() - setpoint < KinematicsConstants.deadzoneTolerance;
     }
 }

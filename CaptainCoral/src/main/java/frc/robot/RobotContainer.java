@@ -69,9 +69,23 @@ public class RobotContainer {
     public final Drivetrain drivetrain = TunerConstants.createDrivetrain();    
 
     public RobotContainer() {
-        //====================Autonomous Command====================
+        //====================Autonomous Commands====================
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
+
+        //Alignment Commands
+        NamedCommands.registerCommand("leftAlignCmd", new LeftAlignCmd(drivetrain));
+        NamedCommands.registerCommand("rightAlignCmd", new RightAlignCmd(drivetrain));
+
+        //Zeroing Commands
+        NamedCommands.registerCommand("zeroEndEffectorWrist", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint));
+        NamedCommands.registerCommand("zeroElevator", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint));
+        NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+
+        //Action Commands
+        NamedCommands.registerCommand("endEffectorL4", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint));
+        NamedCommands.registerCommand("elevatorL4", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
+        NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
 
         configureBindings();
     }
@@ -101,29 +115,29 @@ public class RobotContainer {
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
-        // DriverController.leftTrigger().whileTrue(
-        //         Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-        //         new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Deploy_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
-        //         new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed)
-        //         )
-        // );
+        DriverController.leftTrigger().whileTrue(
+                Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
+                new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Deploy_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed)
+                )
+        );
     
-        // DriverController.leftTrigger().onFalse(
-        //         Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-        //         new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Stow_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
-        //         new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.absoluteZero)
-        //         )
-        // );
+        DriverController.leftTrigger().onFalse(
+                Commands.parallel(
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
+                new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Stow_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.absoluteZero)
+                )
+        );
 
         // //====================End Effector Run====================
         DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
 
         // //====================TEMPORARY INTAKE TAP====================
-        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed));
+        // DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed));
 
         // //====================Bottom Algae DeScore====================
         // DriverController.leftBumper().whileTrue(

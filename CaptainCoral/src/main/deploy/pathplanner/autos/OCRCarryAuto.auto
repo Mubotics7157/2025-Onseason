@@ -11,12 +11,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "Elevator L4 Coral Score"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "OCRCarry2"

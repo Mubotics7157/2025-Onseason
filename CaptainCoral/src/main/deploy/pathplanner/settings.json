@@ -3,6 +3,8 @@
   "robotLength": 0.762,
   "holonomicMode": true,
   "pathFolders": [
+    "DiagonalPreload",
+    "StraightPreload",
     "OCRCarryAuto"
   ],
   "autoFolders": [],

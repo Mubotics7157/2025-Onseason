@@ -21,5 +21,4 @@ public final class DeviceConstants {
 
     public static final int CLIMB_MASTER_MOTOR_DEVICE_ID = 24;
     public static final int CLIMB_SLAVE_MOTOR_DEVICE_ID = 25;
-
 }

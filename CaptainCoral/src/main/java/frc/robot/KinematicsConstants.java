@@ -1,11 +1,11 @@
 package frc.robot;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public final class KinematicsConstants {
+public class KinematicsConstants { //FINAL KEYWORD???
     //====================General====================
     public static final double absoluteZero = 0.0;
     public static final double jogSpeedMultiplier = -0.125;
+    public static final double deadzoneTolerance = 0.1;
 
     //====================Drivetrain====================
     public static final double drivetrainSpeedMultiplier = 0.1;
@@ -29,7 +29,7 @@ public final class KinematicsConstants {
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 19.0;
     public static final double End_Effector_Wrist_Gullet_Setpoint = 0.02;
 
-    public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
+    public static final double End_Effector_Wrist_L1_Score_Setpoint = SmartDashboard.getNumber("End_Effector_Wrist_L1_Score_Setpoint", 3.0);
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 4.25;
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
 
