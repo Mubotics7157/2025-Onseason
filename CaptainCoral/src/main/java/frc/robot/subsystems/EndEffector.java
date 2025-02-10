@@ -70,7 +70,7 @@ public class EndEffector extends SubsystemBase {
 
         //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
-        endEffectorRollerLimitConfigs.StatorCurrentLimit = 30; //120, 80
+        endEffectorRollerLimitConfigs.StatorCurrentLimit = 80; //120, 80
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs

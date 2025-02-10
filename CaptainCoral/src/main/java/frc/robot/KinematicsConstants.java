@@ -37,7 +37,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
 
     public static final double scoreSpeed = -0.4;
-    public static final double deScoreSpeed = 0.05;
+    public static final double tapSpeed = -0.15;
 
     //====================Elevator====================
     public static final double Elevator_Zero_Setpoint = 0.0;

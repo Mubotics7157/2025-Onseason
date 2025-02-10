@@ -65,7 +65,7 @@ public class Intake extends SubsystemBase {
 
         //Current Limits
         var intakeRollerLimitConfigs = intakeRollersMotorConfigs.CurrentLimits;
-        intakeRollerLimitConfigs.StatorCurrentLimit = 30; //120, 80
+        intakeRollerLimitConfigs.StatorCurrentLimit = 80; //120, 80
         intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs
