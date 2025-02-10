@@ -138,9 +138,6 @@ public class RobotContainer {
         // //====================End Effector Run====================
         DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
 
-        // //====================TEMPORARY INTAKE TAP====================
-        // DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed));
-
         //====================Bottom Algae DeScore====================
         DriverController.leftBumper().whileTrue(
             Commands.parallel(
@@ -231,49 +228,15 @@ public class RobotContainer {
                 )
         );
 
-        // //====================Processor Score Position====================
-        // DriverController.povUp().whileTrue(
-        //     Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Processor_Score_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Processor_Score_Setpoint)
-        //         )
-        // );
-    
-        // DriverController.povUp().onFalse(
-        //         Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
-        //         )
-        // );
-
-        // //DriverController.povUp().and(DriverController.rightTrigger()).whileTrue((new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed)));
-
-        // //====================Barge Score Position====================
-        // DriverController.button(7).whileTrue(
-        //         Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Barge_Score_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Barge_Score_Setpoint)
-        //             )
-        //     );
-        
-        //     DriverController.button(7).onFalse(
-        //         Commands.parallel(
-        //         new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-        //         new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
-        //             )
-        //     );
-
-        // //DriverController.button(7).and(DriverController.rightTrigger()).whileTrue((new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed)));
-
         // //====================Gullet Intake====================
-        DriverController.leftBumper().whileTrue(
+        DriverController.button(8).whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Coral_Station_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Coral_Station_Setpoint)
                 )
         );
 
-        DriverController.leftBumper().onFalse(
+        DriverController.button(8).onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
                 new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
@@ -281,7 +244,7 @@ public class RobotContainer {
         );
 
         //====================Elevator Jog====================
-        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.Jog_Speed_Multiplier * DriverController.getRightY()));
+        // DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.Jog_Speed_Multiplier * DriverController.getRightY()));
         }
 
         public Command getAutonomousCommand() {
