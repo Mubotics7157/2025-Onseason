@@ -2,7 +2,6 @@ package frc.robot.commands;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -12,9 +11,7 @@ import frc.robot.LimelightHelpers;
 import frc.robot.TunerConstants;
 import frc.robot.subsystems.Drivetrain;
 import static edu.wpi.first.units.Units.*;
-
 import java.util.function.Supplier;
-
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
@@ -23,7 +20,6 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 
 public class RightAlignCmd extends Command {
     private final Drivetrain drivetrain;
-    private double target_setpoint;
     
     public RightAlignCmd(Drivetrain drivetrain) {
         this.drivetrain = drivetrain;

@@ -116,10 +116,7 @@ public class RobotContainer {
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
         DriverController.leftTrigger().whileTrue(
-                Commands.parallel(
-                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
-                new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Deploy_Setpoint),
+                Commands.parallel(    
                 new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Intake_Speed)
                 )
@@ -127,9 +124,6 @@ public class RobotContainer {
     
         DriverController.leftTrigger().onFalse(
                 Commands.parallel(
-                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint),
-                new IntakeWristCmd(Intake.getInstance(), KinematicsConstants.Intake_Zero_Setpoint),
                 new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero)
                 )
