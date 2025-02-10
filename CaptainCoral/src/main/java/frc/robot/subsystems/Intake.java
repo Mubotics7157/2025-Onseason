@@ -79,7 +79,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void goToIntakeSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
         Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 

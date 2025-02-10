@@ -33,6 +33,6 @@ public class IntakeWristCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return intake.getIntakeWristEncoder() - setpoint < KinematicsConstants.deadzoneTolerance;
+        return intake.getIntakeWristEncoder() - setpoint < KinematicsConstants.PID_Setpoint_Tolerance;
     }
 }

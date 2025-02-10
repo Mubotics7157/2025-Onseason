@@ -32,6 +32,6 @@ public class ElevatorPIDCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return elevator.getElevatorMasterEncoder() - setpoint < KinematicsConstants.deadzoneTolerance;
+        return elevator.getElevatorMasterEncoder() - setpoint < KinematicsConstants.PID_Setpoint_Tolerance;
     }
 }

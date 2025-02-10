@@ -27,7 +27,7 @@ public class EndEffectorRunCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        endEffector.setEndEffectorRollerMotorSpeed(KinematicsConstants.absoluteZero);
+        endEffector.setEndEffectorRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
         System.out.println("EndEffectorRunCmd Ended");
     }
 

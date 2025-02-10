@@ -27,7 +27,7 @@ public class ClimbRunCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        climb.setClimbMotorSpeed(KinematicsConstants.absoluteZero);
+        climb.setClimbMotorSpeed(KinematicsConstants.Absolute_Zero);
         System.out.println("ClimbRunCmd Ended");
     }
 

@@ -58,7 +58,7 @@ public class EndEffector extends SubsystemBase {
 
         //Current Limits
         var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
-        endEffectorWristLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        endEffectorWristLimitConfigs.StatorCurrentLimit = 80;
         endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -70,7 +70,7 @@ public class EndEffector extends SubsystemBase {
 
         //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
-        endEffectorRollerLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        endEffectorRollerLimitConfigs.StatorCurrentLimit = 80;
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs
@@ -83,7 +83,7 @@ public class EndEffector extends SubsystemBase {
     }
 
     public void goToEndEffectorSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
         End_Effector_Wrist_Master_Motor.setControl(m_request.withPosition(this.setpoint));
         End_Effector_Wrist_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }

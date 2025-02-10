@@ -80,12 +80,12 @@ public class RobotContainer {
         //Zeroing Commands
         NamedCommands.registerCommand("zeroEndEffectorWrist", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint));
         NamedCommands.registerCommand("zeroElevator", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint));
-        NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
 
         //Action Commands
         NamedCommands.registerCommand("endEffectorL4", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint));
         NamedCommands.registerCommand("elevatorL4", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
-        NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+        NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
 
         configureBindings();
     }
@@ -93,9 +93,9 @@ public class RobotContainer {
     private void configureBindings() {
         //====================SWERVE CANBUS BINDINGS====================
             drivetrain.setDefaultCommand(drivetrain.applyRequest(() -> drive
-            .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-            .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.drivetrainSpeedMultiplier * MaxSpeed)
-            .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * KinematicsConstants.drivetrainTurnMultiplier * MaxAngularRate)
+            .withVelocityX(-1 * MathUtil.applyDeadband(DriverController.getLeftY(), 0.05) * KinematicsConstants.Drivetrain_Speed_Multiplier * MaxSpeed)
+            .withVelocityY(-1 * MathUtil.applyDeadband(DriverController.getLeftX(), 0.05) * KinematicsConstants.Drivetrain_Speed_Multiplier * MaxSpeed)
+            .withRotationalRate(-1 * MathUtil.applyDeadband(DriverController.getRightX(), 0.05) * KinematicsConstants.Drivetrain_Turn_Multiplier * MaxAngularRate)
             )
         );
 
@@ -133,15 +133,15 @@ public class RobotContainer {
         //         )
         // );
 
-        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.intakeSpeed));
-        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.tapSpeed));
+        DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Run_Speed));
+        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Tap_Speed));
 
-        DriverController.leftTrigger().onFalse(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.absoluteZero));
-        DriverController.leftTrigger().onFalse(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.absoluteZero));
+        DriverController.leftTrigger().onFalse(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero));
+        DriverController.leftTrigger().onFalse(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
 
 
         // //====================End Effector Run====================
-        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.scoreSpeed));
+        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
 
         // //====================TEMPORARY INTAKE TAP====================
         // DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.deScoreSpeed));
@@ -286,7 +286,7 @@ public class RobotContainer {
         );
 
         //====================Elevator Jog====================
-        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.jogSpeedMultiplier * DriverController.getRightY()));
+        DriverController.povUp().whileTrue(new ElevatorJogCmd(Elevator.getInstance(), () -> KinematicsConstants.Jog_Speed_Multiplier * DriverController.getRightY()));
         }
 
         public Command getAutonomousCommand() {

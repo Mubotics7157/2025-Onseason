@@ -28,8 +28,8 @@ public class IntakeRunCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        intake.setIntakeRollerMotorSpeed(KinematicsConstants.absoluteZero);
-        intake.setIndexerMotorSpeed(KinematicsConstants.absoluteZero);
+        intake.setIntakeRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
+        intake.setIndexerMotorSpeed(KinematicsConstants.Absolute_Zero);
         System.out.println("IntakeRunCmd Ended");
     }
 

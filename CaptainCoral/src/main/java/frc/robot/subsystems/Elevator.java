@@ -65,7 +65,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public void goToElevatorSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.absoluteZero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
         Elevator_Master_Motor.setControl(m_request.withPosition(this.setpoint));
         Elevator_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
     }

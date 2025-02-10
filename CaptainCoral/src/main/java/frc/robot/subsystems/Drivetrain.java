@@ -297,8 +297,8 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     public double limelight_vertical_proportional() {   
-        double kP = KinematicsConstants.FBDriveKP;
-        double FBVelocity = (LimelightHelpers.getTY("limelight") + KinematicsConstants.square_up_setpoint) * kP;
+        double kP = KinematicsConstants.Drivetrain_FB_kP;
+        double FBVelocity = (LimelightHelpers.getTY("limelight") + KinematicsConstants.Square_Up_Setpoint) * kP;
         FBVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         
         if (LimelightHelpers.getTY("limelight") < 0.05) {
@@ -309,9 +309,9 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
       }
 
     public double left_pole_limelight_horizontal_proportional() {
-        double kP = KinematicsConstants.LRDriveKP;
+        double kP = KinematicsConstants.Drivetrain_LR_kP;
         
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.left_pole_setpoint) * kP; //Adding goes left, subtracting goes right
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.Left_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
         if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.05) {
@@ -322,9 +322,9 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     public double right_pole_limelight_horizontal_proportional() {
-        double kP = KinematicsConstants.LRDriveKP;
+        double kP = KinematicsConstants.Drivetrain_LR_kP;
         
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.right_pole_setpoint) * kP; //Adding goes left, subtracting goes right
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.Right_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
         if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.05) {

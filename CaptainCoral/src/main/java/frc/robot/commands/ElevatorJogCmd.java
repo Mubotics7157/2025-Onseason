@@ -28,7 +28,7 @@ public class ElevatorJogCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        elevator.setElevatorMotorSpeed(KinematicsConstants.absoluteZero);
+        elevator.setElevatorMotorSpeed(KinematicsConstants.Absolute_Zero);
         System.out.println("ElevatorJogCmd Ended");
     }
 

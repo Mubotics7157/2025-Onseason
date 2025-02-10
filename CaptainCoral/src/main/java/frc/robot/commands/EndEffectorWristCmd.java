@@ -32,6 +32,6 @@ public class EndEffectorWristCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(endEffector.getEndEffectorWristMasterEncoder() - setpoint) < KinematicsConstants.deadzoneTolerance; 
+        return Math.abs(endEffector.getEndEffectorWristMasterEncoder() - setpoint) < KinematicsConstants.PID_Setpoint_Tolerance; 
     }
 }
