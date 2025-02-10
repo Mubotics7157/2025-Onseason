@@ -35,7 +35,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Intake_Roller_Current_Limit = 80.0;
 
     //Intake Speeds
-    public static final double Intake_Run_Speed = 0.8;
+    public static final double Intake_Ground_Run_Speed = 0.8;
 
     //Intake Setpoints
     public static final double Intake_Zero_Setpoint = 0.0;
