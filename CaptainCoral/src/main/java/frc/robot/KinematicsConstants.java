@@ -19,13 +19,30 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Drivetrain_LR_kP = 0.0075; //0.0075
 
     //====================Intake====================
-    public static final double Intake_Stow_Setpoint = 0.0;
-    public static final double Intake_Deploy_Setpoint = 8.5;
-    
+    //Intake Motion Magic
+    public static final double Intake_Wrist_kS = 0.0;
+    public static final double Intake_Wrist_kV = 0.12;
+    public static final double Intake_Wrist_kA = 0.05;
+    public static final double Intake_Wrist_kP = 10.0;
+    public static final double Intake_Wrist_kI = 0.0;
+    public static final double Intake_Wrist_kD = 0.0;
+    public static final double Intake_Wrist_Velocity = 32.0;
+    public static final double Intake_Wrist_Acceleration = 64.0;
+    public static final double Intake_Wrist_Jerk = 128.0;
+
+    //Intake Current Limits
+    public static final double Intake_Wrist_Current_Limit = 80.0;
+    public static final double Intake_Roller_Current_Limit = 80.0;
+
+    //Intake Speeds
     public static final double Intake_Run_Speed = 0.8;
 
+    //Intake Setpoints
+    public static final double Intake_Zero_Setpoint = 0.0;
+    public static final double Intake_Ground_Deploy_Setpoint = 8.5;
+
     //====================End Effector====================
-    //Motion Magic
+    //End Effector Motion Magic
     public static final double End_Effector_Wrist_kS = 0.0;
     public static final double End_Effector_Wrist_kV = 0.12;
     public static final double End_Effector_Wrist_kA = 0.05;
@@ -36,7 +53,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Wrist_Acceleration = 64.0;
     public static final double End_Effector_Wrist_Jerk = 128.0;
 
-    //Current Limits
+    //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
     public static final double End_Effector_Roller_Current_Limit = 80.0;
 
@@ -58,7 +75,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
 
     //====================Elevator====================
-    //Motion Magic
+    //Elevator Motion Magic
     public static final double Elevator_kS = 0.0;
     public static final double Elevator_kV = 0.12;
     public static final double Elevator_kA = 0.05;
@@ -69,7 +86,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Elevator_Acceleration = 40.0;
     public static final double Elevator_Jerk = 80.0;
 
-    //Curent Limit
+    //Elevator Curent Limit
     public static final double Elevator_Current_Limit = 80.0;
 
     //Elevator Setpoints
@@ -87,8 +104,10 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Elevator_Barge_Score_Setpoint = 26.5;
 
     //====================Climb====================
+    //Climb Current Limit
     public static final double Climb_Current_Limit = 120.0;
 
+    //Climb Speeds
     public static final double Climb_Up_Speed = 0.8;
     public static final double Climb_Down_Speed = -0.8;
 }

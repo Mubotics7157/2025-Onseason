@@ -39,22 +39,22 @@ public class Intake extends SubsystemBase {
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0;
-        generalSlotConfigs.kV = 0.12;
-        generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 10.0;
-        generalSlotConfigs.kI = 0.0;
-        generalSlotConfigs.kD = 0.0;
+        generalSlotConfigs.kS = KinematicsConstants.Intake_Wrist_kS;
+        generalSlotConfigs.kV = KinematicsConstants.Intake_Wrist_kV;
+        generalSlotConfigs.kA = KinematicsConstants.Intake_Wrist_kA;
+        generalSlotConfigs.kP = KinematicsConstants.Intake_Wrist_kP;
+        generalSlotConfigs.kI = KinematicsConstants.Intake_Wrist_kI;
+        generalSlotConfigs.kD = KinematicsConstants.Intake_Wrist_kD;
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 32;
-        motionMagicConfigs.MotionMagicAcceleration = 64;
-        motionMagicConfigs.MotionMagicJerk = 128;
+        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.Intake_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.Intake_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.Intake_Wrist_Jerk;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
-        intakeWristLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        intakeWristLimitConfigs.StatorCurrentLimit = KinematicsConstants.Intake_Wrist_Current_Limit;
         intakeWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -65,7 +65,7 @@ public class Intake extends SubsystemBase {
 
         //Current Limits
         var intakeRollerLimitConfigs = intakeRollersMotorConfigs.CurrentLimits;
-        intakeRollerLimitConfigs.StatorCurrentLimit = 80; //120, 80
+        intakeRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.Intake_Roller_Current_Limit;
         intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs
