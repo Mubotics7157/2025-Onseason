@@ -29,30 +29,30 @@ public class Elevator extends SubsystemBase {
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
-        Elevator_Master_Motor.setPosition(0.0);
-        Elevator_Slave_Motor.setPosition(0.0);
+        Elevator_Master_Motor.setPosition(KinematicsConstants.Absolute_Zero);
+        Elevator_Slave_Motor.setPosition(KinematicsConstants.Absolute_Zero);
 
         //Brake Mode
         elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0;
-        generalSlotConfigs.kV = 0.12;
-        generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 9.0; //6.0
-        generalSlotConfigs.kI = 0.0;
-        generalSlotConfigs.kD = 0.0; 
+        generalSlotConfigs.kS = KinematicsConstants.Elevator_kS;
+        generalSlotConfigs.kV = KinematicsConstants.Elevator_kV;
+        generalSlotConfigs.kA = KinematicsConstants.Elevator_kV;
+        generalSlotConfigs.kP = KinematicsConstants.Elevator_kP;
+        generalSlotConfigs.kI = KinematicsConstants.Elevator_kI;
+        generalSlotConfigs.kD = KinematicsConstants.Elevator_kD;
 
         //Motion Magic
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 20; //16, 20
-        motionMagicConfigs.MotionMagicAcceleration = 40; //32, 40
-        motionMagicConfigs.MotionMagicJerk = 80; //64, 80
+        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.Elevator_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.Elevator_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.Elevator_Jerk;
 
         //Current limits
         var limitConfigs = elevatorMotorConfigs.CurrentLimits;
-        limitConfigs.StatorCurrentLimit = 80; //120, 80
+        limitConfigs.StatorCurrentLimit = KinematicsConstants.Elevator_Current_Limit;
         limitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs

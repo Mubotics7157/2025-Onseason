@@ -21,9 +21,6 @@ public class Climb extends SubsystemBase {
         System.out.println("====================Climb Subsystem Initialized====================");
 
         //====================Climb Subsystem====================
-        Climb_Master_Motor.setPosition(0.0);
-        Climb_Slave_Motor.setPosition(0.0);
-
         var climbMotorConfigs = new TalonFXConfiguration();
 
         climbMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;

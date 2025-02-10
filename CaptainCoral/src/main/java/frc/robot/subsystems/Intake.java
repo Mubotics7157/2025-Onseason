@@ -32,7 +32,7 @@ public class Intake extends SubsystemBase {
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        Intake_Wrist_Motor.setPosition(0.0);
+        Intake_Wrist_Motor.setPosition(KinematicsConstants.Absolute_Zero);
 
         //Brake Mode
         intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;

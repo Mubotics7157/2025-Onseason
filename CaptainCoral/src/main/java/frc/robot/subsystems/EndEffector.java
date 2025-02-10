@@ -35,30 +35,30 @@ public class EndEffector extends SubsystemBase {
         //====================End Effector Wrist====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        End_Effector_Wrist_Master_Motor.setPosition(0.0);
-        End_Effector_Wrist_Slave_Motor.setPosition(0.0);
+        End_Effector_Wrist_Master_Motor.setPosition(KinematicsConstants.Absolute_Zero);
+        End_Effector_Wrist_Slave_Motor.setPosition(KinematicsConstants.Absolute_Zero);
 
         //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = 0.0;
-        generalSlotConfigs.kV = 0.12;
-        generalSlotConfigs.kA = 0.05;
-        generalSlotConfigs.kP = 10.0;
-        generalSlotConfigs.kI = 0.0;
-        generalSlotConfigs.kD = 0.0;
+        generalSlotConfigs.kS = KinematicsConstants.End_Effector_Wrist_kS;
+        generalSlotConfigs.kV = KinematicsConstants.End_Effector_Wrist_kV;
+        generalSlotConfigs.kA = KinematicsConstants.End_Effector_Wrist_kA;
+        generalSlotConfigs.kP = KinematicsConstants.End_Effector_Wrist_kP;
+        generalSlotConfigs.kI = KinematicsConstants.End_Effector_Wrist_kI;
+        generalSlotConfigs.kD = KinematicsConstants.End_Effector_Wrist_kD;
 
         //Motion Magic
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = 32;
-        motionMagicConfigs.MotionMagicAcceleration = 64;
-        motionMagicConfigs.MotionMagicJerk = 128;
+        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.End_Effector_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.End_Effector_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.End_Effector_Wrist_Jerk;
 
         //Current Limits
         var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
-        endEffectorWristLimitConfigs.StatorCurrentLimit = 80;
+        endEffectorWristLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Wrist_Current_Limit;
         endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -70,7 +70,7 @@ public class EndEffector extends SubsystemBase {
 
         //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
-        endEffectorRollerLimitConfigs.StatorCurrentLimit = 80;
+        endEffectorRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Roller_Current_Limit;
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs

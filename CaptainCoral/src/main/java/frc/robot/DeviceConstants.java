@@ -2,8 +2,8 @@ package frc.robot;
 
 public final class DeviceConstants {
     //====================CONTROLLER====================
-    public static final int CONTROLLER_DEVICE_ID = 0; //Final
-    public static final double DEADZONE_TOLERANCE = 0.05; //Final
+    public static final int DRIVER_CONTROLLER_DEVICE_ID = 0; //Final
+    public static final double JOYSTICK_DEADZONE_TOLERANCE = 0.05; //Final
 
     //====================RIO CANBUS====================
     public static final int INTAKE_WRIST_MOTOR_DEVICE_ID = 14;

@@ -54,7 +54,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class RobotContainer {
     //====================GENERAL SETUP====================
     private final SendableChooser<Command> autoChooser;
-    private final CommandXboxController DriverController = new CommandXboxController(DeviceConstants.CONTROLLER_DEVICE_ID);
+    private final CommandXboxController DriverController = new CommandXboxController(DeviceConstants.DRIVER_CONTROLLER_DEVICE_ID);
 
     //====================SWERVE SETUP====================
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -134,7 +134,7 @@ public class RobotContainer {
         // );
 
         DriverController.leftTrigger().whileTrue(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Run_Speed));
-        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Tap_Speed));
+        DriverController.leftTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Intake_Speed));
 
         DriverController.leftTrigger().onFalse(new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero));
         DriverController.leftTrigger().onFalse(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
@@ -273,8 +273,8 @@ public class RobotContainer {
         // //====================Gullet Intake====================
         DriverController.leftBumper().whileTrue(
                 Commands.parallel(
-                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Gullet_Setpoint),
-                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Gullet_Setpoint)
+                new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Coral_Station_Setpoint),
+                new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Coral_Station_Setpoint)
                 )
         );
 
