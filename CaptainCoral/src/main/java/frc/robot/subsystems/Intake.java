@@ -100,7 +100,7 @@ public class Intake extends SubsystemBase {
 
     //====================Indexer Methods====================
     public void setIndexerMotorSpeed(double speed) {
-        Intake_Indexer_Master_Motor.set(speed);
-        Intake_Indexer_Slave_Motor.set(speed);
+        Intake_Indexer_Master_Motor.set(-1 * speed);
+        Intake_Indexer_Slave_Motor.set(-1 * speed);
     }
 }

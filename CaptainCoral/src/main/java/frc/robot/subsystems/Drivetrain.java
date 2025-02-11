@@ -301,7 +301,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         double FBVelocity = (LimelightHelpers.getTY("limelight") + KinematicsConstants.Square_Up_Setpoint) * kP;
         FBVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         
-        if (LimelightHelpers.getTY("limelight") < 0.05) {
+        if (LimelightHelpers.getTY("limelight") < KinematicsConstants.Drivetrain_Auto_Align_Tolerance) {
             FBVelocity = 0;
         }
 
@@ -314,7 +314,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.Left_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.05) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < KinematicsConstants.Drivetrain_Auto_Align_Tolerance) {
             LRVelocity = 0;
         }
 
@@ -327,10 +327,23 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         double LRVelocity = (LimelightHelpers.getTX("limelight") + KinematicsConstants.Right_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.05) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < KinematicsConstants.Drivetrain_Auto_Align_Tolerance) {
             LRVelocity = 0;
         }
 
         return LRVelocity;
+    }
+
+    public double rotation_limelight_proportional() {
+        double kP = 0.001;
+
+        double rotVelocity = (LimelightHelpers.getTX("limelight") * kP);
+        rotVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond); 
+
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < KinematicsConstants.Drivetrain_Auto_Align_Tolerance) {
+            rotVelocity = 0;
+        }
+
+        return rotVelocity;
     }
 }

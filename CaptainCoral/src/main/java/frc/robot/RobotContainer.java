@@ -108,10 +108,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
 
         //====================Align Left====================
-        DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
+        // DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
 
-        //====================Align Right====================
-        DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));  
+        // //====================Align Right====================
+        // DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));  
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
@@ -123,6 +123,21 @@ public class RobotContainer {
         );
     
         DriverController.leftTrigger().onFalse(
+                Commands.parallel(
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero),
+                new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero)
+                )
+        );
+
+         //====================Ground Outtake====================
+         DriverController.povUp().whileTrue(
+                Commands.parallel(    
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Outake_Ground_Run_Speed),
+                new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Outake_Speed)
+                )
+        );
+    
+        DriverController.povUp().onFalse(
                 Commands.parallel(
                 new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero)

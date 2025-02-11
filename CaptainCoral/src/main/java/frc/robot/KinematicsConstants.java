@@ -8,15 +8,17 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double PID_Setpoint_Tolerance = 0.1;
 
     //====================Drivetrain====================
-    public static final double Drivetrain_Speed_Multiplier = 0.1;
+    public static final double Drivetrain_Speed_Multiplier = 0.50;
     public static final double Drivetrain_Turn_Multiplier = 0.5;
 
-    public static final double Left_Pole_Setpoint = 19.0; //Square Up: 18.5 | Triangle: 10.0
-    public static final double Right_Pole_Setpoint = -19.0; //Square Up: -21.0 | Triangle: 20.0
+    public static final double Left_Pole_Setpoint = 20.0; //Square Up: 18.5 | Triangle: 10.0
+    public static final double Right_Pole_Setpoint = -23.0; //Square Up: -21.0 | Triangle: 20.0
     public static final double Square_Up_Setpoint = 0.0;
 
     public static final double Drivetrain_FB_kP = 0.015; //0.015
-    public static final double Drivetrain_LR_kP = 0.0075; //0.0075
+    public static final double Drivetrain_LR_kP = 0.00375; //0.0075
+
+    public static final double Drivetrain_Auto_Align_Tolerance = 0.025;
 
     //====================Intake====================
     //Intake Motion Magic
@@ -36,6 +38,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
 
     //Intake Speeds
     public static final double Intake_Ground_Run_Speed = 0.8;
+    public static final double Outake_Ground_Run_Speed = -0.8;
 
     //Intake Setpoints
     public static final double Intake_Zero_Setpoint = 0.0;
@@ -60,6 +63,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     //End Effector Speeds
     public static final double End_Effector_Score_Speed = -0.4;
     public static final double End_Effector_Ground_Intake_Speed = -0.15;
+    public static final double End_Effector_Ground_Outake_Speed = 0.15;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.15;
 
     //End Effector Setpoints
@@ -70,7 +74,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
 
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.02;
-    public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 19.0;
+    public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 17.0;
     public static final double End_Effector_Wrist_Processor_Score_Setpoint = 19.0;
     public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
 
