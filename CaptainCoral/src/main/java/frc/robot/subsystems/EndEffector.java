@@ -96,7 +96,7 @@ public class EndEffector extends SubsystemBase {
         SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
         SmartDashboard.putNumber("End Effector Wrist Slave Encoder", getEndEffectorWristSlaveEncoder());
 
-        SmartDashboard.putBoolean("End Effector Sensor Reading", getEndEffectorSensor());
+        SmartDashboard.putBoolean("End Effector Sensor Reading", getEndEffectorSensorReading());
     }
     
     //====================End Effector Wrist Methods====================
@@ -114,7 +114,7 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Bottom_Motor.set(speed);
     }
 
-    public boolean getEndEffectorSensor() {
+    public boolean getEndEffectorSensorReading() {
         return !End_Effector_Sensor.get();
     }
 }

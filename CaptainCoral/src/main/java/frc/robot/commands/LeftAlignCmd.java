@@ -41,9 +41,9 @@ public class LeftAlignCmd extends Command {
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-        .withVelocityX(0.0)
-        .withVelocityY(0.0)
-        .withRotationalRate(rotSpeed));
+        .withVelocityX(xSpeed)
+        .withVelocityY(ySpeed)
+        .withRotationalRate(0.0));
         System.out.println("AlignCmd Ongoing");
         }
 

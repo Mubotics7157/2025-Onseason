@@ -32,7 +32,7 @@ import frc.robot.commands.IntakeRunCmd;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.commands.EndEffectorWristCmd;
 import frc.robot.commands.EndEffectorRunCmd;
-
+import frc.robot.commands.EndEffectorScoreCmd;
 //Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJogCmd;
@@ -108,10 +108,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        // DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain)); //CHANGE SENSOR GAIN
+        DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
 
         // //====================Align Right====================
-        // DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain)); //CHANGE SENSOR GAIN
+        DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
@@ -145,7 +145,7 @@ public class RobotContainer {
         );
 
         // //====================End Effector Run====================
-        DriverController.rightTrigger().whileTrue(new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
+        DriverController.rightTrigger().whileTrue(new EndEffectorScoreCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
 
         //====================Bottom Algae DeScore====================
         DriverController.leftBumper().whileTrue(
