@@ -22,7 +22,7 @@ public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
 
-    private final DigitalInput End_Effector_Sensor = new DigitalInput(7);
+    private final DigitalInput End_Effector_Sensor = new DigitalInput(DeviceConstants.END_EFFECTOR_SENSOR_PORT);
 
     private double setpoint;
 

@@ -35,14 +35,15 @@ public class LeftAlignCmd extends Command {
     public void execute() {
         double xSpeed = drivetrain.limelight_vertical_proportional();
         double ySpeed = drivetrain.left_pole_limelight_horizontal_proportional();
+        double rotSpeed = drivetrain.rotation_limelight_proportional();
 
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-        .withVelocityX(xSpeed)
-        .withVelocityY(ySpeed)
-        .withRotationalRate(0.0));
+        .withVelocityX(0.0)
+        .withVelocityY(0.0)
+        .withRotationalRate(rotSpeed));
         System.out.println("AlignCmd Ongoing");
         }
 
