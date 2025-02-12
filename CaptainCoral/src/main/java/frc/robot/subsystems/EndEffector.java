@@ -22,7 +22,7 @@ public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
 
-    private final AnalogInput End_Effector_Sensor = new AnalogInput(7);
+    private final DigitalInput End_Effector_Sensor = new DigitalInput(7);
 
     private double setpoint;
 
@@ -96,7 +96,7 @@ public class EndEffector extends SubsystemBase {
         SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
         SmartDashboard.putNumber("End Effector Wrist Slave Encoder", getEndEffectorWristSlaveEncoder());
 
-        SmartDashboard.putNumber("End Effector Sensor Reading", getEndEffectorSensorReading());
+        SmartDashboard.putBoolean("End Effector Sensor Reading", getEndEffectorSensor());
     }
     
     //====================End Effector Wrist Methods====================
@@ -114,7 +114,7 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Bottom_Motor.set(speed);
     }
 
-    public double getEndEffectorSensorReading() {
-        return End_Effector_Sensor.getValue();
+    public boolean getEndEffectorSensor() {
+        return !End_Effector_Sensor.get();
     }
 }

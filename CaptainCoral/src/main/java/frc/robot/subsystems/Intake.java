@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -17,6 +18,8 @@ public class Intake extends SubsystemBase {
 
     private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(DeviceConstants.INTAKE_INDEXER_MASTER_MOTOR_DEVICE_ID);
     private final TalonFX Intake_Indexer_Slave_Motor = new TalonFX(DeviceConstants.INTAKE_INDEXER_MASTER_MOTOR_DEVICE_ID);
+
+    private final DigitalInput Indexer_Sensor = new DigitalInput(DeviceConstants.INDEXER_SENSOR_PORT);
 
     private double setpoint;
     
@@ -86,6 +89,8 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
+
+        SmartDashboard.putBoolean("Indexer Sensor Reading", getIndexerSensorReading());
     }
     
     //====================Intake Wrist Methods====================
@@ -102,5 +107,9 @@ public class Intake extends SubsystemBase {
     public void setIndexerMotorSpeed(double speed) {
         Intake_Indexer_Master_Motor.set(-1 * speed);
         Intake_Indexer_Slave_Motor.set(-1 * speed);
+    }
+
+    public boolean getIndexerSensorReading() {
+        return !Indexer_Sensor.get();
     }
 }
