@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,6 +21,8 @@ public class EndEffector extends SubsystemBase {
 
     private final TalonFX End_Effector_Top_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Bottom_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID);
+
+    private final AnalogInput End_Effector_Sensor = new AnalogInput(7);
 
     private double setpoint;
 
@@ -92,6 +95,8 @@ public class EndEffector extends SubsystemBase {
     public void periodic() {
         SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
         SmartDashboard.putNumber("End Effector Wrist Slave Encoder", getEndEffectorWristSlaveEncoder());
+
+        SmartDashboard.putNumber("End Effector Sensor Reading", getEndEffectorSensorReading());
     }
     
     //====================End Effector Wrist Methods====================
@@ -107,5 +112,9 @@ public class EndEffector extends SubsystemBase {
     public void setEndEffectorRollerMotorSpeed(double speed) {
         End_Effector_Top_Motor.set(-1 * speed);
         End_Effector_Bottom_Motor.set(speed);
+    }
+
+    public double getEndEffectorSensorReading() {
+        return End_Effector_Sensor.getValue();
     }
 }

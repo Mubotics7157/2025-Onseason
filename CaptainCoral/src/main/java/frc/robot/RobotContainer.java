@@ -105,13 +105,13 @@ public class RobotContainer {
         DriverController.start().and(DriverController.x()).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         //====================Swerve Heading Reset====================
-        DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); //Resets Swerve Heading
+        DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        // DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
+        // DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain)); //CHANGE SENSOR GAIN
 
         // //====================Align Right====================
-        // DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));  
+        // DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain)); //CHANGE SENSOR GAIN
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
