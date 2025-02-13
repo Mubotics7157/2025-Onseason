@@ -35,8 +35,9 @@ public class RightAlignCmd extends Command {
     public void execute() {
         double xSpeed = drivetrain.limelight_vertical_proportional();
         double ySpeed = drivetrain.right_pole_limelight_horizontal_proportional();
+        double rotSpeed = drivetrain.rotation_limelight_proportional();
 
-        SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
+        SwerveRequest.RobotCentric drivetrainRequest = new SwerveRequest.RobotCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest

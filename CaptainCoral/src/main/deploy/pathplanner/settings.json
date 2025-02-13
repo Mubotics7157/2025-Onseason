@@ -4,8 +4,9 @@
   "holonomicMode": true,
   "pathFolders": [
     "DiagonalPreload",
-    "StraightPreload",
-    "OCRCarryAuto"
+    "DavisCalifornia",
+    "OCRCarryAuto",
+    "StraightPreload"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,

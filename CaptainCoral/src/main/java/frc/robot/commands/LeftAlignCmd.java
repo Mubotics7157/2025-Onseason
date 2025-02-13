@@ -37,7 +37,7 @@ public class LeftAlignCmd extends Command {
         double ySpeed = drivetrain.left_pole_limelight_horizontal_proportional();
         double rotSpeed = drivetrain.rotation_limelight_proportional();
 
-        SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
+       SwerveRequest.RobotCentric drivetrainRequest = new SwerveRequest.RobotCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest

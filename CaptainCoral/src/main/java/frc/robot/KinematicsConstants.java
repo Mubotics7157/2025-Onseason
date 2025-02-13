@@ -8,15 +8,16 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double PID_Setpoint_Tolerance = 0.1;
 
     //====================Drivetrain====================
-    public static final double Drivetrain_Speed_Multiplier = 0.15;
+    public static final double Drivetrain_Speed_Multiplier = 0.2;
     public static final double Drivetrain_Turn_Multiplier = 0.5;
 
     public static final double Left_Pole_Setpoint = 20.0; //Square Up: 18.5 | Triangle: 10.0
-    public static final double Right_Pole_Setpoint = -23.0; //Square Up: -21.0 | Triangle: 20.0
+    public static final double Right_Pole_Setpoint = -30.0; //Square Up: -21.0 | Triangle: 20.0
     public static final double Square_Up_Setpoint = 0.0;
 
     public static final double Drivetrain_FB_kP = 0.015; //0.015
     public static final double Drivetrain_LR_kP = 0.0055; //0.00375
+    public static final double Drivetrain_Rot_kP = 0.02; //0.00375
 
     public static final double Drivetrain_Auto_Align_Tolerance = 0.025;
 
@@ -61,7 +62,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Roller_Current_Limit = 80.0;
 
     //End Effector Speeds
-    public static final double End_Effector_Score_Speed = -0.4;
+    public static final double End_Effector_Score_Speed = -0.6;
     public static final double End_Effector_Ground_Intake_Speed = -0.15;
     public static final double End_Effector_Ground_Outake_Speed = 0.15;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.15;
@@ -71,7 +72,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
 
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 4.25;
-    public static final double End_Effector_Wrist_L4_Score_Setpoint = 5.5;
+    public static final double End_Effector_Wrist_L4_Score_Setpoint = 6.5;
 
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.02;
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 17.0;
@@ -83,12 +84,12 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Elevator_kS = 0.0;
     public static final double Elevator_kV = 0.12;
     public static final double Elevator_kA = 0.05;
-    public static final double Elevator_kP = 9.0;
+    public static final double Elevator_kP = 10.0;
     public static final double Elevator_kI = 0.0;
     public static final double Elevator_kD = 0.0;
-    public static final double Elevator_Velocity = 20.0;
-    public static final double Elevator_Acceleration = 40.0;
-    public static final double Elevator_Jerk = 80.0;
+    public static final double Elevator_Velocity = 16.0;
+    public static final double Elevator_Acceleration = 32.0;
+    public static final double Elevator_Jerk = 64.0;
 
     //Elevator Curent Limit
     public static final double Elevator_Current_Limit = 80.0;

@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.765,
+        "y": 7.331
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.7446866978368876,
+        "y": 6.248732753112273
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.699460227272727,
+        "y": 5.047088068181818
+      },
+      "prevControl": {
+        "x": 2.5990972881260808,
+        "y": 6.347881494164354
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 118.30075576600635
+  },
+  "reversed": false,
+  "folder": "DavisCalifornia",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 135.7299966293314
+  },
+  "useDefaultConstraints": true
+}

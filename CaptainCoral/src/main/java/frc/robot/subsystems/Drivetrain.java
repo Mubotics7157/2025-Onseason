@@ -335,12 +335,12 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     public double rotation_limelight_proportional() {
-        double kP = 0.001;
+        double kP = 0.02;
 
         double rotVelocity = (LimelightHelpers.getTX("limelight") * kP);
         rotVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond); 
 
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < KinematicsConstants.Drivetrain_Auto_Align_Tolerance) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.1) {
             rotVelocity = 0;
         }
 
