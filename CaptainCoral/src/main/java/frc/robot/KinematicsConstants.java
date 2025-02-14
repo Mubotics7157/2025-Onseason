@@ -1,5 +1,6 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import static edu.wpi.first.units.Units.*;
 
 public class KinematicsConstants { //FINAL KEYWORD???
     //====================General====================
@@ -8,8 +9,15 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double PID_Setpoint_Tolerance = 0.1;
 
     //====================Drivetrain====================
-    public static final double Drivetrain_Speed_Multiplier = 0.5;
-    public static final double Drivetrain_Turn_Multiplier = 0.5;
+    public static final double DrivetrainMaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+    public static final double DrivetrainMaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+
+    public static double Drivetrain_Speed_Multiplier = 0.5;
+    public static final double Drivetrain_Turn_Multiplier = 0.8;
+
+    public static final double Drivetrain_Elevator_Speed_Multiplier = 0.2;
+    public static final double Drivetrain_Elevator_Turn_Multiplier = 0.2;
+    public static final double Drivetrain_Elevator_Tolerance = 1.0;
 
     public static final double Left_Pole_Setpoint = 20.0; //Square Up: 18.5 | Triangle: 10.0
     public static final double Right_Pole_Setpoint = -30.0; //Square Up: -21.0 | Triangle: 20.0

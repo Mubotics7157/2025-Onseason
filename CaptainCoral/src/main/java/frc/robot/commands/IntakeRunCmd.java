@@ -46,6 +46,8 @@ public class IntakeRunCmd extends Command {
     public void end(boolean interrupted) {
         intake.setIntakeRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
         intake.setIndexerMotorSpeed(KinematicsConstants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kLeftRumble, KinematicsConstants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kRightRumble, KinematicsConstants.Absolute_Zero);
         System.out.println("IntakeRunCmd Ended");
     }
 
