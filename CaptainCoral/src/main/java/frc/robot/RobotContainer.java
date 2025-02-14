@@ -110,10 +110,10 @@ public class RobotContainer {
         DriverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        DriverController.povLeft().whileTrue(new LeftAlignCmd(drivetrain));
+        DriverController.leftStick().whileTrue(new LeftAlignCmd(drivetrain));
 
         // //====================Align Right====================
-        DriverController.povRight().whileTrue(new RightAlignCmd(drivetrain));
+        DriverController.rightStick().whileTrue(new RightAlignCmd(drivetrain));
 
         //====================RIO CANBUS BINDINGS====================
         //====================Ground Intake====================
