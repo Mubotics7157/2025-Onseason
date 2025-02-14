@@ -4,6 +4,7 @@ public final class DeviceConstants {
     //====================CONTROLLER====================
     public static final int DRIVER_CONTROLLER_DEVICE_ID = 0; //Final
     public static final double JOYSTICK_DEADZONE_TOLERANCE = 0.05; //Final
+    public static final double DRIVER_CONTROLLER_RUMBLE = 0.5;
 
     //====================RIO CANBUS====================
     //Intake/Indexer

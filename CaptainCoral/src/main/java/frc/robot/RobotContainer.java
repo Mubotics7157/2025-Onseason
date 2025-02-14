@@ -81,13 +81,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("zeroEndEffectorWrist", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint));
         NamedCommands.registerCommand("zeroElevator", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint));
         NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
-        NamedCommands.registerCommand("stopIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
+        //NamedCommands.registerCommand("stopIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
 
         //Action Commands
         NamedCommands.registerCommand("endEffectorL4", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint));
         NamedCommands.registerCommand("elevatorL4", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
         NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Intake_Speed));
-        NamedCommands.registerCommand("groundIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
+        //NamedCommands.registerCommand("groundIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
 
         configureBindings();
     }
@@ -119,14 +119,14 @@ public class RobotContainer {
         //====================Ground Intake====================
         DriverController.leftTrigger().whileTrue(
                 Commands.parallel(    
-                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed, DriverController.getHID()),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Intake_Speed)
                 )
         );
     
         DriverController.leftTrigger().onFalse(
                 Commands.parallel(
-                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero, DriverController.getHID()),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero)
                 )
         );
@@ -134,14 +134,14 @@ public class RobotContainer {
          //====================Ground Outtake====================
          DriverController.povUp().whileTrue(
                 Commands.parallel(    
-                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Outake_Ground_Run_Speed),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Outake_Ground_Run_Speed, DriverController.getHID()),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Outake_Speed)
                 )
         );
     
         DriverController.povUp().onFalse(
                 Commands.parallel(
-                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero),
+                new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero, DriverController.getHID()),
                 new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero)
                 )
         );

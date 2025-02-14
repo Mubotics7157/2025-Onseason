@@ -8,7 +8,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double PID_Setpoint_Tolerance = 0.1;
 
     //====================Drivetrain====================
-    public static final double Drivetrain_Speed_Multiplier = 0.2;
+    public static final double Drivetrain_Speed_Multiplier = 0.5;
     public static final double Drivetrain_Turn_Multiplier = 0.5;
 
     public static final double Left_Pole_Setpoint = 20.0; //Square Up: 18.5 | Triangle: 10.0
