@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.5684375,
-        "y": 2.4544744318181815
+        "x": 3.699,
+        "y": 5.047
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.735934998465876,
-        "y": 2.6510442937293517
+        "x": 2.654878661902425,
+        "y": 6.262299126032785
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.225113636363636,
-        "y": 3.002911931818182
+        "x": 1.765,
+        "y": 7.331
       },
       "prevControl": {
-        "x": 5.988022590653886,
-        "y": 2.8213832524411755
+        "x": 2.4978483811626813,
+        "y": 6.5020189676834
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -62.65012421993014
+    "rotation": 128.03045105054042
   },
   "reversed": false,
-  "folder": "DiagonalPreload",
+  "folder": "DavisCalifornia",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -58.201087175705545
+    "rotation": -58.076361677468924
   },
   "useDefaultConstraints": true
 }

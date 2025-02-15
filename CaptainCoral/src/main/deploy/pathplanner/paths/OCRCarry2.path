@@ -50,7 +50,7 @@
     "rotation": -120.76271953423893
   },
   "reversed": false,
-  "folder": "OCRCarryAuto",
+  "folder": "OCRCarry",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

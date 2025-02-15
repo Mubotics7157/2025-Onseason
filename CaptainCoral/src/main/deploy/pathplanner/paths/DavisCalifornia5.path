@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.707,
-        "y": 0.662
+        "x": 1.765,
+        "y": 7.331
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.936103923641851,
-        "y": 1.773317536054794
+        "x": 2.9760517499068,
+        "y": 6.274645176530972
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.024296357615894,
-        "y": 2.884540562913908
+        "x": 3.9986079545454545,
+        "y": 5.2963778409090905
       },
       "prevControl": {
-        "x": 3.0832008758291276,
-        "y": 1.9884843896740785
+        "x": 3.2108482386338464,
+        "y": 5.995378125452139
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -122.69946112100192
+    "rotation": 117.699472808055
   },
   "reversed": false,
-  "folder": "OCRCarry",
+  "folder": "DavisCalifornia",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -126.1863877327746
+    "rotation": 129.19111410744517
   },
   "useDefaultConstraints": true
 }

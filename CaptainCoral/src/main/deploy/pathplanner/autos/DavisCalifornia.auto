@@ -21,6 +21,18 @@
           "data": {
             "pathName": "DavisCalifornia3"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DavisCalifornia4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DavisCalifornia5"
+          }
         }
       ]
     }

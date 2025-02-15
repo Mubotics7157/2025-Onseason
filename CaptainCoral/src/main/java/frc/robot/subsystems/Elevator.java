@@ -17,6 +17,8 @@ public class Elevator extends SubsystemBase {
 
     private double setpoint;
 
+    private final MotionMagicVoltage m_motmag = new MotionMagicVoltage(0);
+
     public static Elevator getInstance() {
         return instance;
     }
