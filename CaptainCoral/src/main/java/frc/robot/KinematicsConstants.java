@@ -12,7 +12,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double DrivetrainMaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     public static final double DrivetrainMaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
 
-    public static double Drivetrain_Speed_Multiplier = 0.5;
+    public static final double Drivetrain_Speed_Multiplier = 0.25;
     public static final double Drivetrain_Turn_Multiplier = 0.8;
 
     public static final double Drivetrain_Elevator_Speed_Multiplier = 0.2;
