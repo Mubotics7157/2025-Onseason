@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.654878661902425,
+        "x": 2.6548786619024245,
         "y": 6.262299126032785
       },
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": 128.03045105054042
   },
   "reversed": false,
-  "folder": "DavisCalifornia",
+  "folder": "DavisCA",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -58.076361677468924

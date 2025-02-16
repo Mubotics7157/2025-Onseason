@@ -74,7 +74,9 @@ public class EndEffector extends SubsystemBase {
         //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
         endEffectorRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Roller_Current_Limit;
-        endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true;    
+        endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true; 
+        
+        endEffectorRollersMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //Applies Configs
         End_Effector_Top_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);

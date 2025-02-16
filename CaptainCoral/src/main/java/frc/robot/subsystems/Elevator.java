@@ -82,7 +82,7 @@ public class Elevator extends SubsystemBase {
     public double getElevatorMasterEncoder() {
         return Elevator_Master_Motor.getPosition().getValueAsDouble();
     }
-
+ 
     public double getElevatorSlaveEncoder() {
         return Elevator_Slave_Motor.getPosition().getValueAsDouble();
     }

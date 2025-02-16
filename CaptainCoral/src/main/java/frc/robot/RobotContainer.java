@@ -36,8 +36,8 @@ import frc.robot.commands.EndEffectorScoreCmd;
 //Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJogCmd;
-import frc.robot.commands.ElevatorUpCmd;
-import frc.robot.commands.ElevatorDownCmd;
+import frc.robot.commands.ElevatorPlaceCmd;
+import frc.robot.commands.ElevatorRegCmd;
 //Climb Imports
 import frc.robot.subsystems.Climb;
 import frc.robot.commands.ClimbRunCmd;
@@ -67,26 +67,26 @@ public class RobotContainer {
 
     public RobotContainer() {
         //====================Autonomous Commands====================
-        autoChooser = AutoBuilder.buildAutoChooser("Tests");
-        SmartDashboard.putData("Auto Mode", autoChooser);
-
         //Alignment Commands
-        // NamedCommands.registerCommand("leftAlignCmd", new LeftAlignCmd(drivetrain));
-        // NamedCommands.registerCommand("rightAlignCmd", new RightAlignCmd(drivetrain));
+        NamedCommands.registerCommand("leftAlignCmd", new LeftAlignCmd(drivetrain));
+        NamedCommands.registerCommand("rightAlignCmd", new RightAlignCmd(drivetrain));
 
-        // //Zeroing Commands
-        // NamedCommands.registerCommand("zeroEndEffectorWrist", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint));
-        // NamedCommands.registerCommand("zeroElevator", new ElevatorTeleUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint));
-        // NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
-        // //NamedCommands.registerCommand("stopIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
+        //Zeroing Commands
+        NamedCommands.registerCommand("zeroEndEffectorWrist", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint));
+        NamedCommands.registerCommand("zeroElevator", new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint));
+        NamedCommands.registerCommand("stopEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.Absolute_Zero));
+        NamedCommands.registerCommand("stopGroundIntake", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Absolute_Zero, DriverController.getHID()));
 
-        // //Action Commands
-        // NamedCommands.registerCommand("endEffectorL4", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint));
-        // NamedCommands.registerCommand("elevatorL4", new ElevatorPIDCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
-        // NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Ground_Intake_Speed));
-        //NamedCommands.registerCommand("groundIntakeRollers", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed));
+        //Action Commands
+        NamedCommands.registerCommand("endEffectorL4", new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint));
+        NamedCommands.registerCommand("elevatorL4", new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint));
+        NamedCommands.registerCommand("runEndEffector", new EndEffectorRunCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Score_Speed));
+        NamedCommands.registerCommand("groundIntake", new IntakeRunCmd(Intake.getInstance(), KinematicsConstants.Intake_Ground_Run_Speed, DriverController.getHID()));
 
         configureBindings();
+
+        autoChooser = AutoBuilder.buildAutoChooser("StraightPreload");
+        SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     private void configureBindings() {
@@ -180,14 +180,14 @@ public class RobotContainer {
         DriverController.a().whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L1_Score_Setpoint),
-                new ElevatorUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L1_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
+                new ElevatorPlaceCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L1_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
                 )
         );
 
         DriverController.a().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorDownCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
+                new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
                 )
         );
 
@@ -195,14 +195,14 @@ public class RobotContainer {
         DriverController.b().whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L2_L3_Score_Setpoint),
-                new ElevatorUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L2_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
+                new ElevatorPlaceCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L2_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
                 )
         );
 
         DriverController.b().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorDownCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
+                new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
                 )
         );
 
@@ -210,14 +210,14 @@ public class RobotContainer {
         DriverController.x().whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L2_L3_Score_Setpoint),
-                new ElevatorUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L3_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
+                new ElevatorPlaceCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L3_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
                 )
         );
     
         DriverController.x().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorDownCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
+                new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
                 )
         );
 
@@ -225,14 +225,14 @@ public class RobotContainer {
         DriverController.y().whileTrue(
             Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_L4_Score_Setpoint),
-                new ElevatorUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
+                new ElevatorPlaceCmd(Elevator.getInstance(), KinematicsConstants.Elevator_L4_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
                 )
         );
     
         DriverController.y().onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorDownCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
+                new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
                 )
         );
 
@@ -240,14 +240,14 @@ public class RobotContainer {
         DriverController.button(8).whileTrue(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Coral_Station_Setpoint),
-                new ElevatorUpCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Coral_Station_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
+                new ElevatorPlaceCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Coral_Station_Setpoint, drivetrain, DriverController.getHID(), KinematicsConstants.Drivetrain_Elevator_Speed_Multiplier)
                 )
         );
 
         DriverController.button(8).onFalse(
                 Commands.parallel(
                 new EndEffectorWristCmd(EndEffector.getInstance(), KinematicsConstants.End_Effector_Wrist_Zero_Setpoint),
-                new ElevatorDownCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
+                new ElevatorRegCmd(Elevator.getInstance(), KinematicsConstants.Elevator_Zero_Setpoint)
                 )
         );
 

@@ -50,10 +50,10 @@
     "rotation": 124.8753283446022
   },
   "reversed": false,
-  "folder": "DavisCalifornia",
+  "folder": "DavisCA",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.44184241923537
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }

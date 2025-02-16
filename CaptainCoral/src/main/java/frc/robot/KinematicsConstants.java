@@ -67,11 +67,11 @@ public class KinematicsConstants { //FINAL KEYWORD???
 
     //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
-    public static final double End_Effector_Roller_Current_Limit = 80.0;
+    public static final double End_Effector_Roller_Current_Limit = 120.0;
 
     //End Effector Speeds
-    public static final double End_Effector_Score_Speed = -0.6;
-    public static final double End_Effector_Ground_Intake_Speed = -0.15;
+    public static final double End_Effector_Score_Speed = -1.0;
+    public static final double End_Effector_Ground_Intake_Speed = -0.09;
     public static final double End_Effector_Ground_Outake_Speed = 0.15;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.15;
 

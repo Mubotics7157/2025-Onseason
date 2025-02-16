@@ -10,21 +10,14 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.KinematicsConstants;
 
-public class ElevatorUpCmd extends Command {
+public class ElevatorRegCmd extends Command {
     private final Elevator elevator;
     private double setpoint;
-    private double speedMultiplier;
-    private final Drivetrain drivetrain;
-    private final XboxController controller;
 
-    public ElevatorUpCmd(Elevator elevator, double setpoint, Drivetrain drivetrain, XboxController controller, double speedMultiplier) {
+    public ElevatorRegCmd(Elevator elevator, double setpoint) {
         this.elevator = Elevator.getInstance();
         this.setpoint = setpoint;
-        this.drivetrain = drivetrain;
-        this.controller = controller;
-        this.speedMultiplier = speedMultiplier;
         addRequirements(elevator);
-        addRequirements(drivetrain);
     }
 
     @Override
@@ -36,7 +29,7 @@ public class ElevatorUpCmd extends Command {
     @Override
     public void execute() {
         elevator.goToElevatorSetpoint();
-        drivetrain.slowDrivetrain(controller, speedMultiplier);
+
         System.out.println("ElevatorPIDCmd Ongoing");
     }
 
@@ -47,6 +40,6 @@ public class ElevatorUpCmd extends Command {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return Math.abs(elevator.getElevatorMasterEncoder() - setpoint) < KinematicsConstants.PID_Setpoint_Tolerance;
     }
 }

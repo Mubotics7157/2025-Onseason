@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 58.928341939153704
+    "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "DavisCalifornia",
+  "folder": "DavisCA",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.52530467591758
+    "rotation": -119.99999999999999
   },
   "useDefaultConstraints": true
 }
