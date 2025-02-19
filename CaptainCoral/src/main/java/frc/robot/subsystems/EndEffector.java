@@ -18,7 +18,6 @@ import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Master_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MOTOR_DEVICE_ID);
-
     private final TalonFX End_Effector_Master_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Slave_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID);
 
@@ -39,7 +38,7 @@ public class EndEffector extends SubsystemBase {
         //====================End Effector Wrist====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        End_Effector_Wrist_Master_Motor.setPosition(KinematicsConstants.Absolute_Zero);
+        End_Effector_Wrist_Master_Motor.setPosition(getEndEffectorWristThroughBoreEncoder() * KinematicsConstants.End_Effector_Absolute_To_Integrated); //Change to KinematicsConstants.Absolute_Zero if not working
 
         //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;

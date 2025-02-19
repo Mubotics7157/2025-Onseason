@@ -19,13 +19,13 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Drivetrain_Elevator_Turn_Multiplier = 0.7;
     public static final double Drivetrain_Elevator_Tolerance = 1.0;
 
-    public static final double Left_Pole_Setpoint = 20.0; //Square Up: 18.5 | Triangle: 10.0
-    public static final double Right_Pole_Setpoint = -30.0; //Square Up: -21.0 | Triangle: 20.0
+    public static final double Left_Pole_Setpoint = 20.0;
+    public static final double Right_Pole_Setpoint = -30.0;
     public static final double Square_Up_Setpoint = 0.0;
 
-    public static final double Drivetrain_FB_kP = 0.015; //0.015
-    public static final double Drivetrain_LR_kP = 0.0055; //0.00375
-    public static final double Drivetrain_Rot_kP = 0.02; //0.00375
+    public static final double Drivetrain_FB_kP = 0.015;
+    public static final double Drivetrain_LR_kP = 0.0055;
+    public static final double Drivetrain_Rot_kP = 0.02;
 
     public static final double Drivetrain_Auto_Align_Tolerance = 0.025;
 
@@ -54,6 +54,9 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Intake_Ground_Deploy_Setpoint = 8.5;
 
     //====================End Effector====================
+    //Conversion
+    public static final double End_Effector_Absolute_To_Integrated = 0.0;
+
     //End Effector Motion Magic
     public static final double End_Effector_Wrist_kS = 0.0;
     public static final double End_Effector_Wrist_kV = 0.12;
