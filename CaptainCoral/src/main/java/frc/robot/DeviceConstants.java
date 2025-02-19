@@ -10,24 +10,21 @@ public final class DeviceConstants {
     //Intake/Indexer
     public static final int INTAKE_WRIST_MOTOR_DEVICE_ID = 14;
     public static final int INTAKE_ROLLER_MOTOR_DEVICE_ID = 15;
-
     public static final int INDEXER_SENSOR_PORT = 0;
-    public static final int INTAKE_INDEXER_MASTER_MOTOR_DEVICE_ID = 16;
-    public static final int INTAKE_INDEXER_SLAVE_MOTOR_DEVICE_ID = 17;
+    public static final int INDEXER_MOTOR_DEVICE_ID = 16;
 
     //End Effector
-    public static final int END_EFFECTOR_WRIST_MASTER_MOTOR_DEVICE_ID = 18;
-    public static final int END_EFFECTOR_WRIST_SLAVE_MOTOR_DEVICE_ID = 19;
-
-    public static final int END_EFFECTOR_SENSOR_PORT = 7;
-    public static final int END_EFFECTOR_TOP_MOTOR_DEVICE_ID = 20;
-    public static final int END_EFFECTOR_BOTTOM_MOTOR_DEVICE_ID = 21;
+    public static final int END_EFFECTOR_WRIST_THROUGH_BORE_ENCODER = 2;  //2 OR 8
+    public static final int END_EFFECTOR_WRIST_MOTOR_DEVICE_ID = 17;
+    public static final int END_EFFECTOR_SENSOR_PORT = 9;
+    public static final int END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID = 18;
+    public static final int END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID = 19;
 
     //Elevator
-    public static final int ELEVATOR_MASTER_MOTOR_DEVICE_ID = 22;
-    public static final int ELEVATOR_SLAVE_MOTOR_DEVICE_ID = 23;
+    public static final int ELEVATOR_MASTER_MOTOR_DEVICE_ID = 20;
+    public static final int ELEVATOR_SLAVE_MOTOR_DEVICE_ID = 21;
 
     //Climb
-    public static final int CLIMB_MASTER_MOTOR_DEVICE_ID = 24;
-    public static final int CLIMB_SLAVE_MOTOR_DEVICE_ID = 25;
+    public static final int CLIMB_MASTER_MOTOR_DEVICE_ID = 22;
+    public static final int CLIMB_SLAVE_MOTOR_DEVICE_ID = 23;
 }

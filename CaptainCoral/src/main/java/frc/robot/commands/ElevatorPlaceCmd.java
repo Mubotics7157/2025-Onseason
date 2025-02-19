@@ -14,15 +14,17 @@ public class ElevatorPlaceCmd extends Command {
     private final Elevator elevator;
     private double setpoint;
     private double speedMultiplier;
+    private double turnMultiplier;
     private final Drivetrain drivetrain;
     private final XboxController controller;
 
-    public ElevatorPlaceCmd(Elevator elevator, double setpoint, Drivetrain drivetrain, XboxController controller, double speedMultiplier) {
+    public ElevatorPlaceCmd(Elevator elevator, double setpoint, Drivetrain drivetrain, XboxController controller, double speedMultiplier, double turnMultiplier) {
         this.elevator = Elevator.getInstance();
         this.setpoint = setpoint;
         this.drivetrain = drivetrain;
         this.controller = controller;
         this.speedMultiplier = speedMultiplier;
+        this.turnMultiplier = turnMultiplier;
         addRequirements(elevator);
         addRequirements(drivetrain);
     }
@@ -36,7 +38,7 @@ public class ElevatorPlaceCmd extends Command {
     @Override
     public void execute() {
         elevator.goToElevatorSetpoint();
-        drivetrain.slowDrivetrain(controller, speedMultiplier);
+        drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
         System.out.println("ElevatorPIDCmd Ongoing");
     }
 

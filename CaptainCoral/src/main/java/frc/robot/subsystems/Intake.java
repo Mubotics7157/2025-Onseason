@@ -16,8 +16,7 @@ public class Intake extends SubsystemBase {
 
     private final TalonFX Intake_Roller_Motor = new TalonFX(DeviceConstants.INTAKE_ROLLER_MOTOR_DEVICE_ID);
 
-    private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(DeviceConstants.INTAKE_INDEXER_MASTER_MOTOR_DEVICE_ID);
-    private final TalonFX Intake_Indexer_Slave_Motor = new TalonFX(DeviceConstants.INTAKE_INDEXER_MASTER_MOTOR_DEVICE_ID);
+    private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(DeviceConstants.INDEXER_MOTOR_DEVICE_ID);
 
     private final DigitalInput Indexer_Sensor = new DigitalInput(DeviceConstants.INDEXER_SENSOR_PORT);
 
@@ -69,12 +68,11 @@ public class Intake extends SubsystemBase {
         //Current Limits
         var intakeRollerLimitConfigs = intakeRollersMotorConfigs.CurrentLimits;
         intakeRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.Intake_Roller_Current_Limit;
-        intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;    
+        intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
         Intake_Roller_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
         Intake_Indexer_Master_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
-        Intake_Indexer_Slave_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
     }
 
     public void setIntakeSetpoint(double setpoint) {
@@ -105,8 +103,7 @@ public class Intake extends SubsystemBase {
 
     //====================Indexer Methods====================
     public void setIndexerMotorSpeed(double speed) {
-        Intake_Indexer_Master_Motor.set(-1 * speed);
-        Intake_Indexer_Slave_Motor.set(-1 * speed);
+        Intake_Indexer_Master_Motor.set(-1 * 0.7 * speed);
     }
 
     public boolean getIndexerSensorReading() {

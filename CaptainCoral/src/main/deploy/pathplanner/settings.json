@@ -3,9 +3,9 @@
   "robotLength": 0.762,
   "holonomicMode": true,
   "pathFolders": [
-    "DavisCA",
-    "OCRCarry",
-    "Preload"
+    "StraightPreload",
+    "NonProcessor",
+    "Processor"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
@@ -13,7 +13,7 @@
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
   "defaultNominalVoltage": 12.0,
-  "robotMass": 30.0,
+  "robotMass": 52.163,
   "robotMOI": 6.883,
   "robotTrackwidth": 0.5588,
   "driveWheelRadius": 0.051,

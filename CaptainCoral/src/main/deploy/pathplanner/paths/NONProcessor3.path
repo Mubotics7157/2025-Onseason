@@ -3,37 +3,32 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.285,
-        "y": 5.047
+        "x": 1.725,
+        "y": 7.45
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.593978867848859,
-        "y": 5.555660263091872
+        "x": 2.6507624817682878,
+        "y": 6.346719236463712
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.7649715909090908,
-        "y": 7.330582386363636
+        "x": 3.6894886363636368,
+        "y": 5.086974431818182
       },
       "prevControl": {
-        "x": 2.1940915588667416,
-        "y": 7.0301093500033796
+        "x": 2.672682330605749,
+        "y": 6.298756999677591
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.6409574468085103,
-      "rotationDegrees": 126.775847434566
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -47,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 124.8753283446022
+    "rotation": -59.99999999999999
   },
   "reversed": false,
-  "folder": "DavisCA",
+  "folder": "NonProcessor",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 59.99999999999999
+    "rotation": -59.99999999999999
   },
   "useDefaultConstraints": true
 }

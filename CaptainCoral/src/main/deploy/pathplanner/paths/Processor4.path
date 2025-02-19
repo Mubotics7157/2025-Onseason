@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.765,
-        "y": 7.331
+        "x": 3.689,
+        "y": 3.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.9760517499068,
-        "y": 6.274645176530972
+        "x": 1.6997730001992732,
+        "y": 0.6293315765020822
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.9986079545454545,
-        "y": 5.2963778409090905
+        "x": 1.725,
+        "y": 0.63
       },
       "prevControl": {
-        "x": 3.2108482386338464,
-        "y": 5.995378125452139
+        "x": 3.6828849337748344,
+        "y": 2.9862375827814565
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 117.699472808055
+    "rotation": 59.99999999999999
   },
   "reversed": false,
-  "folder": "DavisCA",
+  "folder": "Processor",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 129.19111410744517
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }

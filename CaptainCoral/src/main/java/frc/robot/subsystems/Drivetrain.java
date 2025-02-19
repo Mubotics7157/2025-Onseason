@@ -353,7 +353,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         return rotVelocity;
     }
 
-    public void slowDrivetrain(XboxController controller, double speedMultiplier) {
+    public void slowDrivetrain(XboxController controller, double speedMultiplier, double turnMultiplier) {
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
@@ -361,7 +361,7 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         setControl(drivetrainRequest
             .withVelocityX(-1 * MathUtil.applyDeadband(controller.getLeftY(), 0.05) * speedMultiplier * KinematicsConstants.DrivetrainMaxSpeed)
             .withVelocityY(-1 * MathUtil.applyDeadband(controller.getLeftX(), 0.05) * speedMultiplier * KinematicsConstants.DrivetrainMaxSpeed)
-            .withRotationalRate(-1 * MathUtil.applyDeadband(controller.getRightX(), 0.05) * speedMultiplier * KinematicsConstants.DrivetrainMaxAngularRate)
+            .withRotationalRate(-1 * MathUtil.applyDeadband(controller.getRightX(), 0.05) * turnMultiplier * KinematicsConstants.DrivetrainMaxAngularRate)
         );
     }
 } 

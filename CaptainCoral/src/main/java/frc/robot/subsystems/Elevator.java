@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -16,8 +17,6 @@ public class Elevator extends SubsystemBase {
     private final TalonFX Elevator_Slave_Motor = new TalonFX(DeviceConstants.ELEVATOR_SLAVE_MOTOR_DEVICE_ID);
 
     private double setpoint;
-
-    private final MotionMagicVoltage m_motmag = new MotionMagicVoltage(0);
 
     public static Elevator getInstance() {
         return instance;
@@ -68,8 +67,8 @@ public class Elevator extends SubsystemBase {
 
     public void goToElevatorSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
-        Elevator_Master_Motor.setControl(m_request.withPosition(this.setpoint));
-        Elevator_Slave_Motor.setControl(m_request.withPosition(this.setpoint));
+        Elevator_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
+        Elevator_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
     @Override
