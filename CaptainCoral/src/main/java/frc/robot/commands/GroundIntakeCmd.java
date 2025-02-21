@@ -26,6 +26,12 @@ public class GroundIntakeCmd extends Command {
         double motorSpeed = speed;
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
+        if (endEffector.getEndEffectorSensorReading() == true) {
+            endEffector.setEndEffectorRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
+        } else {
+            endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+        }
+
         endEffector.goToEndEffectorSetpoint();
             
         System.out.println("GroundIntakeCmd Ongoing");

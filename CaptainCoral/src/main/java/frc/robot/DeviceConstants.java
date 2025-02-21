@@ -14,9 +14,9 @@ public final class DeviceConstants {
     public static final int INDEXER_MOTOR_DEVICE_ID = 16;
 
     //End Effector
-    public static final int END_EFFECTOR_WRIST_THROUGH_BORE_ENCODER = 8;
+    public static final int END_EFFECTOR_WRIST_THROUGH_BORE_ENCODER = 2;
     public static final int END_EFFECTOR_WRIST_MOTOR_DEVICE_ID = 17;
-    public static final int END_EFFECTOR_SENSOR_PORT = 9;
+    public static final int END_EFFECTOR_SENSOR_PORT = 8; //2 OR 8 ONE OR THE OTHER
     public static final int END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID = 18;
     public static final int END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID = 19;
 
