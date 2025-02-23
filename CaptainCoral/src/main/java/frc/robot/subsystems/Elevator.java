@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -25,7 +22,7 @@ public class Elevator extends SubsystemBase {
     private static Elevator instance = new Elevator();
 
     public Elevator() {
-        System.out.println("====================Elevator Subsystem Initialized====================");
+        System.out.println("====================Elevator Subsystem Online====================");
 
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
@@ -61,16 +58,6 @@ public class Elevator extends SubsystemBase {
         Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
     }
 
-    public void setElevatorSetpoint(double setpoint) {
-        this.setpoint = setpoint;
-    }
-
-    public void goToElevatorSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
-        Elevator_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
-        Elevator_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
-    }
-
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Elevator Master Encoder", getElevatorMasterEncoder());
@@ -78,6 +65,11 @@ public class Elevator extends SubsystemBase {
     }
 
     //====================Elevator Methods====================
+    public void setElevatorMotorSpeed(double speed) {
+        Elevator_Master_Motor.set(speed);
+        Elevator_Slave_Motor.set(speed);
+    }
+
     public double getElevatorMasterEncoder() {
         return Elevator_Master_Motor.getPosition().getValueAsDouble();
     }
@@ -86,8 +78,13 @@ public class Elevator extends SubsystemBase {
         return Elevator_Slave_Motor.getPosition().getValueAsDouble();
     }
 
-    public void setElevatorMotorSpeed(double speed) {
-        Elevator_Master_Motor.set(speed);
-        Elevator_Slave_Motor.set(speed);
+    public void setElevatorSetpoint(double setpoint) {
+        this.setpoint = setpoint;
+    }
+
+    public void goToElevatorSetpoint() {
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
+        Elevator_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
+        Elevator_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 }

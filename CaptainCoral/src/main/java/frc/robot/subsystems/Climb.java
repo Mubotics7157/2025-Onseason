@@ -20,7 +20,7 @@ public class Climb extends SubsystemBase {
     private static Climb instance = new Climb();
 
     public Climb() {
-        System.out.println("====================Climb Subsystem Initialized====================");
+        System.out.println("====================Climb Subsystem Online====================");
 
         //====================Climb Subsystem====================
         var climbMotorConfigs = new TalonFXConfiguration();
