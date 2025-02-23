@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.76,
-        "y": 3.829
+        "x": 1.306,
+        "y": 7.7
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.859187362295545,
-        "y": 3.8367041659571877
+        "x": 1.693826215219111,
+        "y": 7.3576134888441205
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.17,
-        "y": 3.829
+        "x": 3.5598579545454543,
+        "y": 5.545667613636364
       },
       "prevControl": {
-        "x": 6.113381692650338,
-        "y": 3.826415581556261
+        "x": 2.1393292123220204,
+        "y": 7.069940887592603
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "zeroElevator",
-      "waypointRelativePos": 0,
+      "name": "stopGroundIntake",
+      "waypointRelativePos": 0.3,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -49,7 +49,7 @@
             {
               "type": "named",
               "data": {
-                "name": "zeroElevator"
+                "name": "stopGroundIntake"
               }
             }
           ]
@@ -57,8 +57,8 @@
       }
     },
     {
-      "name": "zeroEndEffectorWrist",
-      "waypointRelativePos": 0,
+      "name": "elevatorL4",
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -73,7 +73,7 @@
             {
               "type": "named",
               "data": {
-                "name": "zeroEndEffectorWrist"
+                "name": "elevatorL4"
               }
             }
           ]
@@ -81,8 +81,8 @@
       }
     },
     {
-      "name": "stopEndEffector",
-      "waypointRelativePos": 0,
+      "name": "endEffectorL4",
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -97,7 +97,7 @@
             {
               "type": "named",
               "data": {
-                "name": "endEffectorStop"
+                "name": "endEffectorL4"
               }
             }
           ]
@@ -115,13 +115,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -59.99999999999999
   },
   "reversed": false,
-  "folder": "StraightPreload",
+  "folder": "Middle",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

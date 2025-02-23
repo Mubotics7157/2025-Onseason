@@ -31,7 +31,80 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "endEffectorL4",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.001
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "endEffectorL4"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "elevatorL4",
+      "waypointRelativePos": 0.3,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.001
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "elevatorL4"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "StopGroundIntake",
+      "waypointRelativePos": 0.3,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0.001
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "stopGroundIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,

@@ -3,9 +3,9 @@
   "robotLength": 0.762,
   "holonomicMode": true,
   "pathFolders": [
-    "StraightPreload",
     "NonProcessor",
-    "Processor"
+    "Processor",
+    "Middle"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
