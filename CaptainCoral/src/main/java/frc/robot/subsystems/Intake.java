@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
@@ -13,12 +14,12 @@ import frc.robot.KinematicsConstants;
 
 public class Intake extends SubsystemBase {
     private final TalonFX Intake_Wrist_Motor = new TalonFX(DeviceConstants.INTAKE_WRIST_MOTOR_DEVICE_ID);
-
     private final TalonFX Intake_Roller_Motor = new TalonFX(DeviceConstants.INTAKE_ROLLER_MOTOR_DEVICE_ID);
-
     private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(DeviceConstants.INDEXER_MOTOR_DEVICE_ID);
 
-    private final DigitalInput Indexer_Sensor = new DigitalInput(DeviceConstants.INDEXER_SENSOR_PORT);
+
+    private final DutyCycleEncoder Intake_Wrist_Through_Bore = new DutyCycleEncoder(new DigitalInput(DeviceConstants.INTAKE_WRIST_THROUGH_BORE_PORT));
+    //private final DigitalInput Indexer_Sensor = new DigitalInput(DeviceConstants.INDEXER_PHOTOELECTRIC_PORT);
 
     private double setpoint;
     
@@ -73,6 +74,7 @@ public class Intake extends SubsystemBase {
         //Applies Configs
         Intake_Roller_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
         Intake_Indexer_Master_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
+
     }
 
     public void setIntakeSetpoint(double setpoint) {
@@ -87,14 +89,31 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
-
-        SmartDashboard.putBoolean("Indexer Sensor Reading", getIndexerSensorReading());
+        SmartDashboard.putNumber("Intake Through Bore Encoder", getIntakeWristThroughBoreEncoder());
+        //SmartDashboard.putBoolean("Indexer Sensor Reading", getIndexerSensorReading());
     }
     
     //====================Intake Wrist Methods====================
     public double getIntakeWristEncoder() {
         return Intake_Wrist_Motor.getPosition().getValueAsDouble();
     }
+
+    public double getIntakeWristThroughBoreEncoder() {
+        return Intake_Wrist_Through_Bore.get() - 0.4;
+    }
+
+    // public void setIntakeWristCoastMode() {
+    //     var intakeWristMotorConfigs = Intake_Wrist_Motor.getConfigurator();
+    //     intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+
+    //     Intake_Wrist_Motor.getConfigurator().apply(intakeWristMotorConfigs);
+    // }
+
+    // public void setIntakeWristBrakeMode() {
+    //     var intakeWristMotorConfigs = Intake_Wrist_Motor.getConfigurator();
+    //     intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    //     Intake_Wrist_Motor.getConfigurator().apply(intakeWristMotorConfigs);
+    // }
 
     //====================Intake Roller Methods====================
     public void setIntakeRollerMotorSpeed(double speed) {
@@ -106,7 +125,8 @@ public class Intake extends SubsystemBase {
         Intake_Indexer_Master_Motor.set(-1 * 0.7 * speed);
     }
 
-    public boolean getIndexerSensorReading() {
-        return !Indexer_Sensor.get();
-    }
+    
+    // public boolean getIndexerSensorReading() {
+    //     return !Indexer_Sensor.get();
+    // }
 }

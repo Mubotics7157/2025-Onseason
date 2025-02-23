@@ -19,7 +19,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Drivetrain_Elevator_Turn_Multiplier = 0.7;
     public static final double Drivetrain_Elevator_Tolerance = 1.0;
 
-    public static final double Left_Pole_Setpoint = 20.0;
+    public static final double Left_Pole_Setpoint = 25.0;
     public static final double Right_Pole_Setpoint = -30.0;
     public static final double Square_Up_Setpoint = 0.0;
 
@@ -37,9 +37,9 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Intake_Wrist_kP = 10.0;
     public static final double Intake_Wrist_kI = 0.0;
     public static final double Intake_Wrist_kD = 0.0;
-    public static final double Intake_Wrist_Velocity = 128.0; //64
-    public static final double Intake_Wrist_Acceleration = 256.0; //128
-    public static final double Intake_Wrist_Jerk = 512.0; //256
+    public static final double Intake_Wrist_Velocity = 256.0; //64
+    public static final double Intake_Wrist_Acceleration = 512.0; //128
+    public static final double Intake_Wrist_Jerk = 1024.0; //256
 
     //Intake Current Limits
     public static final double Intake_Wrist_Current_Limit = 80.0;
@@ -73,7 +73,7 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double End_Effector_Roller_Current_Limit = 120.0;
 
     //End Effector Speeds
-    public static final double End_Effector_Score_Speed = 0.3;
+    public static final double End_Effector_Score_Speed = 0.2;
     public static final double End_Effector_Ground_Intake_Speed = 0.2;
     public static final double End_Effector_Ground_Outake_Speed = -0.25;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.15;
@@ -108,15 +108,15 @@ public class KinematicsConstants { //FINAL KEYWORD???
     public static final double Elevator_Zero_Setpoint = 0.0;
     public static final double Elevator_Coral_Station_Setpoint = 6.5;
 
-    public static final double Elevator_L1_Setpoint = 8.0;
-    public static final double Elevator_L2_Setpoint = 7.15;
+    public static final double Elevator_L1_Setpoint = 3.5;
+    public static final double Elevator_L2_Setpoint = 6.15;
     public static final double Elevator_L3_Setpoint = 13.8;
-    public static final double Elevator_L4_Setpoint = 25.0;
+    public static final double Elevator_L4_Setpoint = 25.3; //25.05
 
     public static final double Elevator_Bottom_Algae_Setpoint = 5.75;
     public static final double Elevator_Top_Algae_Setpoint = 20.5;
     public static final double Elevator_Processor_Score_Setpoint = 0.0;
-    public static final double Elevator_Barge_Score_Setpoint = 24.5;
+    public static final double Elevator_Barge_Score_Setpoint = 26.0; 
 
     //====================Climb====================
     //Climb Current Limit

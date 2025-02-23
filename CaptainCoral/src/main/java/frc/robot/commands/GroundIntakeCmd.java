@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.Intake;
 import frc.robot.KinematicsConstants;
 
 public class GroundIntakeCmd extends Command {
@@ -8,15 +9,25 @@ public class GroundIntakeCmd extends Command {
     private final EndEffector endEffector;
     private final double setpoint;
 
-    public GroundIntakeCmd(EndEffector endEffector, double speed, double setpoint) {
+    private final Intake intake;
+    private final double intakeSetpoint;
+    private final double intakeSpeed;
+
+    public GroundIntakeCmd(EndEffector endEffector, double speed, double setpoint, Intake intake, double intakeSetpoint, double intakeSpeed) {
         this.speed = speed;
         this.endEffector = EndEffector.getInstance();
         this.setpoint = setpoint;
+
+        this.intake = Intake.getInstance();
+        this.intakeSetpoint = intakeSetpoint;
+        this.intakeSpeed = intakeSpeed;
+
         addRequirements(endEffector);
     }
 
     @Override
     public void initialize() {
+        intake.setIntakeSetpoint(intakeSetpoint);
         endEffector.setEndEffectorSetpoint(setpoint);
         System.out.println("GroundIntakeCmd Started");
     }
@@ -24,6 +35,10 @@ public class GroundIntakeCmd extends Command {
     @Override
     public void execute() {
         double motorSpeed = speed;
+
+        intake.setIntakeRollerMotorSpeed(intakeSpeed);
+        intake.setIndexerMotorSpeed(intakeSpeed);
+
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
         if (endEffector.getEndEffectorSensorReading() == true) {
@@ -33,6 +48,8 @@ public class GroundIntakeCmd extends Command {
         }
 
         endEffector.goToEndEffectorSetpoint();
+
+        intake.goToIntakeSetpoint();
             
         System.out.println("GroundIntakeCmd Ongoing");
     }

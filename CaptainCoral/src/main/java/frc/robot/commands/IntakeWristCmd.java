@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
 import frc.robot.KinematicsConstants;
@@ -15,6 +16,8 @@ public class IntakeWristCmd extends Command {
 
     @Override
     public void initialize() {
+        this.setpoint = SmartDashboard.getNumber("Intake Setpoint", this.setpoint);
+
         intake.setIntakeSetpoint(setpoint);
         System.out.println("IntakeWristCmd Started");
     }

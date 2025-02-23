@@ -21,8 +21,8 @@ public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Master_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID);
     private final TalonFX End_Effector_Slave_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID);
 
-    private final DutyCycleEncoder End_Effector_Wrist_Through_Bore_Encoder = new DutyCycleEncoder(new DigitalInput(DeviceConstants.END_EFFECTOR_WRIST_THROUGH_BORE_ENCODER));
-    private final DigitalInput End_Effector_Sensor = new DigitalInput(DeviceConstants.END_EFFECTOR_SENSOR_PORT);
+    private final DutyCycleEncoder End_Effector_Wrist_Through_Bore_Encoder = new DutyCycleEncoder(new DigitalInput(DeviceConstants.END_EFFECTOR_WRIST_THROUGH_BORE_PORT));
+    private final DigitalInput End_Effector_Sensor = new DigitalInput(DeviceConstants.END_EFFECTOR_PHOTOELECTRIC_PORT);
 
     private double setpoint;
 
