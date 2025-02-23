@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Elevator;
-import frc.robot.commands.EndEffectorWristCmd;
+import frc.robot.commands.EndEffectorWrist;
 import frc.robot.subsystems.EndEffector;
 
 public class Robot extends TimedRobot {

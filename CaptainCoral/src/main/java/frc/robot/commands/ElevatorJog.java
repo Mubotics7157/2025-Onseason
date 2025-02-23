@@ -4,11 +4,11 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.KinematicsConstants;
 import java.util.function.DoubleSupplier;
 
-public class ElevatorJogCmd extends Command {
+public class ElevatorJog extends Command {
     private final Elevator elevator;
     private final DoubleSupplier speed; 
 
-    public ElevatorJogCmd(Elevator elevator, DoubleSupplier speed) {
+    public ElevatorJog(Elevator elevator, DoubleSupplier speed) {
         this.speed = speed;
         this.elevator = Elevator.getInstance(); 
         addRequirements(elevator); 
@@ -16,20 +16,20 @@ public class ElevatorJogCmd extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("ElevatorJogCmd Started");
+        System.out.println("ElevatorJog Online");
     }
 
     @Override
     public void execute() {
         double motorSpeed = speed.getAsDouble();
         elevator.setElevatorMotorSpeed(motorSpeed);
-        System.out.println("ElevatorJogCmd Ongoing");
+        System.out.println("ElevatorJog Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
         elevator.setElevatorMotorSpeed(KinematicsConstants.Absolute_Zero);
-        System.out.println("ElevatorJogCmd Ended");
+        System.out.println("ElevatorJog Offline");
     }
 
     @Override

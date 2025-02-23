@@ -3,11 +3,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.KinematicsConstants;
 
-public class EndEffectorScoreCmd extends Command {
+public class EndEffectorScore extends Command {
     private final double speed;
     private final EndEffector endEffector;
 
-    public EndEffectorScoreCmd(EndEffector endEffector, double speed) {
+    public EndEffectorScore(EndEffector endEffector, double speed) {
         this.speed = speed;
         this.endEffector = EndEffector.getInstance();
         addRequirements(endEffector);

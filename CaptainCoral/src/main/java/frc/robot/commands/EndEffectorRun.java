@@ -5,12 +5,12 @@ import frc.robot.subsystems.EndEffector;
 import frc.robot.DeviceConstants;
 import frc.robot.KinematicsConstants;
 
-public class EndEffectorRunCmd extends Command {
+public class EndEffectorRun extends Command {
     private final double speed;
     private final EndEffector endEffector;
     private final XboxController controller;
 
-    public EndEffectorRunCmd(EndEffector endEffector, double speed, XboxController controller) {
+    public EndEffectorRun(EndEffector endEffector, double speed, XboxController controller) {
         this.speed = speed;
         this.endEffector = EndEffector.getInstance();
         this.controller = controller;

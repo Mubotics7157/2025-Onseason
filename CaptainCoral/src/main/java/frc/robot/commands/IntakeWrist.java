@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
 import frc.robot.KinematicsConstants;
 
-public class IntakeWristCmd extends Command {
+public class IntakeWrist extends Command {
     private final Intake intake;
     private double setpoint;
 
-    public IntakeWristCmd(Intake intake, double setpoint) {
+    public IntakeWrist(Intake intake, double setpoint) {
         this.intake = Intake.getInstance();
         this.setpoint = setpoint;
         addRequirements(intake);
@@ -18,13 +18,13 @@ public class IntakeWristCmd extends Command {
     public void initialize() {
         this.setpoint = SmartDashboard.getNumber("Intake Setpoint", this.setpoint);
 
-        intake.setIntakeSetpoint(setpoint);
+        intake.setIntakeWristSetpoint(setpoint);
         System.out.println("IntakeWristCmd Started");
     }
 
     @Override
     public void execute() {
-        intake.goToIntakeSetpoint();
+        intake.goToIntakeWristSetpoint();
         System.out.println("IntakeWristCmd Ongoing");
     }
 

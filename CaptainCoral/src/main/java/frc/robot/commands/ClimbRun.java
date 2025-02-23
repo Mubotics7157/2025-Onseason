@@ -3,11 +3,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Climb;
 import frc.robot.KinematicsConstants;
 
-public class ClimbRunCmd extends Command {
+public class ClimbRun extends Command {
     private final double speed;
     private final Climb climb;
 
-    public ClimbRunCmd(Climb climb, double speed) {
+    public ClimbRun(Climb climb, double speed) {
         this.speed = speed;
         this.climb = Climb.getInstance();
         addRequirements(climb);

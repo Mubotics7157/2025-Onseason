@@ -17,8 +17,8 @@ public final class DeviceConstants {
 
     //End Effector
     public static final int END_EFFECTOR_WRIST_MOTOR_DEVICE_ID = 17;
-    public static final int END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID = 18;
-    public static final int END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID = 19;
+    public static final int END_EFFECTOR_TOP_ROLLER_MOTOR_DEVICE_ID = 18;
+    public static final int END_EFFECTOR_BOTTOM_ROLLER_MOTOR_DEVICE_ID = 19;
 
     public static final int END_EFFECTOR_WRIST_THROUGH_BORE_PORT = 2;
     public static final int END_EFFECTOR_PHOTOELECTRIC_PORT = 8;

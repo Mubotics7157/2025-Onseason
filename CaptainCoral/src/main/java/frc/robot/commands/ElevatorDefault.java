@@ -1,20 +1,13 @@
 package frc.robot.commands;
-import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
-import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
-import com.ctre.phoenix6.swerve.SwerveRequest;
-
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.KinematicsConstants;
 
-public class ElevatorRegCmd extends Command {
+public class ElevatorDefault extends Command {
     private final Elevator elevator;
     private double setpoint;
 
-    public ElevatorRegCmd(Elevator elevator, double setpoint) {
+    public ElevatorDefault(Elevator elevator, double setpoint) {
         this.elevator = Elevator.getInstance();
         this.setpoint = setpoint;
         addRequirements(elevator);
