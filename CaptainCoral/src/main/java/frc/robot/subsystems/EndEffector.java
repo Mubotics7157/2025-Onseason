@@ -17,9 +17,9 @@ import frc.robot.DeviceConstants;
 import frc.robot.KinematicsConstants;
 
 public class EndEffector extends SubsystemBase {
-    private final TalonFX End_Effector_Wrist_Master_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MOTOR_DEVICE_ID);
-    private final TalonFX End_Effector_Master_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_MASTER_ROLLER_MOTOR_DEVICE_ID);
-    private final TalonFX End_Effector_Slave_Motor_Roller = new TalonFX(DeviceConstants.END_EFFECTOR_SLAVE_ROLLER_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Wrist_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Top_Roller_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_TOP_ROLLER_MOTOR_DEVICE_ID);
+    private final TalonFX End_Effector_Bottom_Roller_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_BOTTOM_ROLLER_MOTOR_DEVICE_ID);
 
     private final DutyCycleEncoder End_Effector_Wrist_Through_Bore_Encoder = new DutyCycleEncoder(new DigitalInput(DeviceConstants.END_EFFECTOR_WRIST_THROUGH_BORE_PORT));
     private final DigitalInput End_Effector_Sensor = new DigitalInput(DeviceConstants.END_EFFECTOR_PHOTOELECTRIC_PORT);
@@ -33,12 +33,12 @@ public class EndEffector extends SubsystemBase {
     private static EndEffector instance = new EndEffector();
 
     public EndEffector() {
-        System.out.println("====================EndEffector Subsystem Initialized====================");
+        System.out.println("====================EndEffector Subsystem Online====================");
 
         //====================End Effector Wrist====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        End_Effector_Wrist_Master_Motor.setPosition(getEndEffectorWristThroughBoreEncoder() * KinematicsConstants.End_Effector_Absolute_To_Integrated); //Change to KinematicsConstants.Absolute_Zero if not working
+        End_Effector_Wrist_Motor.setPosition(getEndEffectorWristThroughBore() * KinematicsConstants.End_Effector_Absolute_To_Integrated); //Change to KinematicsConstants.Absolute_Zero if not working
 
         //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
@@ -64,52 +64,50 @@ public class EndEffector extends SubsystemBase {
         endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
-        End_Effector_Wrist_Master_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
+        End_Effector_Wrist_Motor.getConfigurator().apply(endEffectorWristMotorConfigs);
 
         //====================End Effector Rollers====================
-        var endEffectorRollersMotorConfigs = new TalonFXConfiguration();
+        var endEffectorRollerMotorsConfigs = new TalonFXConfiguration();
 
         //Current Limits
-        var endEffectorRollerLimitConfigs = endEffectorRollersMotorConfigs.CurrentLimits;
+        var endEffectorRollerLimitConfigs = endEffectorRollerMotorsConfigs.CurrentLimits;
         endEffectorRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Roller_Current_Limit;
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true; 
-        
-        endEffectorRollersMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //Applies Configs
-        End_Effector_Master_Motor_Roller.getConfigurator().apply(endEffectorRollerLimitConfigs);
-        End_Effector_Slave_Motor_Roller.getConfigurator().apply(endEffectorRollerLimitConfigs);
-    }
-
-    public void setEndEffectorSetpoint(double setpoint) {
-        this.setpoint = setpoint;
-    }
-
-    public void goToEndEffectorSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
-        End_Effector_Wrist_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
+        End_Effector_Top_Roller_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
+        End_Effector_Bottom_Roller_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristMasterEncoder());
-        SmartDashboard.putNumber("End Effector Through Bore Encoder", getEndEffectorWristThroughBoreEncoder());
+        SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristEncoder());
+        SmartDashboard.putNumber("End Effector Through Bore Encoder", getEndEffectorWristThroughBore());
         SmartDashboard.putBoolean("End Effector Sensor Reading", getEndEffectorSensorReading());
     }
     
     //====================End Effector Wrist Methods====================
-    public double getEndEffectorWristMasterEncoder() {
-        return End_Effector_Wrist_Master_Motor.getPosition().getValueAsDouble();
+    public double getEndEffectorWristEncoder() {
+        return End_Effector_Wrist_Motor.getPosition().getValueAsDouble();
     }
 
-    public double getEndEffectorWristThroughBoreEncoder() {
+    public double getEndEffectorWristThroughBore() {
         return End_Effector_Wrist_Through_Bore_Encoder.get();
+    }
+
+    public void setEndEffectorWristSetpoint(double setpoint) {
+        this.setpoint = setpoint;
+    }
+
+    public void goToEndEffectorWristSetpoint() {
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
+        End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
     //====================End Effector Roller Methods====================
     public void setEndEffectorRollerMotorSpeed(double speed) {
-        End_Effector_Master_Motor_Roller.set(-1 * speed);
-        End_Effector_Slave_Motor_Roller.set(speed);
+        End_Effector_Top_Roller_Motor.set(-1 * speed);
+        End_Effector_Bottom_Roller_Motor.set(speed);
     }
 
     public boolean getEndEffectorSensorReading() {
