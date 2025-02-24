@@ -53,6 +53,36 @@
           "data": {
             "pathName": "Processor2"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Processor3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Processor4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Processor5"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Processor6"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Processor7B"
+          }
         }
       ]
     }
