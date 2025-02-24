@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class ElevatorDefault extends Command {
     private final Elevator elevator;
@@ -16,23 +16,23 @@ public class ElevatorDefault extends Command {
     @Override
     public void initialize() {
         elevator.setElevatorSetpoint(setpoint);
-        System.out.println("ElevatorPIDCmd Started");
+        System.out.println("ElevatorDefault Online");
     }
 
     @Override
     public void execute() {
         elevator.goToElevatorSetpoint();
 
-        System.out.println("ElevatorPIDCmd Ongoing");
+        System.out.println("ElevatorDefault Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("ElevatorPIDCmd Ended");
+        System.out.println("ElevatorDefault Offline");
     }
 
     @Override
     public boolean isFinished() {
-        return Math.abs(elevator.getElevatorMasterEncoder() - setpoint) < KinematicsConstants.PID_Setpoint_Tolerance;
+        return Math.abs(elevator.getElevatorMasterEncoder() - setpoint) < PhysConstants.PID_Setpoint_Tolerance;
     }
 }

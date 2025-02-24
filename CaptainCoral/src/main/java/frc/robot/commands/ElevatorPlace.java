@@ -6,9 +6,9 @@ import frc.robot.subsystems.Elevator;
 
 public class ElevatorPlace extends Command {
     private final Elevator elevator;
-    private double setpoint;
-    private double speedMultiplier;
-    private double turnMultiplier;
+    private final double setpoint;
+    private final double speedMultiplier;
+    private final double turnMultiplier;
     private final Drivetrain drivetrain;
     private final XboxController controller;
 
@@ -26,19 +26,19 @@ public class ElevatorPlace extends Command {
     @Override
     public void initialize() {
         elevator.setElevatorSetpoint(setpoint);
-        System.out.println("ElevatorPIDCmd Started");
+        System.out.println("ElevatorPlace Online");
     }
 
     @Override
     public void execute() {
         elevator.goToElevatorSetpoint();
         drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
-        System.out.println("ElevatorPIDCmd Ongoing");
+        System.out.println("ElevatorPlace Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("ElevatorPIDCmd Ended");
+        System.out.println("ElevatorPlace Offline");
     }
 
     @Override

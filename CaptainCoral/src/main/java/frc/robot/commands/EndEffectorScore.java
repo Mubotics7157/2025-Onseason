@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class EndEffectorScore extends Command {
     private final double speed;
@@ -15,7 +15,7 @@ public class EndEffectorScore extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("EndEffectorScoreCmd Started");
+        System.out.println("EndEffectorScore Online");
     }
 
     @Override
@@ -23,13 +23,13 @@ public class EndEffectorScore extends Command {
         double motorSpeed = speed;
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
             
-        System.out.println("EndEffectorScoreCmd Ongoing");
+        System.out.println("EndEffectorScore Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        endEffector.setEndEffectorRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
-        System.out.println("EndEffectorScoreCmd Ended");
+        endEffector.setEndEffectorRollerMotorSpeed(PhysConstants.Absolute_Zero);
+        System.out.println("EndEffectorScore Offline");
     }
 
     @Override

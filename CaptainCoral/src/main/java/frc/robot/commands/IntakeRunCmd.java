@@ -1,10 +1,7 @@
 package frc.robot.commands;
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
-import frc.robot.DeviceConstants;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class IntakeRunCmd extends Command {
     private final double speed;
@@ -18,7 +15,7 @@ public class IntakeRunCmd extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("IntakeRunCmd Started");
+        System.out.println("IntakeRun Online");
     }
 
     @Override
@@ -27,14 +24,14 @@ public class IntakeRunCmd extends Command {
         intake.setIntakeRollerMotorSpeed(motorSpeed);
         intake.setIndexerMotorSpeed(motorSpeed);
 
-        System.out.println("IntakeRunCmd Ongoing");
+        System.out.println("IntakeRun Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        intake.setIntakeRollerMotorSpeed(KinematicsConstants.Absolute_Zero);
-        intake.setIndexerMotorSpeed(KinematicsConstants.Absolute_Zero);
-        System.out.println("IntakeRunCmd Ended");
+        intake.setIntakeRollerMotorSpeed(PhysConstants.Absolute_Zero);
+        intake.setIndexerMotorSpeed(PhysConstants.Absolute_Zero);
+        System.out.println("IntakeRun Offline");
     }
 
     @Override

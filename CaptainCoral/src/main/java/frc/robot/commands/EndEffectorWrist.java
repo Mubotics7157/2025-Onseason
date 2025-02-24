@@ -2,17 +2,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class EndEffectorWrist extends Command {
     private final EndEffector endEffector;
     private double setpoint;
-    private double testSetpoint;
 
     public EndEffectorWrist(EndEffector endEffector, double setpoint) {
         this.endEffector = EndEffector.getInstance();
         this.setpoint = setpoint;
-        this.testSetpoint =  SmartDashboard.getNumber("WristSetpoint", this.setpoint);
 
         addRequirements(endEffector);
     }
@@ -20,23 +18,22 @@ public class EndEffectorWrist extends Command {
     @Override
     public void initialize() {
         endEffector.setEndEffectorWristSetpoint(setpoint);
-        System.out.println("EndEffectorWristCmd Started");
+        System.out.println("EndEffectorWrist Online");
     }
 
     @Override
     public void execute() {
-        SmartDashboard.putNumber("data from get data", this.testSetpoint);
         endEffector.goToEndEffectorWristSetpoint();
-        System.out.println("EndEffectorWristCmd Ongoing");
+        System.out.println("EndEffectorWrist Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("EndEffectorWristCmd Ended");
+        System.out.println("EndEffectorWrist Offline");
     }
 
     @Override
     public boolean isFinished() {
-        return Math.abs(endEffector.getEndEffectorWristEncoder() - setpoint) < KinematicsConstants.PID_Setpoint_Tolerance; 
+        return Math.abs(endEffector.getEndEffectorWristEncoder() - setpoint) < PhysConstants.PID_Setpoint_Tolerance; 
     }
 }

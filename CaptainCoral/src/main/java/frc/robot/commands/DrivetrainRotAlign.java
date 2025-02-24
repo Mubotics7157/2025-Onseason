@@ -3,7 +3,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DrivetrainRotAlign extends Command {
@@ -27,8 +27,8 @@ public class DrivetrainRotAlign extends Command {
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-        .withVelocityX(KinematicsConstants.Absolute_Zero)
-        .withVelocityY(KinematicsConstants.Absolute_Zero)
+        .withVelocityX(PhysConstants.Absolute_Zero)
+        .withVelocityY(PhysConstants.Absolute_Zero)
         .withRotationalRate(rotSpeed));
         System.out.println("DrivetrainRotAlign Executing");
         }

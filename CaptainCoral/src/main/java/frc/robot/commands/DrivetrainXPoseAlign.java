@@ -6,24 +6,23 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 import frc.robot.TunerConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.VisionManager;
 
-
-public class DrivetrainAlignHorizontal extends Command {
+public class DrivetrainXPoseAlign extends Command {
     private final Drivetrain drivetrain;
     private final VisionManager visionManager;
     
-    public DrivetrainAlignHorizontal(Drivetrain drivetrain, VisionManager visionManager) {
+    public DrivetrainXPoseAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
         this.visionManager = visionManager;
 
         addRequirements(drivetrain);
         addRequirements(visionManager);
 
-        SmartDashboard.putNumber("DrivePose Horizontal kP", KinematicsConstants.Drivetrain_X_Pose_kP);
+        SmartDashboard.putNumber("DrivePose Horizontal kP", PhysConstants.Drivetrain_X_Pose_kP);
     }
 
     @Override
@@ -37,7 +36,7 @@ public class DrivetrainAlignHorizontal extends Command {
         if (currentPose == null) {
             return 0.0;
         } else {
-            return currentPose.getX() * SmartDashboard.getNumber("DrivePose Horizontal kP", KinematicsConstants.Drivetrain_X_Pose_kP) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+            return currentPose.getX() * SmartDashboard.getNumber("DrivePose Horizontal kP", PhysConstants.Drivetrain_X_Pose_kP) * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         }
       }
 
