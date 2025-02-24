@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.EndEffectorWrist;
 import frc.robot.subsystems.EndEffector;
+import frc.robot.subsystems.Intake;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -40,7 +41,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putNumber("End_Effector_Wrist_L1_Score_Setpoint", KinematicsConstants.End_Effector_Wrist_L1_Score_Setpoint);
+    SmartDashboard.putNumber("End_Effector_Wrist_L1_Score_Setpoint", PhysConstants.End_Effector_Wrist_L1_Score_Setpoint);
   }
 
   @Override
@@ -61,6 +62,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    Intake.getInstance().zeroIntakeWrist();
+    //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 
   @Override
@@ -76,6 +80,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    Intake.getInstance().zeroIntakeWrist();
+    //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 
   @Override
