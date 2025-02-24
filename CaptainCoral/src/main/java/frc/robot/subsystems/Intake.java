@@ -10,7 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.DeviceConstants;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class Intake extends SubsystemBase {
     private final TalonFX Intake_Wrist_Motor = new TalonFX(DeviceConstants.INTAKE_WRIST_MOTOR_DEVICE_ID);
@@ -34,29 +34,29 @@ public class Intake extends SubsystemBase {
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        Intake_Wrist_Motor.setPosition(KinematicsConstants.Absolute_Zero);
+        Intake_Wrist_Motor.setPosition(PhysConstants.Absolute_Zero);
 
         //Brake Mode
         intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = KinematicsConstants.Intake_Wrist_kS;
-        generalSlotConfigs.kV = KinematicsConstants.Intake_Wrist_kV;
-        generalSlotConfigs.kA = KinematicsConstants.Intake_Wrist_kA;
-        generalSlotConfigs.kP = KinematicsConstants.Intake_Wrist_kP;
-        generalSlotConfigs.kI = KinematicsConstants.Intake_Wrist_kI;
-        generalSlotConfigs.kD = KinematicsConstants.Intake_Wrist_kD;
+        generalSlotConfigs.kS = PhysConstants.Intake_Wrist_kS;
+        generalSlotConfigs.kV = PhysConstants.Intake_Wrist_kV;
+        generalSlotConfigs.kA = PhysConstants.Intake_Wrist_kA;
+        generalSlotConfigs.kP = PhysConstants.Intake_Wrist_kP;
+        generalSlotConfigs.kI = PhysConstants.Intake_Wrist_kI;
+        generalSlotConfigs.kD = PhysConstants.Intake_Wrist_kD;
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.Intake_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.Intake_Wrist_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.Intake_Wrist_Jerk;
+        motionMagicConfigs.MotionMagicCruiseVelocity = PhysConstants.Intake_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = PhysConstants.Intake_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = PhysConstants.Intake_Wrist_Jerk;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
-        intakeWristLimitConfigs.StatorCurrentLimit = KinematicsConstants.Intake_Wrist_Current_Limit;
+        intakeWristLimitConfigs.StatorCurrentLimit = PhysConstants.Intake_Wrist_Current_Limit;
         intakeWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -67,7 +67,7 @@ public class Intake extends SubsystemBase {
 
         //Current Limits
         var intakeRollerLimitConfigs = intakeRollersMotorConfigs.CurrentLimits;
-        intakeRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.Intake_Roller_Current_Limit;
+        intakeRollerLimitConfigs.StatorCurrentLimit = PhysConstants.Intake_Roller_Current_Limit;
         intakeRollerLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -79,7 +79,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
-        SmartDashboard.putNumber("Intake Through Bore Encoder", getIntakeWristThroughBore());
+        SmartDashboard.putNumber("Intake Through Bore Encoder", getIntakeWristThroughBoreWithOffset());
         //SmartDashboard.putBoolean("Indexer Sensor Reading", getIndexerSensorReading());
     }
     
@@ -88,7 +88,7 @@ public class Intake extends SubsystemBase {
         return Intake_Wrist_Motor.getPosition().getValueAsDouble();
     }
 
-    public double getIntakeWristThroughBore() {
+    public double getIntakeWristThroughBoreWithOffset() {
         return Intake_Wrist_Through_Bore.get() - 0.4;
     }
 
@@ -97,8 +97,12 @@ public class Intake extends SubsystemBase {
     }
 
     public void goToIntakeWristSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(PhysConstants.Absolute_Zero);
         Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
+    }
+
+    public void zeroIntakeWrist() {
+        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset()); //MAKE SURE UNITS MATCH
     }
 
     //====================Intake Roller Methods====================

@@ -7,7 +7,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.DeviceConstants;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class Elevator extends SubsystemBase {
     private final TalonFX Elevator_Master_Motor = new TalonFX(DeviceConstants.ELEVATOR_MASTER_MOTOR_DEVICE_ID);
@@ -27,30 +27,30 @@ public class Elevator extends SubsystemBase {
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
-        Elevator_Master_Motor.setPosition(KinematicsConstants.Absolute_Zero);
-        Elevator_Slave_Motor.setPosition(KinematicsConstants.Absolute_Zero);
+        Elevator_Master_Motor.setPosition(PhysConstants.Absolute_Zero);
+        Elevator_Slave_Motor.setPosition(PhysConstants.Absolute_Zero);
 
         //Brake Mode
         elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
-        generalSlotConfigs.kS = KinematicsConstants.Elevator_kS;
-        generalSlotConfigs.kV = KinematicsConstants.Elevator_kV;
-        generalSlotConfigs.kA = KinematicsConstants.Elevator_kV;
-        generalSlotConfigs.kP = KinematicsConstants.Elevator_kP;
-        generalSlotConfigs.kI = KinematicsConstants.Elevator_kI;
-        generalSlotConfigs.kD = KinematicsConstants.Elevator_kD;
+        generalSlotConfigs.kS = PhysConstants.Elevator_kS;
+        generalSlotConfigs.kV = PhysConstants.Elevator_kV;
+        generalSlotConfigs.kA = PhysConstants.Elevator_kV;
+        generalSlotConfigs.kP = PhysConstants.Elevator_kP;
+        generalSlotConfigs.kI = PhysConstants.Elevator_kI;
+        generalSlotConfigs.kD = PhysConstants.Elevator_kD;
 
         //Motion Magic
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.Elevator_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.Elevator_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.Elevator_Jerk;
+        motionMagicConfigs.MotionMagicCruiseVelocity = PhysConstants.Elevator_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = PhysConstants.Elevator_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = PhysConstants.Elevator_Jerk;
 
         //Current limits
         var limitConfigs = elevatorMotorConfigs.CurrentLimits;
-        limitConfigs.StatorCurrentLimit = KinematicsConstants.Elevator_Current_Limit;
+        limitConfigs.StatorCurrentLimit = PhysConstants.Elevator_Current_Limit;
         limitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -83,7 +83,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public void goToElevatorSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(PhysConstants.Absolute_Zero);
         Elevator_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
         Elevator_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }

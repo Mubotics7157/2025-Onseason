@@ -7,7 +7,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.DeviceConstants;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class Climb extends SubsystemBase {
     private final TalonFX Climb_Master_Motor = new TalonFX(DeviceConstants.CLIMB_MASTER_MOTOR_DEVICE_ID);
@@ -29,7 +29,7 @@ public class Climb extends SubsystemBase {
 
         //Current Limits
         var climbLimitConfigs = climbMotorConfigs.CurrentLimits;
-        climbLimitConfigs.StatorCurrentLimit = KinematicsConstants.Climb_Current_Limit;
+        climbLimitConfigs.StatorCurrentLimit = PhysConstants.Climb_Current_Limit;
         climbLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs

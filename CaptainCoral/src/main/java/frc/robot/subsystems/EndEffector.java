@@ -14,7 +14,7 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.DeviceConstants;
-import frc.robot.KinematicsConstants;
+import frc.robot.PhysConstants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Motor = new TalonFX(DeviceConstants.END_EFFECTOR_WRIST_MOTOR_DEVICE_ID);
@@ -38,29 +38,29 @@ public class EndEffector extends SubsystemBase {
         //====================End Effector Wrist====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
 
-        End_Effector_Wrist_Motor.setPosition(getEndEffectorWristThroughBore() * KinematicsConstants.End_Effector_Absolute_To_Integrated); //Change to KinematicsConstants.Absolute_Zero if not working
+        End_Effector_Wrist_Motor.setPosition(getEndEffectorWristThroughBore() * PhysConstants.End_Effector_Absolute_To_Integrated); //Change to KinematicsConstants.Absolute_Zero if not working
 
         //Brake Mode
         endEffectorWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = endEffectorWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = KinematicsConstants.End_Effector_Wrist_kS;
-        generalSlotConfigs.kV = KinematicsConstants.End_Effector_Wrist_kV;
-        generalSlotConfigs.kA = KinematicsConstants.End_Effector_Wrist_kA;
-        generalSlotConfigs.kP = KinematicsConstants.End_Effector_Wrist_kP;
-        generalSlotConfigs.kI = KinematicsConstants.End_Effector_Wrist_kI;
-        generalSlotConfigs.kD = KinematicsConstants.End_Effector_Wrist_kD;
+        generalSlotConfigs.kS = PhysConstants.End_Effector_Wrist_kS;
+        generalSlotConfigs.kV = PhysConstants.End_Effector_Wrist_kV;
+        generalSlotConfigs.kA = PhysConstants.End_Effector_Wrist_kA;
+        generalSlotConfigs.kP = PhysConstants.End_Effector_Wrist_kP;
+        generalSlotConfigs.kI = PhysConstants.End_Effector_Wrist_kI;
+        generalSlotConfigs.kD = PhysConstants.End_Effector_Wrist_kD;
 
         //Motion Magic
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = KinematicsConstants.End_Effector_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = KinematicsConstants.End_Effector_Wrist_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = KinematicsConstants.End_Effector_Wrist_Jerk;
+        motionMagicConfigs.MotionMagicCruiseVelocity = PhysConstants.End_Effector_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = PhysConstants.End_Effector_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicJerk = PhysConstants.End_Effector_Wrist_Jerk;
 
         //Current Limits
         var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
-        endEffectorWristLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Wrist_Current_Limit;
+        endEffectorWristLimitConfigs.StatorCurrentLimit = PhysConstants.End_Effector_Wrist_Current_Limit;
         endEffectorWristLimitConfigs.StatorCurrentLimitEnable = true;
 
         //Applies Configs
@@ -71,7 +71,7 @@ public class EndEffector extends SubsystemBase {
 
         //Current Limits
         var endEffectorRollerLimitConfigs = endEffectorRollerMotorsConfigs.CurrentLimits;
-        endEffectorRollerLimitConfigs.StatorCurrentLimit = KinematicsConstants.End_Effector_Roller_Current_Limit;
+        endEffectorRollerLimitConfigs.StatorCurrentLimit = PhysConstants.End_Effector_Roller_Current_Limit;
         endEffectorRollerLimitConfigs.StatorCurrentLimitEnable = true; 
 
         //Applies Configs
@@ -100,7 +100,7 @@ public class EndEffector extends SubsystemBase {
     }
 
     public void goToEndEffectorWristSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(KinematicsConstants.Absolute_Zero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(PhysConstants.Absolute_Zero);
         End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
