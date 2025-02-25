@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    SmartDashboard.putNumber("End_Effector_Wrist_L1_Score_Setpoint", PhysConstants.End_Effector_Wrist_L1_Score_Setpoint);
+    SmartDashboard.putNumber("End_Effector_Wrist_L1_Score_Setpoint", Constants.End_Effector_Wrist_L1_Score_Setpoint);
   }
 
   @Override
