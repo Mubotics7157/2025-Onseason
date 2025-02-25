@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 import java.util.function.DoubleSupplier;
 
 public class ElevatorJog extends Command {
@@ -28,7 +28,7 @@ public class ElevatorJog extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        elevator.setElevatorMotorSpeed(PhysConstants.Absolute_Zero);
+        elevator.setElevatorMotorSpeed(Constants.Absolute_Zero);
         System.out.println("ElevatorJog Offline");
     }
 

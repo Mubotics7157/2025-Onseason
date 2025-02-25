@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.Intake;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 
 public class RobotIntakeGround extends Command {
     private final double speed;
@@ -52,7 +52,7 @@ public class RobotIntakeGround extends Command {
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
         if (endEffector.getEndEffectorSensorReading() == true) {
-            endEffector.setEndEffectorRollerMotorSpeed(PhysConstants.Absolute_Zero);
+            endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
         }
@@ -67,9 +67,9 @@ public class RobotIntakeGround extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        intake.setIntakeRollerMotorSpeed(PhysConstants.Absolute_Zero);
-        intake.setIndexerMotorSpeed(PhysConstants.Absolute_Zero);
-        endEffector.setEndEffectorRollerMotorSpeed(PhysConstants.Absolute_Zero);
+        intake.setIntakeRollerMotorSpeed(Constants.Absolute_Zero);
+        intake.setIndexerMotorSpeed(Constants.Absolute_Zero);
+        endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         System.out.println("STATEIntakeGround Offline");
     }
 

@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 
 public class IntakeRunCmd extends Command {
     private final double speed;
@@ -29,8 +29,8 @@ public class IntakeRunCmd extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        intake.setIntakeRollerMotorSpeed(PhysConstants.Absolute_Zero);
-        intake.setIndexerMotorSpeed(PhysConstants.Absolute_Zero);
+        intake.setIntakeRollerMotorSpeed(Constants.Absolute_Zero);
+        intake.setIndexerMotorSpeed(Constants.Absolute_Zero);
         System.out.println("IntakeRun Offline");
     }
 

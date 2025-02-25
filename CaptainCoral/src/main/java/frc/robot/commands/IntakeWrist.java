@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Intake;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 
 public class IntakeWrist extends Command {
     private final Intake intake;
@@ -32,6 +32,6 @@ public class IntakeWrist extends Command {
 
     @Override
     public boolean isFinished() {
-        return intake.getIntakeWristEncoder() - setpoint < PhysConstants.PID_Setpoint_Tolerance;
+        return intake.getIntakeWristEncoder() - setpoint < Constants.PID_Setpoint_Tolerance;
     }
 }

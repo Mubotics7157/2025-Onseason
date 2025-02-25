@@ -2,8 +2,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
-import frc.robot.DeviceConstants;
-import frc.robot.PhysConstants;
+import frc.robot.Devices;
+import frc.robot.Constants;
 
 public class EndEffectorRun extends Command {
     private final double speed;
@@ -29,18 +29,18 @@ public class EndEffectorRun extends Command {
 
         //End Effector Sensor (Roller Stop)
         if (endEffector.getEndEffectorSensorReading() == true) {
-            endEffector.setEndEffectorRollerMotorSpeed(PhysConstants.Absolute_Zero);
+            endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
         }
 
         //End Effector Sensor (Controller Rumble)
         if (endEffector.getEndEffectorSensorReading() == true) {
-            controller.setRumble(XboxController.RumbleType.kLeftRumble, DeviceConstants.DRIVER_CONTROLLER_RUMBLE);
-            controller.setRumble(XboxController.RumbleType.kRightRumble, DeviceConstants.DRIVER_CONTROLLER_RUMBLE);
+            controller.setRumble(XboxController.RumbleType.kLeftRumble, Devices.CONTROLLER_RUMBLE);
+            controller.setRumble(XboxController.RumbleType.kRightRumble, Devices.CONTROLLER_RUMBLE);
         } else {
-            controller.setRumble(XboxController.RumbleType.kLeftRumble, PhysConstants.Absolute_Zero);
-            controller.setRumble(XboxController.RumbleType.kRightRumble, PhysConstants.Absolute_Zero);
+            controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+            controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
         }
             
         System.out.println("EndEffectorRun Executing");
@@ -48,9 +48,9 @@ public class EndEffectorRun extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        endEffector.setEndEffectorRollerMotorSpeed(PhysConstants.Absolute_Zero);
-        controller.setRumble(XboxController.RumbleType.kLeftRumble, PhysConstants.Absolute_Zero);
-        controller.setRumble(XboxController.RumbleType.kRightRumble, PhysConstants.Absolute_Zero);
+        endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
         System.out.println("EndEffectorRun Offline");
     }
 

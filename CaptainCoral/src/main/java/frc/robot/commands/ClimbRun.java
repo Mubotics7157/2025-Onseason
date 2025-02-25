@@ -1,7 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 import frc.robot.subsystems.Climb;
 
 public class ClimbRun extends Command {
@@ -29,7 +29,7 @@ public class ClimbRun extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        climb.setClimbMotorSpeed(PhysConstants.Absolute_Zero);
+        climb.setClimbMotorSpeed(Constants.Absolute_Zero);
         System.out.println("EndEffectorScore Offline");
     }
 

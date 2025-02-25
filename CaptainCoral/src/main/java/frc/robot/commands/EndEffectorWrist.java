@@ -2,7 +2,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.EndEffector;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 
 public class EndEffectorWrist extends Command {
     private final EndEffector endEffector;
@@ -34,6 +34,6 @@ public class EndEffectorWrist extends Command {
 
     @Override
     public boolean isFinished() {
-        return Math.abs(endEffector.getEndEffectorWristEncoder() - setpoint) < PhysConstants.PID_Setpoint_Tolerance; 
+        return Math.abs(endEffector.getEndEffectorWristEncoder() - setpoint) < Constants.PID_Setpoint_Tolerance; 
     }
 }

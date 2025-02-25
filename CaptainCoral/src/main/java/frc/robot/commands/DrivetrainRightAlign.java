@@ -3,7 +3,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DrivetrainRightAlign extends Command {
@@ -30,7 +30,7 @@ public class DrivetrainRightAlign extends Command {
         drivetrain.setControl(drivetrainRequest
         .withVelocityX(xSpeed)
         .withVelocityY(ySpeed)
-        .withRotationalRate(PhysConstants.Absolute_Zero));
+        .withRotationalRate(Constants.Absolute_Zero));
         System.out.println("DrivetrainRightAlign Executing");
         }
 
