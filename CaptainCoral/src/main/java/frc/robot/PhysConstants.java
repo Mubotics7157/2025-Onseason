@@ -89,7 +89,7 @@ public class PhysConstants { //FINAL KEYWORD???
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.02;
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 8.6;
     public static final double End_Effector_Wrist_Processor_Score_Setpoint = 19.0;
-    public static final double End_Effector_Wrist_Barge_Score_Setpoint = 14.0;
+    public static final double End_Effector_Wrist_Barge_Score_Setpoint = 5.825;
 
     //====================Elevator====================
     //Elevator Motion Magic
@@ -116,9 +116,9 @@ public class PhysConstants { //FINAL KEYWORD???
     public static final double Elevator_L4_Setpoint = 25.3; //25.05
 
     public static final double Elevator_Bottom_Algae_Setpoint = 5.75;
-    public static final double Elevator_Top_Algae_Setpoint = 20.5;
+    public static final double Elevator_Top_Algae_Setpoint = 17.5;
     public static final double Elevator_Processor_Score_Setpoint = 0.0;
-    public static final double Elevator_Barge_Score_Setpoint = 26.0; 
+    public static final double Elevator_Barge_Score_Setpoint = 25.3; 
 
     //====================Climb====================
     //Climb Current Limit

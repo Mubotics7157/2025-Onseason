@@ -3,7 +3,7 @@ package frc.robot;
 public final class DeviceConstants {
     //====================CONTROLLER====================
     public static final int DRIVER_CONTROLLER_DEVICE_ID = 0;
-    public static final int OPERATOR_CONTROLLER_DEVICE_ID = 0;
+    public static final int OPERATOR_CONTROLLER_DEVICE_ID = 1;
     public static final double JOYSTICK_DEADZONE_TOLERANCE = 0.05;
     public static final double DRIVER_CONTROLLER_RUMBLE = 1.0;
 

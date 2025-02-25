@@ -1,7 +1,8 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Climb;
+
 import frc.robot.PhysConstants;
+import frc.robot.subsystems.Climb;
 
 public class ClimbRun extends Command {
     private final double speed;
@@ -15,20 +16,21 @@ public class ClimbRun extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("ClimbRun Online");
+        System.out.println("EndEffectorScore Online");
     }
 
     @Override
     public void execute() {
         double motorSpeed = speed;
         climb.setClimbMotorSpeed(motorSpeed);
-        System.out.println("ClimbRun Executing");
+            
+        System.out.println("EndEffectorScore Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
         climb.setClimbMotorSpeed(PhysConstants.Absolute_Zero);
-        System.out.println("ClimbRun Offline");
+        System.out.println("EndEffectorScore Offline");
     }
 
     @Override

@@ -11,7 +11,6 @@ import frc.robot.PhysConstants;
 
 public class Climb extends SubsystemBase {
     private final TalonFX Climb_Master_Motor = new TalonFX(DeviceConstants.CLIMB_MASTER_MOTOR_DEVICE_ID);
-    private final TalonFX Climb_Slave_Motor = new TalonFX(DeviceConstants.CLIMB_SLAVE_MOTOR_DEVICE_ID);
 
     public static Climb getInstance() {
         return instance;
@@ -34,7 +33,6 @@ public class Climb extends SubsystemBase {
 
         //Applies Configs
         Climb_Master_Motor.getConfigurator().apply(climbMotorConfigs);
-        Climb_Slave_Motor.getConfigurator().apply(climbMotorConfigs);
     }
 
     @Override
@@ -43,6 +41,5 @@ public class Climb extends SubsystemBase {
     //====================Climb Methods====================
     public void setClimbMotorSpeed(double speed) {
         Climb_Master_Motor.set(speed);
-        Climb_Slave_Motor.set(speed);
     }
 }
