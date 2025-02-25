@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import frc.robot.PhysConstants;
+import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.TunerConstants;
 import frc.robot.TunerConstants.TunerSwerveDrivetrain;
@@ -303,11 +303,11 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     public double limelight_vertical_proportional() {   
-        double kP = PhysConstants.Drivetrain_FB_kP;
-        double FBVelocity = (LimelightHelpers.getTY("limelight") + PhysConstants.Square_Up_Setpoint) * kP;
+        double kP = Constants.Drivetrain_FB_kP;
+        double FBVelocity = (LimelightHelpers.getTY("limelight") + Constants.Square_Up_Setpoint) * kP;
         FBVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         
-        if (LimelightHelpers.getTY("limelight") < PhysConstants.Drivetrain_Auto_Align_Tolerance) {
+        if (LimelightHelpers.getTY("limelight") < Constants.Drivetrain_Auto_Align_Tolerance) {
             FBVelocity = 0;
         }
 
@@ -315,12 +315,12 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
       }
 
     public double left_pole_limelight_horizontal_proportional() {
-        double kP = PhysConstants.Drivetrain_LR_kP;
+        double kP = Constants.Drivetrain_LR_kP;
         
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + PhysConstants.Left_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + Constants.Left_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < PhysConstants.Drivetrain_Auto_Align_Tolerance) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < Constants.Drivetrain_Auto_Align_Tolerance) {
             LRVelocity = 0;
         }
 
@@ -328,12 +328,12 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
     }
 
     public double right_pole_limelight_horizontal_proportional() {
-        double kP = PhysConstants.Drivetrain_LR_kP;
+        double kP = Constants.Drivetrain_LR_kP;
         
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + PhysConstants.Right_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
+        double LRVelocity = (LimelightHelpers.getTX("limelight") + Constants.Right_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
         LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
 
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < PhysConstants.Drivetrain_Auto_Align_Tolerance) {
+        if (Math.abs(LimelightHelpers.getTX("limelight")) < Constants.Drivetrain_Auto_Align_Tolerance) {
             LRVelocity = 0;
         }
 
@@ -359,9 +359,9 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
 
         setControl(drivetrainRequest
-            .withVelocityX(-1 * MathUtil.applyDeadband(controller.getLeftY(), 0.05) * speedMultiplier * PhysConstants.DrivetrainMaxSpeed)
-            .withVelocityY(-1 * MathUtil.applyDeadband(controller.getLeftX(), 0.05) * speedMultiplier * PhysConstants.DrivetrainMaxSpeed)
-            .withRotationalRate(-1 * MathUtil.applyDeadband(controller.getRightX(), 0.05) * turnMultiplier * PhysConstants.DrivetrainMaxAngularRate)
+            .withVelocityX(-1 * MathUtil.applyDeadband(controller.getLeftY(), 0.05) * speedMultiplier * Constants.DrivetrainMaxSpeed)
+            .withVelocityY(-1 * MathUtil.applyDeadband(controller.getLeftX(), 0.05) * speedMultiplier * Constants.DrivetrainMaxSpeed)
+            .withRotationalRate(-1 * MathUtil.applyDeadband(controller.getRightX(), 0.05) * turnMultiplier * Constants.DrivetrainMaxAngularRate)
         );
     }
 } 
