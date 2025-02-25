@@ -1,0 +1,31 @@
+package frc.robot;
+
+public final class Devices {
+    //====================Controller====================
+    public static final int DRIVER_CONTROLLER = 0;
+    public static final int OPERATOR_CONTROLLER = 1;
+    public static final double JOYSTICK_JOG_SPEED_MULTIPLIER = 0.125;
+    public static final double JOYSTICK_DEADZONE_TOLERANCE = 0.05;
+    public static final double CONTROLLER_RUMBLE = 1.0;
+
+    //====================Intake/Indexer====================
+    public static final int INTAKE_WRIST_MOTOR = 14;
+    public static final int INTAKE_ROLLER_MOTOR = 15;
+    public static final int INDEXER_MOTOR = 16;
+    public static final int INTAKE_WRIST_THROUGH_BORE_PORT = 0;
+    //public static final int INDEXER_PHOTOELECTRIC_PORT = 7;
+
+    //====================End Effector====================
+    public static final int END_EFFECTOR_WRIST_MOTOR = 17;
+    public static final int END_EFFECTOR_TOP_ROLLER_MOTOR = 18;
+    public static final int END_EFFECTOR_BOTTOM_ROLLER_MOTOR = 19;
+    public static final int END_EFFECTOR_WRIST_THROUGH_BORE_PORT = 2;
+    public static final int END_EFFECTOR_PHOTOELECTRIC_PORT = 8;
+
+    //====================Elevator====================
+    public static final int ELEVATOR_MASTER_MOTOR = 20;
+    public static final int ELEVATOR_SLAVE_MOTOR = 21;
+
+    //====================Climb====================
+    public static final int CLIMB_MOTOR = 22;
+}
