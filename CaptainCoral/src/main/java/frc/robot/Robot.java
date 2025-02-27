@@ -38,10 +38,14 @@ public class Robot extends TimedRobot {
   }
 
   @Override
+  public void robotInit() {
+      //SmartDashboard.putNumber("")
+      super.robotInit();
+  }
+
+  @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-
-    SmartDashboard.putNumber("End_Effector_Wrist_L1_Score_Setpoint", Constants.End_Effector_Wrist_L1_Score_Setpoint);
   }
 
   @Override
@@ -63,7 +67,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
 
-    Intake.getInstance().zeroIntakeWrist();
+    //Intake.getInstance().zeroIntakeWrist();
     //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 
@@ -81,7 +85,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    Intake.getInstance().zeroIntakeWrist();
+    //Intake.getInstance().zeroIntakeWrist();
     //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 

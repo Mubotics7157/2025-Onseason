@@ -3,37 +3,56 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.987,
-        "y": 5.057059659090909
+        "x": 5.135699503311258,
+        "y": 4.991121688741721
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.830133412611765,
-        "y": 5.057059659090909
+        "x": 3.1453435430463577,
+        "y": 6.008091887417217
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MNP1E"
     },
     {
       "anchor": {
-        "x": 5.285,
-        "y": 5.047
+        "x": 0.5084850993377483,
+        "y": 5.6957367549668865
       },
       "prevControl": {
-        "x": 6.3818181853538665,
-        "y": 5.047
+        "x": 1.9882535850993808,
+        "y": 5.6957367549668865
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MNP2E"
     }
   ],
-  "rotationTargets": [],
-  "constraintZones": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.66,
+      "rotationDegrees": 0.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Slow Intake",
+      "minWaypointRelativePos": 0.66,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 1.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "elevatorL4",
+      "name": "GroundIntake",
       "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": {
@@ -43,37 +62,13 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 0.001
+                "waitTime": 5.0
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "elevatorL4"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "name": "endEffectorL4",
-      "waypointRelativePos": 0.5,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "race",
-        "data": {
-          "commands": [
-            {
-              "type": "wait",
-              "data": {
-                "waitTime": 0.001
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "endEffectorL4"
+                "name": "GroundIntake"
               }
             }
           ]
@@ -91,13 +86,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 0.0
   },
   "reversed": false,
-  "folder": "NonProcessor",
+  "folder": "MushroomNONProcessor",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -119.99999999999999
   },
   "useDefaultConstraints": true
 }

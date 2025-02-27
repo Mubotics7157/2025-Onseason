@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Middle1"
+            "pathName": "MushroomNONProcessor1"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "rightAlignCmd"
+                  "name": "DrivetrainLeftAlign"
                 }
               }
             ]
@@ -36,13 +36,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.5
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "endEffectorScore"
+                  "name": "EndEffectorScore"
                 }
               }
             ]
@@ -61,7 +61,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "endEffectorStop"
+                  "name": "EndEffectorStop"
                 }
               }
             ]
@@ -72,49 +72,43 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "race",
                 "data": {
-                  "waitTime": 1.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "zeroEndEffectorWrist"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "zeroElevator"
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.001
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RobotHome"
+                      }
+                    }
+                  ]
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "Middle2"
+            "waitTime": 1.0
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Middle3"
+            "pathName": "MushroomNONProcessor2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MushroomNONProcessor3"
           }
         },
         {
@@ -130,7 +124,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "rightAlignCmd"
+                  "name": "DrivetrainRightAlign"
                 }
               }
             ]
@@ -143,32 +137,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.0
+                  "waitTime": 0.5
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "endEffectorScore"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.001
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "stopEndEffector"
+                  "name": "EndEffectorScore"
                 }
               }
             ]
@@ -187,7 +162,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "zeroElevator"
+                  "name": "EndEffectorStop"
                 }
               }
             ]
@@ -206,7 +181,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "zeroEndEffectorWrist"
+                  "name": "RobotHome"
                 }
               }
             ]

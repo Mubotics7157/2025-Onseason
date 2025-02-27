@@ -3,43 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.674,
-        "y": 4.11
+        "x": 7.15,
+        "y": 6.153
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.534090909090909,
-        "y": 6.512798295454545
+        "x": 5.890052623819729,
+        "y": 5.765447415642874
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.3062784090909094,
-        "y": 7.7
+        "x": 5.135699503311258,
+        "y": 4.991121688741721
       },
       "prevControl": {
-        "x": 4.746477272727282,
-        "y": 7.630198863636364
+        "x": 6.0646686187880805,
+        "y": 5.612399237496291
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MNP1E"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.36702127659574435,
-      "rotationDegrees": -90.0
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "groundIntake",
-      "waypointRelativePos": 0.24309392265193366,
+      "name": "RobotAutoPrepScoreL4",
+      "waypointRelativePos": 0.8,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -48,13 +43,13 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 2.5
+                "waitTime": 0.001
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "groundIntake"
+                "name": "RobotAutoPrepScoreL4"
               }
             }
           ]
@@ -72,10 +67,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "Middle",
+  "folder": "MushroomNONProcessor",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0

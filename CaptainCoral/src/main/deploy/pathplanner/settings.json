@@ -4,9 +4,8 @@
   "holonomicMode": true,
   "pathFolders": [
     "Middle",
-    "Mushroom",
-    "NonProcessor",
-    "Processor"
+    "MushroomProcessor",
+    "MushroomNONProcessor"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
@@ -19,8 +18,8 @@
   "robotTrackwidth": 0.5588,
   "driveWheelRadius": 0.0508,
   "driveGearing": 6.122,
-  "maxDriveSpeed": 3.85,
-  "driveMotorType": "krakenX60FOC",
+  "maxDriveSpeed": 3.65,
+  "driveMotorType": "krakenX60",
   "driveCurrentLimit": 120.0,
   "wheelCOF": 1.1,
   "flModuleX": 0.267,
