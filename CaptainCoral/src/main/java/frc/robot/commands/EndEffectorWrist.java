@@ -24,7 +24,6 @@ public class EndEffectorWrist extends Command {
     @Override
     public void execute() {
         endEffector.goToEndEffectorWristSetpoint();
-        System.out.println("EndEffectorWrist Executing");
     }
 
     @Override

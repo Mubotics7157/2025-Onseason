@@ -23,8 +23,6 @@ public class IntakeRunCmd extends Command {
         double motorSpeed = speed;
         intake.setIntakeRollerMotorSpeed(motorSpeed);
         intake.setIndexerMotorSpeed(motorSpeed);
-
-        System.out.println("IntakeRun Executing");
     }
 
     @Override

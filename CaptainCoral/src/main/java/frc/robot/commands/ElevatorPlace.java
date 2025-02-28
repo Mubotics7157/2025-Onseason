@@ -33,7 +33,6 @@ public class ElevatorPlace extends Command {
     public void execute() {
         elevator.goToElevatorSetpoint();
         drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
-        System.out.println("ElevatorPlace Executing");
     }
 
     @Override

@@ -39,7 +39,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-      //SmartDashboard.putNumber("")
       super.robotInit();
   }
 
@@ -66,9 +65,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-
-    //Intake.getInstance().zeroIntakeWrist();
-    //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 
   @Override
@@ -84,9 +80,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
-    //Intake.getInstance().zeroIntakeWrist();
-    //PUT END EFFECTOR + INTAKE WRIST ABS ENCODER STUFF HERE
   }
 
   @Override

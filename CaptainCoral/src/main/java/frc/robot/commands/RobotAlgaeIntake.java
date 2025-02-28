@@ -40,7 +40,7 @@ public class RobotAlgaeIntake extends Command {
     public void initialize() {
         endEffector.setEndEffectorWristSetpoint(endEffectorSetpoint);
         elevator.setElevatorSetpoint(elevatorSetpoint);
-        System.out.println("STATEPrepScore Online");
+        System.out.println("RobotAlgaeIntake Online");
     }
 
     @Override
@@ -50,12 +50,11 @@ public class RobotAlgaeIntake extends Command {
         drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
 
         endEffector.setEndEffectorRollerMotorSpeed(endEffectorSpeed);
-        System.out.println("STATEPrepScore Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("STATEPrepScore Offline");
+        System.out.println("RobotAlgaeIntake Offline");
     }
 
     @Override

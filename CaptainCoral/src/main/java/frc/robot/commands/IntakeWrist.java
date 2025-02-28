@@ -22,7 +22,6 @@ public class IntakeWrist extends Command {
     @Override
     public void execute() {
         intake.goToIntakeWristSetpoint();
-        System.out.println("IntakeWrist Executing");
     }
 
     @Override

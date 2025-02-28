@@ -22,8 +22,6 @@ public class EndEffectorScore extends Command {
     public void execute() {
         double motorSpeed = speed;
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
-            
-        System.out.println("EndEffectorScore Executing");
     }
 
     @Override

@@ -31,7 +31,6 @@ public class DrivetrainLeftAlign extends Command {
         .withVelocityX(xSpeed)
         .withVelocityY(ySpeed)
         .withRotationalRate(Constants.Absolute_Zero));
-        System.out.println("DrivetrainLeftAlign Executing");
         }
 
     @Override

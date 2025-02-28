@@ -30,7 +30,6 @@ public class DrivetrainRotAlign extends Command {
         .withVelocityX(Constants.Absolute_Zero)
         .withVelocityY(Constants.Absolute_Zero)
         .withRotationalRate(rotSpeed));
-        System.out.println("DrivetrainRotAlign Executing");
         }
 
     @Override

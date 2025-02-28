@@ -16,21 +16,19 @@ public class ClimbRun extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("EndEffectorScore Online");
+        System.out.println("ClimbRun Online");
     }
 
     @Override
     public void execute() {
         double motorSpeed = speed;
         climb.setClimbMotorSpeed(motorSpeed);
-            
-        System.out.println("EndEffectorScore Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
         climb.setClimbMotorSpeed(Constants.Absolute_Zero);
-        System.out.println("EndEffectorScore Offline");
+        System.out.println("ClimbRun Offline");
     }
 
     @Override

@@ -38,7 +38,7 @@ public class RobotIntakeGround extends Command {
         intake.setIntakeWristSetpoint(intakeSetpoint);
         endEffector.setEndEffectorWristSetpoint(setpoint);
         elevator.setElevatorSetpoint(elevatorSetpoint);
-        System.out.println("STATEIntakeGround Online");
+        System.out.println("RobotIntakeGround Online");
     }
 
     @Override
@@ -53,20 +53,15 @@ public class RobotIntakeGround extends Command {
 
         if (endEffector.getEndEffectorSensorReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
-            // intake.setIndexerMotorSpeed(Constants.Absolute_Zero);
-            // intake.setIntakeRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
-            // intake.setIndexerMotorSpeed(-1 * motorSpeed);
-            // intake.setIntakeRollerMotorSpeed(-1 * motorSpeed);
         }
 
         //PID Control
         intake.goToIntakeWristSetpoint();
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();        
-            
-        //System.out.println("STATEIntakeGround Executing");
+
     }
 
     @Override
@@ -74,7 +69,7 @@ public class RobotIntakeGround extends Command {
         intake.setIntakeRollerMotorSpeed(Constants.Absolute_Zero);
         intake.setIndexerMotorSpeed(Constants.Absolute_Zero);
         endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
-        System.out.println("STATEIntakeGround Offline");
+        System.out.println("RobotIntakeGround Offline");
     }
 
     @Override

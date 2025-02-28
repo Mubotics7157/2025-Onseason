@@ -42,8 +42,6 @@ public class EndEffectorRun extends Command {
             controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
             controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
         }
-            
-        System.out.println("EndEffectorRun Executing");
     }
 
     @Override

@@ -34,7 +34,6 @@ public class RobotHome extends Command {
     public void execute() {
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();
-        System.out.println("RobotHome Executing");
     }
 
     @Override

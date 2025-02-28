@@ -27,7 +27,7 @@ public class DrivetrainXPoseAlign extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("DrivetrainHorizontalPose Online");
+        System.out.println("DrivetrainXPose Online");
     }
 
     public double getXSpeed() { 
@@ -49,13 +49,11 @@ public class DrivetrainXPoseAlign extends Command {
         .withVelocityX(getXSpeed())
         .withVelocityY(0.0)
         .withRotationalRate(0.0));
-
-        System.out.println("DrivetrainHorizontalPose Executing");
         }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("DrivetrainHorizontalPose Offline");
+        System.out.println("DrivetrainXPose Offline");
     }
 
     @Override

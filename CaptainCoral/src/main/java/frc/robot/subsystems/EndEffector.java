@@ -104,6 +104,10 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
+    public void setEndEffectorWristSpeed(double speed) {
+        End_Effector_Wrist_Motor.set(-1 * speed);
+    }
+
     //====================End Effector Roller Methods====================
     public void setEndEffectorRollerMotorSpeed(double speed) {
         End_Effector_Top_Roller_Motor.set(-1 * speed);

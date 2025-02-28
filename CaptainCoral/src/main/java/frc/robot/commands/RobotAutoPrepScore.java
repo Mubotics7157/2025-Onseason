@@ -34,7 +34,6 @@ public class RobotAutoPrepScore extends Command {
     public void execute() {
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();
-        System.out.println("RobotAutoPrepScore Executing");
     }
 
     @Override

@@ -59,7 +59,6 @@ public class RobotStationIntake extends Command {
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();
         drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
-        System.out.println("RobotStationIntake Executing");
     }
 
     @Override

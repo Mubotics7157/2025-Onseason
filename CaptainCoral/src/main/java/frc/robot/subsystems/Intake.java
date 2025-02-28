@@ -105,6 +105,10 @@ public class Intake extends SubsystemBase {
         Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset()); //MAKE SURE UNITS MATCH
     }
 
+    public void setIntakeWristSpeed(double speed) {
+        Intake_Wrist_Motor.set(speed);
+    }
+
     //====================Intake Roller Methods====================
     public void setIntakeRollerMotorSpeed(double speed) {
         Intake_Roller_Motor.set(speed);

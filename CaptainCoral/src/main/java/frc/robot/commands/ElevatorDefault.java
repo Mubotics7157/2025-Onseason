@@ -22,8 +22,6 @@ public class ElevatorDefault extends Command {
     @Override
     public void execute() {
         elevator.goToElevatorSetpoint();
-
-        System.out.println("ElevatorDefault Executing");
     }
 
     @Override

@@ -38,7 +38,7 @@ public class RobotPrepScore extends Command {
     public void initialize() {
         endEffector.setEndEffectorWristSetpoint(endEffectorSetpoint);
         elevator.setElevatorSetpoint(elevatorSetpoint);
-        System.out.println("STATEPrepScore Online");
+        System.out.println("RobotPrepScore Online");
     }
 
     @Override
@@ -46,12 +46,11 @@ public class RobotPrepScore extends Command {
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();
         drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
-        System.out.println("STATEPrepScore Executing");
     }
 
     @Override
     public void end(boolean interrupted) {
-        System.out.println("STATEPrepScore Offline");
+        System.out.println("RobotPrepScore Offline");
     }
 
     @Override
