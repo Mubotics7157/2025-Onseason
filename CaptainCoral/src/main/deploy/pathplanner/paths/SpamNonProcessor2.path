@@ -3,40 +3,40 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.045624999999999,
-        "y": 3.0328267045454544
+        "x": 5.135369318181818,
+        "y": 5.086974431818182
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.0867673841059595,
-        "y": 2.6333026979229386
+        "x": 6.0328125,
+        "y": 5.685269886363637
       },
       "isLocked": false,
-      "linkedName": "MP1E"
+      "linkedName": "SNP1E"
     },
     {
       "anchor": {
-        "x": 0.4649006622516557,
-        "y": 2.884540562913908
+        "x": 0.45,
+        "y": 5.535696022727272
       },
       "prevControl": {
-        "x": 0.694255234870379,
-        "y": 2.984021616481323
+        "x": 1.4500000000000002,
+        "y": 5.535696022727272
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "MP2E"
+      "linkedName": "SNP2E"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.66,
       "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [
     {
-      "name": "Slow Intake",
+      "name": "SlowIntake",
       "minWaypointRelativePos": 0.66,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
@@ -89,10 +89,10 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "MushroomProcessor",
+  "folder": "SpamNONProcessor",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": -119.99999999999999
   },
   "useDefaultConstraints": true
 }
