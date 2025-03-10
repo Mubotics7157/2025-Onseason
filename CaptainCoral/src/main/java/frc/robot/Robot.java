@@ -44,6 +44,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
       super.robotInit();
+
+      Intake.getInstance().zeroIntakeWristWithAbsolute();
   }
 
   @Override

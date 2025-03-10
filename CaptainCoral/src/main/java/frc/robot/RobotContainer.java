@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.Drivetrain;
@@ -113,11 +114,14 @@ public class RobotContainer {
         //====================Swerve Heading Reset====================
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
+        //TEST
+        driverController.leftBumper().onTrue(new InstantCommand(Elevator.getInstance()::reConfigurePID));
+
         //====================Align Left====================
-        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain));
+        // driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain));
 
         //====================Align Right====================
-        driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain));
+        // driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain));
 
         //====================Ground Intake====================
         driverController.leftTrigger().whileTrue(new RobotIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint));

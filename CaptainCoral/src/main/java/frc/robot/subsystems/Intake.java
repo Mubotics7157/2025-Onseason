@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,6 +10,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import frc.robot.Devices;
+import frc.robot.Utility.AbsoluteEncoder;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
@@ -16,7 +18,7 @@ public class Intake extends SubsystemBase {
     private final TalonFX Intake_Roller_Motor = new TalonFX(Devices.INTAKE_ROLLER_MOTOR);
     private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(Devices.INDEXER_MOTOR);
 
-    private final DutyCycleEncoder Intake_Wrist_Through_Bore = new DutyCycleEncoder(new DigitalInput(Devices.INTAKE_WRIST_THROUGH_BORE_PORT));
+    private final AbsoluteEncoder encoder = new AbsoluteEncoder(7);
 
     private double setpoint;
     
@@ -32,10 +34,12 @@ public class Intake extends SubsystemBase {
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
+        encoder.setInverted(true);
+
+        encoder.setOffset(Rotation2d.fromRotations(0.94312122289));
 
         //Brake Mode
-        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast; //SET ME TO BRAKE
+        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake; //SET ME TO BRAKE
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
@@ -48,8 +52,8 @@ public class Intake extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
-        // motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
@@ -75,7 +79,7 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
-        SmartDashboard.putNumber("Intake Through Bore Encoder", getIntakeWristThroughBoreWithOffset());
+        SmartDashboard.putNumber("Intake Through Bore Rotations", getIntakeWristThroughBoreWithOffset());
     }
     
     //====================Intake Wrist Methods====================
@@ -87,9 +91,13 @@ public class Intake extends SubsystemBase {
         return Intake_Wrist_Motor.getPosition().getValueAsDouble();
     }
 
+    public void zeroIntakeWristWithAbsolute() {
+        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
+    }
+
     public double getIntakeWristThroughBoreWithOffset() {
-        return (((Intake_Wrist_Through_Bore.get() * 6.2775))); //Gear Ratio: 62.775
-    } 
+        return encoder.getPosition().getRotations() * 28.13;
+    }
 
     public void setIntakeWristSetpoint(double setpoint) {
         this.setpoint = setpoint;

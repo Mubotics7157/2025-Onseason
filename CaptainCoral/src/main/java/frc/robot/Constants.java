@@ -49,8 +49,8 @@ public class Constants {
     public static final double Outake_Ground_Run_Speed = 0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 3.0;
-    public static final double Intake_Ground_Deploy_Setpoint = 14.25;
+    public static final double Intake_Zero_Setpoint = 2.5;
+    public static final double Intake_Ground_Deploy_Setpoint = 16.5;
 
     //====================End Effector====================
     //Conversion
