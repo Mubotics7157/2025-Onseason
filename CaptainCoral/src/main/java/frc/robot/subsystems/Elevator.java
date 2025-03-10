@@ -24,6 +24,8 @@ public class Elevator extends SubsystemBase {
     public Elevator() {
         System.out.println("====================Elevator Subsystem Online====================");
 
+        //PUT NUMBER HERE
+
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
 
@@ -35,6 +37,7 @@ public class Elevator extends SubsystemBase {
 
         //General Configurations
         var generalSlotConfigs = elevatorMotorConfigs.Slot0;
+        generalSlotConfigs.kG = Constants.Elevator_kG;
         generalSlotConfigs.kS = Constants.Elevator_kS;
         generalSlotConfigs.kV = Constants.Elevator_kV;
         generalSlotConfigs.kA = Constants.Elevator_kV;
@@ -42,11 +45,10 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kI = Constants.Elevator_kI;
         generalSlotConfigs.kD = Constants.Elevator_kD;
 
-        //Motion Magic
+        // //Motion Magic
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Elevator_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = Constants.Elevator_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = Constants.Elevator_Jerk;
+        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Elevator_Velocity;
+        // motionMagicConfigs.MotionMagicAcceleration = Constants.Elevator_Acceleration;
 
         //Current limits
         var limitConfigs = elevatorMotorConfigs.CurrentLimits;
@@ -87,4 +89,43 @@ public class Elevator extends SubsystemBase {
         Elevator_Master_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
         Elevator_Slave_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
+
+    public void zeroElevator() {
+        Elevator_Master_Motor.setPosition(Constants.Absolute_Zero);
+        Elevator_Slave_Motor.setPosition(Constants.Absolute_Zero);
+    }
+
+    //make method called reconfigure pid, copy and paste pid settings 
+
+    // var elevatorMotorConfigs = new TalonFXConfiguration();
+
+    //     Elevator_Master_Motor.setPosition(Constants.Absolute_Zero);
+    //     Elevator_Slave_Motor.setPosition(Constants.Absolute_Zero);
+
+    //     //Brake Mode
+    //     elevatorMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+    //     //General Configurations
+    //     var generalSlotConfigs = elevatorMotorConfigs.Slot0;
+    //     generalSlotConfigs.kS = Constants.Elevator_kS; //GET
+    //     generalSlotConfigs.kV = Constants.Elevator_kV; //GET
+    //     generalSlotConfigs.kA = Constants.Elevator_kV; //GET
+    //     generalSlotConfigs.kP = Constants.Elevator_kP; //GET
+    //     generalSlotConfigs.kI = Constants.Elevator_kI; //GET
+    //     generalSlotConfigs.kD = Constants.Elevator_kD; //GET
+
+    //     //Motion Magic
+    //     var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
+    //     motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Elevator_Velocity;
+    //     motionMagicConfigs.MotionMagicAcceleration = Constants.Elevator_Acceleration;
+    //     motionMagicConfigs.MotionMagicJerk = Constants.Elevator_Jerk;
+
+    //     //Current limits
+    //     var limitConfigs = elevatorMotorConfigs.CurrentLimits;
+    //     limitConfigs.StatorCurrentLimit = Constants.Elevator_Current_Limit;
+    //     limitConfigs.StatorCurrentLimitEnable = true;
+
+    //     //Applies Configs
+    //     Elevator_Master_Motor.getConfigurator().apply(elevatorMotorConfigs);
+    //     Elevator_Slave_Motor.getConfigurator().apply(elevatorMotorConfigs);
 }

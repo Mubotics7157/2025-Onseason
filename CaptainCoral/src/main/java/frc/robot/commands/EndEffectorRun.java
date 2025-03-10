@@ -28,14 +28,14 @@ public class EndEffectorRun extends Command {
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
         //End Effector Sensor (Roller Stop)
-        if (endEffector.getEndEffectorSensorReading() == true) {
+        if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
         }
 
         //End Effector Sensor (Controller Rumble)
-        if (endEffector.getEndEffectorSensorReading() == true) {
+        if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             controller.setRumble(XboxController.RumbleType.kLeftRumble, Devices.CONTROLLER_RUMBLE);
             controller.setRumble(XboxController.RumbleType.kRightRumble, Devices.CONTROLLER_RUMBLE);
         } else {

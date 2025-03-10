@@ -18,11 +18,11 @@ import frc.robot.Constants;
 
 public class EndEffector extends SubsystemBase {
     private final TalonFX End_Effector_Wrist_Motor = new TalonFX(Devices.END_EFFECTOR_WRIST_MOTOR);
-    private final TalonFX End_Effector_Top_Roller_Motor = new TalonFX(Devices.END_EFFECTOR_TOP_ROLLER_MOTOR);
-    private final TalonFX End_Effector_Bottom_Roller_Motor = new TalonFX(Devices.END_EFFECTOR_BOTTOM_ROLLER_MOTOR);
+    private final TalonFX End_Effector_Top_Roller_Motor = new TalonFX(Devices.END_EFFECTOR_ROLLER_MOTOR);
 
     private final DutyCycleEncoder End_Effector_Wrist_Through_Bore_Encoder = new DutyCycleEncoder(new DigitalInput(Devices.END_EFFECTOR_WRIST_THROUGH_BORE_PORT));
-    private final DigitalInput End_Effector_Sensor = new DigitalInput(Devices.END_EFFECTOR_PHOTOELECTRIC_PORT);
+    private final DigitalInput End_Effector_Front_Photoelectric = new DigitalInput(Devices.END_EFFECTOR_PHOTOELECTRIC_FRONT_PORT);
+    private final DigitalInput End_Effector_Back_Photoelectric = new DigitalInput(Devices.END_EFFECTOR_PHOTOELECTRIC_BACK_PORT);
 
     private double setpoint;
 
@@ -54,9 +54,8 @@ public class EndEffector extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = endEffectorWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.End_Effector_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = Constants.End_Effector_Wrist_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = Constants.End_Effector_Wrist_Jerk;
+        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.End_Effector_Wrist_Velocity;
+        // motionMagicConfigs.MotionMagicAcceleration = Constants.End_Effector_Wrist_Acceleration;
 
         //Current Limits
         var endEffectorWristLimitConfigs = endEffectorWristMotorConfigs.CurrentLimits;
@@ -76,14 +75,14 @@ public class EndEffector extends SubsystemBase {
 
         //Applies Configs
         End_Effector_Top_Roller_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
-        End_Effector_Bottom_Roller_Motor.getConfigurator().apply(endEffectorRollerLimitConfigs);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("End Effector Wrist Master Encoder", getEndEffectorWristEncoder());
+        SmartDashboard.putNumber("End Effector Wrist Encoder", getEndEffectorWristEncoder());
         SmartDashboard.putNumber("End Effector Through Bore Encoder", getEndEffectorWristThroughBore());
-        SmartDashboard.putBoolean("End Effector Sensor Reading", getEndEffectorSensorReading());
+        SmartDashboard.putBoolean("End Effector Front Photoelectric Reading", getEndEffectorFrontPhotoElectricReading());
+        SmartDashboard.putBoolean("End Effector Back Photoelectric Reading", getEndEffectorBackPhotoElectricReading());
     }
     
     //====================End Effector Wrist Methods====================
@@ -108,13 +107,20 @@ public class EndEffector extends SubsystemBase {
         End_Effector_Wrist_Motor.set(-1 * speed);
     }
 
+    public void zeroEndEffectorWrist() {
+        End_Effector_Wrist_Motor.setPosition(Constants.Absolute_Zero);
+    }
+
     //====================End Effector Roller Methods====================
     public void setEndEffectorRollerMotorSpeed(double speed) {
         End_Effector_Top_Roller_Motor.set(-1 * speed);
-        End_Effector_Bottom_Roller_Motor.set(speed);
     }
 
-    public boolean getEndEffectorSensorReading() {
-        return !End_Effector_Sensor.get();
+    public boolean getEndEffectorFrontPhotoElectricReading() {
+        return !End_Effector_Front_Photoelectric.get();
+    }
+
+    public boolean getEndEffectorBackPhotoElectricReading() {
+        return !End_Effector_Back_Photoelectric.get();
     }
 }

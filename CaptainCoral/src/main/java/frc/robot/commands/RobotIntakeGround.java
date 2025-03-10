@@ -51,7 +51,7 @@ public class RobotIntakeGround extends Command {
 
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
-        if (endEffector.getEndEffectorSensorReading() == true) {
+        if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);

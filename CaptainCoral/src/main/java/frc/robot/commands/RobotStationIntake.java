@@ -14,27 +14,16 @@ public class RobotStationIntake extends Command {
     private final Elevator elevator;
     private final double elevatorSetpoint;
 
-    private final Drivetrain drivetrain;
-    private final double speedMultiplier;
-    private final double turnMultiplier;
-    private final XboxController controller;
-
-    public RobotStationIntake(EndEffector endEffector, double endEffectorSetpoint, double endEffectorSpeed, Elevator elevator, double elevatorSetpoint, Drivetrain drivetrain, double speedMultiplier, double turnMultiplier, XboxController controller) {
+    public RobotStationIntake(EndEffector endEffector, double endEffectorSetpoint, double endEffectorSpeed, Elevator elevator, double elevatorSetpoint) {
         this.endEffector = EndEffector.getInstance();
         this.endEffectorSetpoint = endEffectorSetpoint;
         this.endEffectorSpeed = endEffectorSpeed;
 
         this.elevator = Elevator.getInstance();
         this.elevatorSetpoint = elevatorSetpoint;
-
-        this.drivetrain = drivetrain;
-        this.speedMultiplier = speedMultiplier;
-        this.turnMultiplier = turnMultiplier;
-        this.controller = controller;
         
         addRequirements(elevator);
         addRequirements(endEffector);
-        addRequirements(drivetrain);
     }
 
     @Override
@@ -50,7 +39,7 @@ public class RobotStationIntake extends Command {
 
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
-        if (endEffector.getEndEffectorSensorReading() == true) {
+        if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
@@ -58,7 +47,6 @@ public class RobotStationIntake extends Command {
 
         endEffector.goToEndEffectorWristSetpoint();
         elevator.goToElevatorSetpoint();
-        drivetrain.slowDrivetrain(controller, speedMultiplier, turnMultiplier);
     }
 
     @Override

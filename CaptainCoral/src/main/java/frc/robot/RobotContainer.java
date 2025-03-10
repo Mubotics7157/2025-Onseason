@@ -32,6 +32,9 @@ import frc.robot.commands.EndEffectorWristJog;
 import frc.robot.commands.RobotIntakeGround;
 import frc.robot.commands.RobotPrepScore;
 import frc.robot.commands.RobotStationIntake;
+import frc.robot.commands.ZeroElevator;
+import frc.robot.commands.ZeroEndEffectorWrist;
+import frc.robot.commands.ZeroIntakeWrist;
 import frc.robot.commands.EndEffectorRun;
 import frc.robot.commands.EndEffectorScore;
 //Elevator Imports
@@ -59,7 +62,7 @@ import frc.robot.subsystems.VisionManager;
 public class RobotContainer {
     //====================GENERAL SETUP====================
     private final SendableChooser<Command> autoChooser;
-    private final CommandXboxController driverController = new CommandXboxController(Devices.DRIVER_CONTROLLER);
+    private final CommandXboxController driverController = new CommandXboxController(Devices.DRIVER_CONTROLLER_PORT);
     private final CommandXboxController operatorController = new CommandXboxController(Devices.OPERATOR_CONTROLLER);
 
     //====================SWERVE SETUP====================
@@ -156,8 +159,8 @@ public class RobotContainer {
         driverController.y().onFalse(new RobotHome(EndEffector.getInstance(), Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
 
         //====================Coral Gullet Intake====================
-        driverController.button(8).whileTrue(new RobotStationIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Coral_Station_Setpoint, Constants.End_Effector_Coral_Station_Intake_Speed, Elevator.getInstance(), Constants.Elevator_L4_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
-        driverController.button(8).onFalse(new RobotStationIntake(EndEffector.getInstance(), Constants.Absolute_Zero, Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
+        driverController.button(8).whileTrue(new RobotStationIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Coral_Station_Setpoint, Constants.End_Effector_Coral_Station_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Coral_Station_Setpoint));
+        driverController.button(8).onFalse(new RobotStationIntake(EndEffector.getInstance(), Constants.Absolute_Zero, Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
 
         //====================Ground Algae Intake====================
         driverController.rightStick().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Ground_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Algae_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
@@ -172,7 +175,7 @@ public class RobotContainer {
         driverController.povRight().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Remove_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
         //====================Net Algae Score====================
-        driverController.leftStick().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Barge_Score_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Barge_Score_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
+        driverController.leftStick().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Net_Score_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Net_Score_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
         driverController.leftStick().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Remove_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
         //====================OPERATOR CONTROLLER BINDINGS====================
@@ -191,11 +194,20 @@ public class RobotContainer {
         //====================Elevator Jog=====================
         operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
-        //====================End Effector Jog=====================
+        //====================Elevator Manual Zero=====================
+        operatorController.y().onTrue(new ZeroElevator(Elevator.getInstance()));
+
+        //====================End Effector Wrist Jog=====================
         operatorController.povRight().whileTrue(new EndEffectorWristJog(EndEffector.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
-        //====================Intake Jog=====================
+        //====================End Effector Wrist Manual Zero=====================
+        operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
+
+        //====================Intake Wrist Jog=====================
         operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        
+        //====================Intake Wrist Manual Zero=====================
+        operatorController.x().onTrue(new ZeroIntakeWrist(Intake.getInstance()));
     }
 
         public Command getAutonomousCommand() {

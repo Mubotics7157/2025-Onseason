@@ -3,7 +3,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -18,7 +17,6 @@ public class Intake extends SubsystemBase {
     private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(Devices.INDEXER_MOTOR);
 
     private final DutyCycleEncoder Intake_Wrist_Through_Bore = new DutyCycleEncoder(new DigitalInput(Devices.INTAKE_WRIST_THROUGH_BORE_PORT));
-    //private final DigitalInput Indexer_Sensor = new DigitalInput(DeviceConstants.INDEXER_PHOTOELECTRIC_PORT);
 
     private double setpoint;
     
@@ -34,10 +32,10 @@ public class Intake extends SubsystemBase {
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        Intake_Wrist_Motor.setPosition(Constants.Absolute_Zero);
+        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
 
         //Brake Mode
-        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast; //SET ME TO BRAKE
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
@@ -50,9 +48,8 @@ public class Intake extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
-        motionMagicConfigs.MotionMagicJerk = Constants.Intake_Wrist_Jerk;
+        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
+        // motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
@@ -73,24 +70,26 @@ public class Intake extends SubsystemBase {
         //Applies Configs
         Intake_Roller_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
         Intake_Indexer_Master_Motor.getConfigurator().apply(intakeRollersMotorConfigs);
-
     }
 
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
         SmartDashboard.putNumber("Intake Through Bore Encoder", getIntakeWristThroughBoreWithOffset());
-        //SmartDashboard.putBoolean("Indexer Sensor Reading", getIndexerSensorReading());
     }
     
     //====================Intake Wrist Methods====================
+    public void zeroIntakeWrist() {
+        Intake_Wrist_Motor.setPosition(Constants.Absolute_Zero);
+    }
+
     public double getIntakeWristEncoder() {
         return Intake_Wrist_Motor.getPosition().getValueAsDouble();
     }
 
     public double getIntakeWristThroughBoreWithOffset() {
-        return Intake_Wrist_Through_Bore.get() - 0.4;
-    }
+        return (((Intake_Wrist_Through_Bore.get() * 6.2775))); //Gear Ratio: 62.775
+    } 
 
     public void setIntakeWristSetpoint(double setpoint) {
         this.setpoint = setpoint;
@@ -99,10 +98,6 @@ public class Intake extends SubsystemBase {
     public void goToIntakeWristSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(Constants.Absolute_Zero);
         Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
-    }
-
-    public void zeroIntakeWrist() {
-        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset()); //MAKE SURE UNITS MATCH
     }
 
     public void setIntakeWristSpeed(double speed) {
@@ -116,10 +111,6 @@ public class Intake extends SubsystemBase {
 
     //====================Indexer Methods====================
     public void setIndexerMotorSpeed(double speed) {
-        Intake_Indexer_Master_Motor.set(-1 * 0.7 * speed);
+        Intake_Indexer_Master_Motor.set(-0.7 * speed);
     }
-
-    // public boolean getIndexerSensorReading() {
-    //     return !Indexer_Sensor.get();
-    // }
 }

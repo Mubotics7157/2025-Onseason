@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.5,
+        "y": 2.1553267045454536
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.3535346949933285,
+        "y": 2.453083193432525
+      },
+      "isLocked": false,
+      "linkedName": "Roulette2End"
+    },
+    {
+      "anchor": {
+        "x": 3.868977272727273,
+        "y": 2.9729971590909092
+      },
+      "prevControl": {
+        "x": 2.3808599944788496,
+        "y": 2.631901260563568
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 59.99999999999999
+  },
+  "reversed": false,
+  "folder": "Roulette",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

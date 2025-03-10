@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "MushroomNONProcessor1"
+            "pathName": "Roulette1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "MushroomNONProcessor2"
+            "pathName": "Roulette2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Roulette3"
           }
         }
       ]
