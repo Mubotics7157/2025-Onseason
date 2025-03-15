@@ -1,13 +1,5 @@
 package frc.robot.Utility;
-
-import javax.crypto.Cipher;
-
-import org.littletonrobotics.junction.Logger;
-
-import com.fasterxml.jackson.databind.ser.impl.ReadOnlyClassToSerializerMap;
-
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DigitalGlitchFilter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 
