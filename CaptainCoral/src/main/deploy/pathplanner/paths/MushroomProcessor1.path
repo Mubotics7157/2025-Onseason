@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.15,
-        "y": 1.903890728476821
+        "x": 7.169573863636364,
+        "y": 0.49
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.195466942211837,
-        "y": 2.863364526887621
+        "x": 5.651504113118112,
+        "y": 2.159383871571207
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 4.852400662251656,
-        "y": 3.3930256622516555
+        "x": 4.925965909090909,
+        "y": 3.5214346590909087
       },
       "prevControl": {
-        "x": 6.541205838418263,
-        "y": 2.268083384366323
+        "x": 5.761633956813249,
+        "y": 2.5025643752513904
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.8,
+      "waypointRelativePos": 0.7,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",

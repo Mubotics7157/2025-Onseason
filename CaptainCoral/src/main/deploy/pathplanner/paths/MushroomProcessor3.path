@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.42,
-        "y": 2.884540562913908
+        "x": 0.25,
+        "y": 2.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4103559602649,
-        "y": 3.3784975165562905
+        "x": 2.270711579173258,
+        "y": 3.0050331930718204
       },
       "isLocked": false,
       "linkedName": "MP2E"
     },
     {
       "anchor": {
-        "x": 3.5230753311258276,
-        "y": 3.756229304635761
+        "x": 3.878948863636363,
+        "y": 3.7208664772727276
       },
       "prevControl": {
-        "x": 2.397964810245455,
-        "y": 3.5600123041103044
+        "x": 3.49319461959377,
+        "y": 3.6168383307784877
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MP3E"
     }
   ],
   "rotationTargets": [],
@@ -82,7 +82,7 @@
     },
     {
       "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.8,
+      "waypointRelativePos": 0.7,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",

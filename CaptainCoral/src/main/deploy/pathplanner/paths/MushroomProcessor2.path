@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.852400662251656,
-        "y": 3.3930256622516555
+        "x": 4.925965909090909,
+        "y": 3.5214346590909087
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.893543988078857,
-        "y": 2.9934993955056624
+        "x": 3.1310795454545453,
+        "y": 2.8134517045454537
       },
       "isLocked": false,
       "linkedName": "MP1E"
     },
     {
       "anchor": {
-        "x": 0.42,
-        "y": 2.884540562913908
+        "x": 0.25,
+        "y": 2.6
       },
       "prevControl": {
-        "x": 0.6493545726187232,
-        "y": 2.984021616481323
+        "x": 1.7457386363636358,
+        "y": 2.6
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,14 +30,14 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.5031948881789144,
       "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [
     {
       "name": "Slow Intake",
-      "minWaypointRelativePos": 0.66,
+      "minWaypointRelativePos": 0.5,
       "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 1.0,
