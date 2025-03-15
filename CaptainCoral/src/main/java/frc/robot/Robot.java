@@ -1,35 +1,11 @@
 package frc.robot;
-
-import java.lang.ModuleLayer.Controller;
-
-import org.littletonrobotics.junction.LoggedRobot;
-
-import com.ctre.phoenix6.Utils;
-import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import edu.wpi.first.math.VecBuilder;
-import edu.wpi.first.math.estimator.PoseEstimator;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.Elevator;
-import frc.robot.commands.EndEffectorWrist;
-import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.Intake;
-
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
@@ -50,6 +26,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+
     //Match Time Log
     double matchTime = Timer.getMatchTime();
     SmartDashboard.putNumber("Match Time", matchTime);
