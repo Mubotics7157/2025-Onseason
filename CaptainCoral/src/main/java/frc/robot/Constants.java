@@ -50,8 +50,8 @@ public class Constants {
     public static final double Outake_Ground_Run_Speed = 0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = -5; //OLD: 5.25
-    public static final double Intake_Ground_Deploy_Setpoint = 6; //17.5
+    public static final double Intake_Zero_Setpoint = -7; //OLD: 5.25, -7
+    public static final double Intake_Ground_Deploy_Setpoint = 6; //17.5, 6
 
     //====================End Effector====================
     //End Effector Motion Magic
@@ -93,7 +93,7 @@ public class Constants {
     public static final double End_Effector_Wrist_Net_Score_Setpoint = 6.15;
 
     public static final double End_Effector_Wrist_Climb_Start_Setpoint = 1.0;
-    public static final double End_Effector_Wrist_Climb_End_Setpoint = 11.25;
+    public static final double End_Effector_Wrist_Climb_End_Setpoint = 12.00;
 
     //====================Elevator====================
     //Elevator Motion Magic

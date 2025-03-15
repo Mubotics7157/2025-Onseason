@@ -185,22 +185,22 @@ public class RobotContainer {
         operatorController.rightTrigger().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Stow_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
         //====================Elevator Jog=====================
-        operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        // operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
-        //====================Elevator Manual Zero=====================
-        operatorController.y().onTrue(new ZeroElevator(Elevator.getInstance()));
+        // //====================Elevator Manual Zero=====================
+        // operatorController.y().onTrue(new ZeroElevator(Elevator.getInstance()));
 
-        //====================End Effector Wrist Jog=====================
-        operatorController.povRight().whileTrue(new EndEffectorWristJog(EndEffector.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        // //====================End Effector Wrist Jog=====================
+        // operatorController.povRight().whileTrue(new EndEffectorWristJog(EndEffector.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
-        //====================End Effector Wrist Manual Zero=====================
-        operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
+        // //====================End Effector Wrist Manual Zero=====================
+        // operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
 
-        //====================Intake Wrist Jog=====================
-        operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        // //====================Intake Wrist Jog=====================
+        // operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
         
-        //====================Intake Wrist Manual Zero=====================
-        operatorController.x().onTrue(new ZeroIntakeWrist(Intake.getInstance()));
+        // //====================Intake Wrist Manual Zero=====================
+        // operatorController.x().onTrue(new ZeroIntakeWrist(Intake.getInstance()));
 
         //====================Super Intake=====================
         operatorController.a().whileTrue(new SuperIntake(Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed));
