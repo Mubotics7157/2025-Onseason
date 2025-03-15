@@ -1,8 +1,6 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -18,7 +16,7 @@ public class Intake extends SubsystemBase {
     private final TalonFX Intake_Roller_Motor = new TalonFX(Devices.INTAKE_ROLLER_MOTOR);
     private final TalonFX Intake_Indexer_Master_Motor = new TalonFX(Devices.INDEXER_MOTOR);
 
-    private final AbsoluteEncoder encoder = new AbsoluteEncoder(7);
+    private final AbsoluteEncoder encoder = new AbsoluteEncoder(Devices.INTAKE_WRIST_THROUGH_BORE_PORT);
 
     private double setpoint;
     
@@ -31,21 +29,25 @@ public class Intake extends SubsystemBase {
     public Intake() {
         System.out.println("====================Intake Subsystem Online====================");
 
+        // //HotRegreshIntakeConfig
+        // SmartDashboard.putNumber("Intake kG", 0.0);
+        // SmartDashboard.putNumber("Intake kP", 0.0);
+        // SmartDashboard.putNumber("Intake kI", 0.0);
+        // SmartDashboard.putNumber("Intake kD", 0.0);
+        // SmartDashboard.putNumber("Intake kVelo", 0.0);
+        // SmartDashboard.putNumber("Intake kAccel", 0.0);
+
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
         encoder.setInverted(true);
-
-        encoder.setOffset(Rotation2d.fromRotations(0.94312122289));
+        encoder.setOffset(Rotation2d.fromRotations(Constants.Intake_Wrist_Through_Bore_Offset));
 
         //Brake Mode
-        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake; //SET ME TO BRAKE
+        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;
-        generalSlotConfigs.kS = Constants.Intake_Wrist_kS;
-        generalSlotConfigs.kV = Constants.Intake_Wrist_kV;
-        generalSlotConfigs.kA = Constants.Intake_Wrist_kA;
         generalSlotConfigs.kP = Constants.Intake_Wrist_kP;
         generalSlotConfigs.kI = Constants.Intake_Wrist_kI;
         generalSlotConfigs.kD = Constants.Intake_Wrist_kD;
@@ -78,8 +80,9 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
         SmartDashboard.putNumber("Intake Through Bore Rotations", getIntakeWristThroughBoreWithOffset());
+        SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
+        SmartDashboard.putNumber("Intake Wrist Velocity", getIntakeWristVelocity());
     }
     
     //====================Intake Wrist Methods====================
@@ -91,12 +94,16 @@ public class Intake extends SubsystemBase {
         return Intake_Wrist_Motor.getPosition().getValueAsDouble();
     }
 
+    public double getIntakeWristVelocity() {
+        return Intake_Wrist_Motor.getVelocity().getValueAsDouble();
+    }
+
     public void zeroIntakeWristWithAbsolute() {
         Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
     }
 
     public double getIntakeWristThroughBoreWithOffset() {
-        return encoder.getPosition().getRotations() * 28.13;
+        return encoder.getPosition().getRotations() * Constants.Intake_Wrist_Through_Bore_Gear_Ratio;
     }
 
     public void setIntakeWristSetpoint(double setpoint) {
@@ -104,7 +111,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void goToIntakeWristSetpoint() {
-        final MotionMagicVoltage m_request = new MotionMagicVoltage(Constants.Absolute_Zero);
+        final MotionMagicVoltage m_request = new MotionMagicVoltage(Constants.Absolute_Zero).withEnableFOC(true);
         Intake_Wrist_Motor.setControl(m_request.withPosition(this.setpoint));
     }
 
@@ -119,6 +126,26 @@ public class Intake extends SubsystemBase {
 
     //====================Indexer Methods====================
     public void setIndexerMotorSpeed(double speed) {
-        Intake_Indexer_Master_Motor.set(-0.7 * speed);
+        Intake_Indexer_Master_Motor.set(-1.0 * speed);
     }
+
+    //  public void HotRegreshIntakeConfig() {
+    //     //General Configurations
+    //     var generalSlotConfigs = new Slot0Configs();
+    //     generalSlotConfigs.kG = SmartDashboard.getNumber("Intake kG", 0.0);
+    //     generalSlotConfigs.kP = SmartDashboard.getNumber("Intake kP", 0.0);
+    //     generalSlotConfigs.kI = SmartDashboard.getNumber("Intake kI", 0.0);
+    //     generalSlotConfigs.kD = SmartDashboard.getNumber("Intake kD", 0.0);
+
+    //     //Motion Magic
+    //     var motionMagicConfigs = new MotionMagicConfigs();
+    //     motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Intake kVelo", 0.0);
+    //     motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Intake kAccel", 0.0);
+
+    //     //Applies Configs
+    //     Intake_Wrist_Motor.getConfigurator().apply(generalSlotConfigs);
+    //     Intake_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
+
+    //     System.out.println("HotRegreshIntakeConfig Complete");
+    // }
 }
