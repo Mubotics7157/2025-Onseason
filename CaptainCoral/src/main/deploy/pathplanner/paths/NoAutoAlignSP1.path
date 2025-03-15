@@ -16,11 +16,11 @@
     },
     {
       "anchor": {
-        "x": 5.15,
+        "x": 5.743636363636364,
         "y": 3.85
       },
       "prevControl": {
-        "x": 5.96693163092356,
+        "x": 6.560567994559924,
         "y": 3.85
       },
       "nextControl": null,
@@ -34,9 +34,27 @@
   "eventMarkers": [
     {
       "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
-      "command": null
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "RobotAutoPrepScoreL4"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "globalConstraints": {
