@@ -1,11 +1,13 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.Intake;
 import frc.robot.Constants;
+import frc.robot.Devices;
 
-public class RobotIntakeGround extends Command {
+public class RobotTeleIntakeGround extends Command {
     private final double speed;
     private final EndEffector endEffector;
     private final double setpoint;
@@ -17,7 +19,9 @@ public class RobotIntakeGround extends Command {
     private final Elevator elevator;
     private final double elevatorSetpoint;
 
-    public RobotIntakeGround(EndEffector endEffector, double speed, double setpoint, Intake intake, double intakeSetpoint, double intakeSpeed, Elevator elevator, double elevatorSetpoint) {
+    private final XboxController controller;
+
+    public RobotTeleIntakeGround(EndEffector endEffector, double speed, double setpoint, Intake intake, double intakeSetpoint, double intakeSpeed, Elevator elevator, double elevatorSetpoint, XboxController controller) {
         this.speed = speed;
         this.endEffector = EndEffector.getInstance();
         this.setpoint = setpoint;
@@ -29,9 +33,11 @@ public class RobotIntakeGround extends Command {
         this.elevator = Elevator.getInstance();
         this.elevatorSetpoint = elevatorSetpoint;
 
-        addRequirements(intake);
-        addRequirements(endEffector);
+        this.controller = controller;
+
         addRequirements(elevator);
+        addRequirements(endEffector);
+        addRequirements(intake);
     }
 
     @Override
@@ -39,7 +45,7 @@ public class RobotIntakeGround extends Command {
         intake.setIntakeWristSetpoint(intakeSetpoint);
         endEffector.setEndEffectorWristSetpoint(setpoint);
         elevator.setElevatorSetpoint(elevatorSetpoint);
-        System.out.println("RobotIntakeGround Online");
+        System.out.println("RobotTeleIntakeGround Online");
     }
 
     @Override
@@ -54,8 +60,14 @@ public class RobotIntakeGround extends Command {
 
         if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
+
+            controller.setRumble(XboxController.RumbleType.kLeftRumble, Devices.CONTROLLER_RUMBLE);
+            controller.setRumble(XboxController.RumbleType.kRightRumble, Devices.CONTROLLER_RUMBLE);
         } else {
             endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+
+            controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+            controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
         }
 
         //PID Control
@@ -70,11 +82,15 @@ public class RobotIntakeGround extends Command {
         intake.setIntakeRollerMotorSpeed(Constants.Absolute_Zero);
         intake.setIndexerMotorSpeed(Constants.Absolute_Zero);
         endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
-        System.out.println("RobotIntakeGround Offline");
+
+        controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
+
+        System.out.println("RobotTeleIntakeGround Offline");
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return speed == Constants.Absolute_Zero;
     }
 }
