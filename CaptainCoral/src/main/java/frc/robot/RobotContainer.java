@@ -81,7 +81,7 @@ public class RobotContainer {
 
         configureBindings();
 
-        autoChooser = AutoBuilder.buildAutoChooser("NoAutoAlignSP");
+        autoChooser = AutoBuilder.buildAutoChooser("YesAutoAlignSP");
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 

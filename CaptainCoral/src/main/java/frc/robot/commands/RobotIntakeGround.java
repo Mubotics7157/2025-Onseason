@@ -1,9 +1,11 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.EndEffector;
 import frc.robot.subsystems.Intake;
 import frc.robot.Constants;
+import frc.robot.Devices;
 
 public class RobotIntakeGround extends Command {
     private final double speed;
@@ -52,6 +54,15 @@ public class RobotIntakeGround extends Command {
 
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
+        // if (endEffector.getEndEffectorFrontPhotoElectricReading() == true && endEffector.getEndEffectorBackPhotoElectricReading() == true) {
+        //     endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
+        // } else if (endEffector.getEndEffectorFrontPhotoElectricReading() == false && endEffector.getEndEffectorBackPhotoElectricReading() == true) {
+        //     endEffector.setEndEffectorRollerMotorSpeed(0.5 * motorSpeed);
+        // } else {
+        //     endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+        // }
+
+        //OLD
         if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
             endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
         } else {

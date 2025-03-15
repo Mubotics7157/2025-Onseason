@@ -1,4 +1,5 @@
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
@@ -21,7 +22,9 @@ public class RobotTeleIntakeGround extends Command {
 
     private final XboxController controller;
 
-    public RobotTeleIntakeGround(EndEffector endEffector, double speed, double setpoint, Intake intake, double intakeSetpoint, double intakeSpeed, Elevator elevator, double elevatorSetpoint, XboxController controller) {
+    public RobotTeleIntakeGround(EndEffector endEffector, double speed, double setpoint, Intake intake,
+            double intakeSetpoint, double intakeSpeed, Elevator elevator, double elevatorSetpoint,
+            XboxController controller) {
         this.speed = speed;
         this.endEffector = EndEffector.getInstance();
         this.setpoint = setpoint;
@@ -50,7 +53,7 @@ public class RobotTeleIntakeGround extends Command {
 
     @Override
     public void execute() {
-        //Roller Control
+        // Roller Control
         intake.setIntakeRollerMotorSpeed(intakeSpeed);
         intake.setIndexerMotorSpeed(intakeSpeed);
 
@@ -58,22 +61,41 @@ public class RobotTeleIntakeGround extends Command {
 
         endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
+        // if (endEffector.getEndEffectorFrontPhotoElectricReading() == true && endEffector.getEndEffectorBackPhotoElectricReading() == true) {
+        //     endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
+        //     controller.setRumble(XboxController.RumbleType.kLeftRumble, Devices.CONTROLLER_RUMBLE);
+        //     controller.setRumble(XboxController.RumbleType.kRightRumble, Devices.CONTROLLER_RUMBLE);
+        // } else if (endEffector.getEndEffectorFrontPhotoElectricReading() == false && endEffector.getEndEffectorBackPhotoElectricReading() == true) {
+        //     endEffector.setEndEffectorRollerMotorSpeed(0.5 * motorSpeed);
+        //     controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+        //     controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
+        // } else {
+        //     endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+        //     controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
+        //     controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
+        // }
+
+        // OLD
         if (endEffector.getEndEffectorFrontPhotoElectricReading() == true) {
-            endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
+        endEffector.setEndEffectorRollerMotorSpeed(Constants.Absolute_Zero);
 
-            controller.setRumble(XboxController.RumbleType.kLeftRumble, Devices.CONTROLLER_RUMBLE);
-            controller.setRumble(XboxController.RumbleType.kRightRumble, Devices.CONTROLLER_RUMBLE);
+        controller.setRumble(XboxController.RumbleType.kLeftRumble,
+        Devices.CONTROLLER_RUMBLE);
+        controller.setRumble(XboxController.RumbleType.kRightRumble,
+        Devices.CONTROLLER_RUMBLE);
         } else {
-            endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
+        endEffector.setEndEffectorRollerMotorSpeed(motorSpeed);
 
-            controller.setRumble(XboxController.RumbleType.kLeftRumble, Constants.Absolute_Zero);
-            controller.setRumble(XboxController.RumbleType.kRightRumble, Constants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kLeftRumble,
+        Constants.Absolute_Zero);
+        controller.setRumble(XboxController.RumbleType.kRightRumble,
+        Constants.Absolute_Zero);
         }
 
-        //PID Control
+        // PID Control
         intake.goToIntakeWristSetpoint();
         endEffector.goToEndEffectorWristSetpoint();
-        elevator.goToElevatorSetpoint();        
+        elevator.goToElevatorSetpoint();
 
     }
 
