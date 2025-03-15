@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -8,7 +9,7 @@ import frc.robot.Devices;
 import frc.robot.Constants;
 
 public class Climb extends SubsystemBase {
-    private final TalonFX Climb_Master_Motor = new TalonFX(Devices.CLIMB_MOTOR);
+    private final TalonFX Climb_Motor = new TalonFX(Devices.CLIMB_MOTOR);
 
     public static Climb getInstance() {
         return instance;
@@ -30,14 +31,25 @@ public class Climb extends SubsystemBase {
         climbLimitConfigs.StatorCurrentLimitEnable = true;    
 
         //Applies Configs
-        Climb_Master_Motor.getConfigurator().apply(climbMotorConfigs);
+        Climb_Motor.getConfigurator().apply(climbMotorConfigs);
     }
 
     @Override
-    public void periodic() {}
+    public void periodic() {
+        SmartDashboard.putNumber("Climb Motor Encoder", getClimbEncoder());
+        SmartDashboard.putNumber("Climb Stator Current", getClimbStatorCurrent());   
+    }
 
     //====================Climb Methods====================
     public void setClimbMotorSpeed(double speed) {
-        Climb_Master_Motor.set(speed);
+        Climb_Motor.set(speed);
+    }
+
+    public double getClimbEncoder() {
+        return Climb_Motor.getPosition().getValueAsDouble();
+    }
+
+    public double getClimbStatorCurrent() {
+        return Climb_Motor.getStatorCurrent().getValueAsDouble();
     }
 }
