@@ -1,14 +1,10 @@
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import com.ctre.phoenix6.configs.MotionMagicConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
 import frc.robot.Devices;
 import frc.robot.Constants;
 
@@ -27,12 +23,13 @@ public class Elevator extends SubsystemBase {
     public Elevator() {
         System.out.println("====================Elevator Subsystem Online====================");
 
-        SmartDashboard.putNumber("Elevator kG", 0.0);
-        SmartDashboard.putNumber("Elevator kP", 0.0);
-        SmartDashboard.putNumber("Elevator kI", 0.0);
-        SmartDashboard.putNumber("Elevator kD", 0.0);
-        SmartDashboard.putNumber("Elevator Velocity", 0.0);
-        SmartDashboard.putNumber("Elevator Acceleration", 0.0);
+        //HotRefreshElevatorConfig
+        // SmartDashboard.putNumber("Elevator kG", 0.0);
+        // SmartDashboard.putNumber("Elevator kP", 0.0);
+        // SmartDashboard.putNumber("Elevator kI", 0.0);
+        // SmartDashboard.putNumber("Elevator kD", 0.0);
+        // SmartDashboard.putNumber("Elevator kVelo", 0.0);
+        // SmartDashboard.putNumber("Elevator kAccel", 0.0);
 
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
@@ -50,7 +47,7 @@ public class Elevator extends SubsystemBase {
         generalSlotConfigs.kI = Constants.Elevator_kI;
         generalSlotConfigs.kD = Constants.Elevator_kD;
 
-        // //Motion Magic
+        //Motion Magic
         var motionMagicConfigs = elevatorMotorConfigs.MotionMagic;
         motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Elevator_Velocity;
         motionMagicConfigs.MotionMagicAcceleration = Constants.Elevator_Acceleration;
@@ -68,9 +65,10 @@ public class Elevator extends SubsystemBase {
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Elevator Master Encoder", getElevatorMasterEncoder());
-        SmartDashboard.putNumber("Elevator Slave Encoder", getElevatorSlaveEncoder());
+        SmartDashboard.putNumber("Elevator Master Velocity", getElevatorMasterVelocity());
 
-        
+        SmartDashboard.putNumber("Elevator Slave Encoder", getElevatorSlaveEncoder());
+        SmartDashboard.putNumber("Elevator Slave Velocity", getElevatorSlaveVelocity());
     }
 
     //====================Elevator Methods====================
@@ -82,9 +80,17 @@ public class Elevator extends SubsystemBase {
     public double getElevatorMasterEncoder() {
         return Elevator_Master_Motor.getPosition().getValueAsDouble();
     }
+
+    public double getElevatorMasterVelocity() {
+        return Elevator_Master_Motor.getVelocity().getValueAsDouble();
+    }
  
     public double getElevatorSlaveEncoder() {
         return Elevator_Slave_Motor.getPosition().getValueAsDouble();
+    }
+
+    public double getElevatorSlaveVelocity() {
+        return Elevator_Slave_Motor.getVelocity().getValueAsDouble();
     }
 
     public void setElevatorSetpoint(double setpoint) {
@@ -102,24 +108,26 @@ public class Elevator extends SubsystemBase {
         Elevator_Slave_Motor.setPosition(Constants.Absolute_Zero);
     }
 
-    public void reConfigurePID() {
-        //General Configurations
-        var generalSlotConfigs = new Slot0Configs();
-        generalSlotConfigs.kG = SmartDashboard.getNumber("Elevator kG", 0.0);
-        generalSlotConfigs.kP = SmartDashboard.getNumber("Elevator kP", 0.0);
-        generalSlotConfigs.kI = SmartDashboard.getNumber("Elevator kI", 0.0);
-        generalSlotConfigs.kD = SmartDashboard.getNumber("Elevator kD", 0.0);
+    // public void HotRefreshElevatorConfig() {
+    //     //General Configurations
+    //     var generalSlotConfigs = new Slot0Configs();
+    //     generalSlotConfigs.kG = SmartDashboard.getNumber("Elevator kG", 0.0);
+    //     generalSlotConfigs.kP = SmartDashboard.getNumber("Elevator kP", 0.0);
+    //     generalSlotConfigs.kI = SmartDashboard.getNumber("Elevator kI", 0.0);
+    //     generalSlotConfigs.kD = SmartDashboard.getNumber("Elevator kD", 0.0);
 
-        // //Motion Magic
-        var motionMagicConfigs = new MotionMagicConfigs();
-        generalSlotConfigs.kI = SmartDashboard.getNumber("Elevator Velocity", 0.0);
-        generalSlotConfigs.kD = SmartDashboard.getNumber("Elevator Acceleration", 0.0);
+    //     //Motion Magic
+    //     var motionMagicConfigs = new MotionMagicConfigs();
+    //     motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Elevator kVelo", 0.0);
+    //     motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Elevator kAccel", 0.0);
 
-        //Applies Configs
-        Elevator_Master_Motor.getConfigurator().apply(generalSlotConfigs);
-        Elevator_Master_Motor.getConfigurator().apply(generalSlotConfigs);
+    //     //Applies Configs
+    //     Elevator_Master_Motor.getConfigurator().apply(generalSlotConfigs);
+    //     Elevator_Master_Motor.getConfigurator().apply(motionMagicConfigs);
 
-        Elevator_Slave_Motor.getConfigurator().apply(motionMagicConfigs);
-        Elevator_Slave_Motor.getConfigurator().apply(motionMagicConfigs);
-    }
+    //     Elevator_Slave_Motor.getConfigurator().apply(generalSlotConfigs);
+    //     Elevator_Slave_Motor.getConfigurator().apply(motionMagicConfigs);
+
+    //     System.out.println("HotRefreshElevatorConfig Complete");
+    // }
 }
