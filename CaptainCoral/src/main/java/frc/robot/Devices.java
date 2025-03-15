@@ -4,7 +4,7 @@ public final class Devices {
     //====================Controller====================
     public static final int DRIVER_CONTROLLER_PORT = 0;
     public static final int OPERATOR_CONTROLLER = 1;
-    public static final double JOYSTICK_JOG_SPEED_MULTIPLIER = 0.125;
+    public static final double JOYSTICK_JOG_SPEED_MULTIPLIER = 0.125; //0.125
     public static final double JOYSTICK_DEADZONE_TOLERANCE = 0.05;
     public static final double CONTROLLER_RUMBLE = 1.0;
 
