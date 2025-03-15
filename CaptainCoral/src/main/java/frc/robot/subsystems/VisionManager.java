@@ -1,42 +1,47 @@
 package frc.robot.subsystems;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix6.Utils;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers;
-import frc.robot.LimelightHelpers.LimelightResults;
-import frc.robot.LimelightHelpers.LimelightTarget_Fiducial;
+import frc.robot.RobotContainer;
 
 public class VisionManager extends SubsystemBase {
-    
-    public static VisionManager getInstance() {
-        return instance;
+  private Drivetrain drivetrain = RobotContainer.drivetrain;
+
+  public static VisionManager getInstance() {
+    return instance;
+  }
+
+  private static VisionManager instance = new VisionManager();
+
+  public VisionManager() {
+    System.out.println("====================Vision Manager Online====================");
+  }
+
+  @Override
+  public void periodic() {
+    // updateOdometry();
+  }
+
+  public void updateOdometry() {
+
+    LimelightHelpers.SetRobotOrientation("limelight", drivetrain.getState().Pose.getRotation().getDegrees(), 0, 0, 0, 0, 0);
+    LimelightHelpers.PoseEstimate mt2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight");
+
+    boolean doRejectUpdate = false;
+
+    if (Math.abs(drivetrain.getPigeon2().getAngularVelocityZWorld().getValueAsDouble()) > 360) {
+      doRejectUpdate = true;
     }
 
-    private static VisionManager instance = new VisionManager();
-
-    public VisionManager() {}
-
-    @Override
-    public void periodic() {
-        Pose2d pose = getPose();
-
-        if (pose == null) {
-            return;
-        }
-
-        SmartDashboard.putNumber("x Pose", pose.getX());
-        SmartDashboard.putNumber("y Pose", pose.getY());
-        SmartDashboard.putNumber("rot Pose", pose.getRotation().getDegrees());
+    if (mt2.tagCount == 0) {
+      doRejectUpdate = true;
     }
 
-    public Pose2d getPose() {
-        LimelightResults results = LimelightHelpers.getLatestResults("limelight");
-    
-        if (results.targets_Fiducials.length > 0) {
-            LimelightTarget_Fiducial tag = results.targets_Fiducials[0];
-            return tag.getCameraPose_TargetSpace().toPose2d();
-        } else {
-            return null;
-        }
+    if (!doRejectUpdate) {
+      drivetrain.addVisionMeasurement(mt2.pose, Utils.fpgaToCurrentTime(mt2.timestampSeconds),
+          VecBuilder.fill(0.7, 0.7, 999999999)); // Decrease if laggy
     }
+  }
 }
