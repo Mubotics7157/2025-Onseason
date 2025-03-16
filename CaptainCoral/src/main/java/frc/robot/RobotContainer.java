@@ -71,7 +71,7 @@ public class RobotContainer {
 
         //====================Actions====================
         NamedCommands.registerCommand("RobotAutoPrepScoreL4", new RobotAutoPrepScore(EndEffector.getInstance(), Constants.End_Effector_Wrist_L4_Score_Setpoint, Elevator.getInstance(), Constants.Elevator_L4_Setpoint));
-        NamedCommands.registerCommand("EndEffectorScore", new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_Coral_Speed));
+        NamedCommands.registerCommand("EndEffectorScore", new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L2_L3_L4_Speed));
         NamedCommands.registerCommand("GroundIntake", new RobotIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint));
 
         //====================Zeroing====================
@@ -128,7 +128,7 @@ public class RobotContainer {
         );
 
         //====================End Effector Run====================
-        driverController.rightTrigger().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_Coral_Speed));
+        driverController.rightTrigger().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L2_L3_L4_Speed));
         driverController.rightTrigger().onFalse(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
 
         //====================Algae Intake====================
@@ -185,16 +185,16 @@ public class RobotContainer {
         operatorController.rightTrigger().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Stow_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
         //====================Elevator Jog=====================
-        // operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
         // //====================Elevator Manual Zero=====================
-        // operatorController.y().onTrue(new ZeroElevator(Elevator.getInstance()));
+        operatorController.y().onTrue(new ZeroElevator(Elevator.getInstance()));
 
         // //====================End Effector Wrist Jog=====================
-        // operatorController.povRight().whileTrue(new EndEffectorWristJog(EndEffector.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        operatorController.povRight().whileTrue(new EndEffectorWristJog(EndEffector.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
 
         // //====================End Effector Wrist Manual Zero=====================
-        // operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
+        operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
 
         // //====================Intake Wrist Jog=====================
         // operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
@@ -203,8 +203,12 @@ public class RobotContainer {
         // operatorController.x().onTrue(new ZeroIntakeWrist(Intake.getInstance()));
 
         //====================Super Intake=====================
-        operatorController.a().whileTrue(new SuperIntake(Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed));
-        operatorController.a().onFalse(new SuperIntake(Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero));
+        // operatorController.a().whileTrue(new SuperIntake(Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, 0.5 * Constants.Intake_Ground_Run_Speed));
+        // operatorController.a().onFalse(new SuperIntake(Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero));
+
+        //====================Spit L1=====================
+        driverController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L1_Coral_Speed));
+        driverController.a().onFalse(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
     }
 
         public Command getAutonomousCommand() {
