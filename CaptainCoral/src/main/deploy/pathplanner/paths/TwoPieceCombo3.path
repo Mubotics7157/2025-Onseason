@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.15,
-        "y": 4.02
+        "x": 0.45,
+        "y": 2.0128518211920525
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.15,
-        "y": 4.02
+        "x": 2.2228062913907283,
+        "y": 2.710202814569536
       },
       "isLocked": false,
-      "linkedName": "W2E"
+      "linkedName": "TPC2E"
     },
     {
       "anchor": {
-        "x": 3.5521316225165562,
-        "y": 4.02
+        "x": 3.8644867549668875,
+        "y": 3.400289735099337
       },
       "prevControl": {
-        "x": 2.5521316225165562,
-        "y": 4.02
+        "x": 2.2300703642384105,
+        "y": 2.6956746688741715
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +43,7 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 0.0
+                "waitTime": 3.0
               }
             },
             {
@@ -57,7 +57,7 @@
       }
     },
     {
-      "name": "GroundIntakeStop",
+      "name": "StopGroundIntake",
       "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": {
@@ -73,7 +73,7 @@
             {
               "type": "named",
               "data": {
-                "name": "GroundIntakeStop"
+                "name": "StopGroundIntake"
               }
             }
           ]
@@ -82,7 +82,7 @@
     },
     {
       "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -115,10 +115,10 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 59.99999999999999
   },
   "reversed": false,
-  "folder": "Wrapper",
+  "folder": "TwoPieceCombo",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

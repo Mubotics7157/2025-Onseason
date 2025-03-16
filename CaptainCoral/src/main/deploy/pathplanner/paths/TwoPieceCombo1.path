@@ -3,52 +3,38 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.2307954545454542,
-        "y": 5.136832386363635
+        "x": 7.2,
+        "y": 4.02
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5503729827236397,
-        "y": 5.136832386363635
+        "x": 6.289666979451,
+        "y": 4.02
       },
       "isLocked": false,
-      "linkedName": "W1E"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.15,
+        "x": 5.713721590909091,
         "y": 4.02
       },
       "prevControl": {
-        "x": 1.2761006266791133,
+        "x": 6.530653221832651,
         "y": 4.02
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "W2E"
+      "linkedName": "TPC1E"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.5,
-      "maxWaypointRelativePos": 1.0,
-      "constraints": {
-        "maxVelocity": 1.0,
-        "maxAcceleration": 1.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0,
-        "nominalVoltage": 12.0,
-        "unlimited": false
-      }
-    }
-  ],
+  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "GroundIntake",
-      "waypointRelativePos": 0.5,
+      "name": "RobotAutoPrepScoreL4",
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -57,13 +43,13 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 0.0
+                "waitTime": 0
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "GroundIntake"
+                "name": "RobotAutoPrepScoreL4"
               }
             }
           ]
@@ -80,14 +66,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 0.0
+    "velocity": 0.0,
+    "rotation": 180.0
   },
   "reversed": false,
-  "folder": "Wrapper",
+  "folder": "TwoPieceCombo",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

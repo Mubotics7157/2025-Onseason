@@ -4,8 +4,8 @@
   "holonomicMode": true,
   "pathFolders": [
     "MushroomProcessor",
-    "Wrapper",
     "NoAutoAlignSP",
+    "TwoPieceCombo",
     "YesAutoAlignSP"
   ],
   "autoFolders": [],
