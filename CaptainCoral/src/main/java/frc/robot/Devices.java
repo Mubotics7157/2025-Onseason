@@ -13,7 +13,7 @@ public final class Devices {
     public static final int INTAKE_ROLLER_MOTOR = 15;
     public static final int INDEXER_MOTOR = 16;
     public static final int INTAKE_WRIST_THROUGH_BORE_PORT = 7;
-    //public static final int INDEXER_PHOTOELECTRIC_PORT = 7;
+    //public static final int INDEXER_PHOTOELECTRIC_PORT = 7; 
 
     //====================End Effector====================
     public static final int END_EFFECTOR_WRIST_MOTOR = 17;

@@ -54,8 +54,8 @@ public class Intake extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
+        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
+        // motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
@@ -126,7 +126,7 @@ public class Intake extends SubsystemBase {
 
     //====================Indexer Methods====================
     public void setIndexerMotorSpeed(double speed) {
-        Intake_Indexer_Master_Motor.set(-1.0 * speed);
+        Intake_Indexer_Master_Motor.set(speed);
     }
 
     //  public void HotRegreshIntakeConfig() {

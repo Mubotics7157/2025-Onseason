@@ -3,38 +3,43 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.2,
-        "y": 4.02
+        "x": 3.749318181818182,
+        "y": 2.6788352272727276
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.289666979451,
-        "y": 4.02
+        "x": 2.592613636363636,
+        "y": 2.7486363636363627
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "IT1S"
     },
     {
       "anchor": {
-        "x": 5.7,
-        "y": 4.02
+        "x": 1.1467329545454548,
+        "y": 1.0434943181818186
       },
       "prevControl": {
-        "x": 6.51693163092356,
-        "y": 4.02
+        "x": 2.542755681818182,
+        "y": 2.4794034090909096
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "YAASP1E"
+      "linkedName": "IT1E"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.33,
+      "rotationDegrees": 59.99999999999999
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.6,
+      "name": "GroundIntake",
+      "waypointRelativePos": 0.1,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -43,13 +48,13 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 0
+                "waitTime": 3.0
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "RobotAutoPrepScoreL4"
+                "name": "GroundIntake"
               }
             }
           ]
@@ -66,14 +71,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": 180.0
+    "velocity": 0,
+    "rotation": 59.99999999999999
   },
   "reversed": false,
-  "folder": "YesAutoAlignSP",
+  "folder": "New Folder",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }

@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 4.925965909090909,
-        "y": 3.5214346590909087
+        "x": 4.856164772727273,
+        "y": 3.4865340909090907
       },
       "prevControl": {
-        "x": 5.761633956813249,
-        "y": 2.5025643752513904
+        "x": 5.691832820449613,
+        "y": 2.4676638070695724
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
   "eventMarkers": [
     {
       "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.7,
+      "waypointRelativePos": 0.6,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",

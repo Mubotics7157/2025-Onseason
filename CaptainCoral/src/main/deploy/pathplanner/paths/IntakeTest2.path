@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.2,
-        "y": 4.02
+        "x": 1.1467329545454548,
+        "y": 1.0434943181818186
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.289666979451,
-        "y": 4.02
+        "x": 1.8293233673243272,
+        "y": 1.6748490595039123
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "IT1E"
     },
     {
       "anchor": {
-        "x": 5.7,
-        "y": 4.02
+        "x": 3.749318181818182,
+        "y": 2.6788352272727276
       },
       "prevControl": {
-        "x": 6.51693163092356,
-        "y": 4.02
+        "x": 3.5339621135916874,
+        "y": 2.475727463151373
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "YAASP1E"
+      "linkedName": "IT1S"
     }
   ],
   "rotationTargets": [],
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "RobotAutoPrepScoreL4",
-      "waypointRelativePos": 0.6,
+      "name": "GroundIntake",
+      "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",
@@ -43,13 +43,37 @@
             {
               "type": "wait",
               "data": {
-                "waitTime": 0
+                "waitTime": 2.0
               }
             },
             {
               "type": "named",
               "data": {
-                "name": "RobotAutoPrepScoreL4"
+                "name": "GroundIntake"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GroundIntakeStop",
+      "waypointRelativePos": 0.66,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 3.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "GroundIntakeStop"
               }
             }
           ]
@@ -66,14 +90,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.0,
-    "rotation": 180.0
+    "velocity": 0,
+    "rotation": 59.99999999999999
   },
   "reversed": false,
-  "folder": "YesAutoAlignSP",
+  "folder": "New Folder",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }

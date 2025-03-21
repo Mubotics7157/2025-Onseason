@@ -126,7 +126,6 @@ public class RobotContainer {
                 new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero)
                 )
         );
-
         //====================End Effector Run====================
         driverController.rightTrigger().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L2_L3_L4_Speed));
         driverController.rightTrigger().onFalse(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
@@ -169,7 +168,7 @@ public class RobotContainer {
 
         //====================OPERATOR CONTROLLER BINDINGS====================
         //====================Elevator Climb + End Effector=====================
-        operatorController.leftTrigger().whileTrue(new RobotPrepScore(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_Start_Setpoint, Elevator.getInstance(), Constants.Elevator_Climb_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, operatorController.getHID()));
+        operatorController.leftTrigger().whileTrue(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_Start_Setpoint, Elevator.getInstance(), Constants.Elevator_Climb_Setpoint));
         operatorController.leftTrigger().onFalse(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_End_Setpoint, Elevator.getInstance(), Constants.Absolute_Zero));
 
         //====================Climb Up=====================
@@ -197,7 +196,7 @@ public class RobotContainer {
         operatorController.b().onTrue(new ZeroEndEffectorWrist(EndEffector.getInstance()));
 
         // //====================Intake Wrist Jog=====================
-        // operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
+        operatorController.povLeft().whileTrue(new IntakeWristJog(Intake.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
         
         // //====================Intake Wrist Manual Zero=====================
         // operatorController.x().onTrue(new ZeroIntakeWrist(Intake.getInstance()));
@@ -207,8 +206,8 @@ public class RobotContainer {
         // operatorController.a().onFalse(new SuperIntake(Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero));
 
         //====================Spit L1=====================
-        driverController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L1_Coral_Speed));
-        driverController.a().onFalse(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
+        operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L1_Coral_Speed));
+        operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
     }
 
         public Command getAutonomousCommand() {
