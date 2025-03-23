@@ -104,7 +104,7 @@ public class RobotContainer {
         //====================Swerve Heading Reset====================
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
-        //driverController.leftBumper().whileTrue(new DrivetrainPoseAlign(drivetrain, VisionManager.getInstance()));
+        driverController.leftBumper().whileTrue(new DrivetrainPoseAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Left====================
         //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain));
