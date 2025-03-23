@@ -30,7 +30,6 @@ public class VisionManager extends SubsystemBase {
     logPose();
   }
 
-  //====================Pose Getter Method====================
   public Pose3d getPose() {
     LimelightResults results = LimelightHelpers.getLatestResults("limelight");
 
@@ -42,7 +41,6 @@ public class VisionManager extends SubsystemBase {
     }
   }
 
-  //====================Measurement Logger Method====================
   public void logPose() {
     var pose = getPose();
 
@@ -57,13 +55,12 @@ public class VisionManager extends SubsystemBase {
     SmartDashboard.putNumber("FBPOSE", Math.round(pose.getZ() * 100000.0) / 100000.0);
 
     if (pose.getRotation() != null) {
-      SmartDashboard.putNumber("ROTPOSE", Math.toDegrees(pose.getRotation().getY())); //Math.toDegrees(pose.getRotation().getAngle()
+      SmartDashboard.putNumber("ROTPOSE", Math.toDegrees(pose.getRotation().getY())); // Math.toDegrees(pose.getRotation().getAngle()
     } else {
       SmartDashboard.putNumber("ROTPOSE", 0);
     }
   }
 
-  //====================LR Measurement Grabber Method====================
   public double deriveLRPose() {
     var pose = getPose();
     if (pose == null) {
@@ -73,7 +70,6 @@ public class VisionManager extends SubsystemBase {
     }
   }
 
-  //====================FB Measurement Grabber Method====================
   public double deriveFBPose() {
     var pose = getPose();
     if (pose == null) {
@@ -83,7 +79,6 @@ public class VisionManager extends SubsystemBase {
     }
   }
 
-  //====================Rot Measurement Grabber Method====================
   public double deriveRotPose() {
     var pose = getPose();
 
@@ -92,28 +87,10 @@ public class VisionManager extends SubsystemBase {
 
     } else {
       if (pose.getRotation() != null) {
-        return Math.toDegrees(pose.getRotation().getAngle());
+        return Math.toDegrees(pose.getRotation().getY());
       } else {
         return 0.0;
       }
     }
-  }
-
-  public double calculateFBSpeed() {
-    ProfiledPIDController FBPIDController = new ProfiledPIDController(-3.5, 0, 0, new Constraints(4.0, 4.0));
-    double FBSpeed = FBPIDController.calculate(deriveFBPose(), -0.55);
-    return FBSpeed;
-  }
-
-  public double calculateLRSpeed() {
-    ProfiledPIDController LRPIDController = new ProfiledPIDController(-3.35, 0, 0, new Constraints(4.0, 4.0));
-    double LRSpeed = LRPIDController.calculate(deriveLRPose(), -0.17);
-    return LRSpeed;
-  }
-
-  public double calculateRotSpeed() {
-    ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0)); // +- ON THE P TERM
-    double RotSpeed = rotationPIDController.calculate(deriveRotPose(), 0.0);
-    return RotSpeed;
   }
 }
