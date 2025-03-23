@@ -311,57 +311,6 @@ public class Drivetrain extends TunerSwerveDrivetrain implements Subsystem {
         m_simNotifier.startPeriodic(kSimLoopPeriod);
     }
 
-    public double limelight_vertical_proportional() {   
-        double kP = Constants.Drivetrain_FB_kP;
-        double FBVelocity = (LimelightHelpers.getTY("limelight") + Constants.Square_Up_Setpoint) * kP;
-        FBVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-        
-        if (LimelightHelpers.getTY("limelight") < Constants.Drivetrain_Auto_Align_Tolerance) {
-            FBVelocity = 0;
-        }
-
-        return FBVelocity;
-      }
-
-    public double left_pole_limelight_horizontal_proportional() {
-        double kP = Constants.Drivetrain_LR_kP;
-        
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + Constants.Left_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
-        LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < Constants.Drivetrain_Auto_Align_Tolerance) {
-            LRVelocity = 0;
-        }
-
-        return LRVelocity;
-    }
-
-    public double right_pole_limelight_horizontal_proportional() {
-        double kP = Constants.Drivetrain_LR_kP;
-        
-        double LRVelocity = (LimelightHelpers.getTX("limelight") + Constants.Right_Pole_Setpoint) * kP; //Adding goes left, subtracting goes right
-        LRVelocity *= TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
-
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < Constants.Drivetrain_Auto_Align_Tolerance) {
-            LRVelocity = 0;
-        }
-
-        return LRVelocity;
-    }
-
-    public double rotation_limelight_proportional() {
-        double kP = 0.02;
-
-        double rotVelocity = (LimelightHelpers.getTX("limelight") * kP);
-        rotVelocity *= RotationsPerSecond.of(0.75).in(RadiansPerSecond); 
-
-        if (Math.abs(LimelightHelpers.getTX("limelight")) < 0.1) {
-            rotVelocity = 0;
-        }
-
-        return rotVelocity;
-    }
-
     public void slowDrivetrain(XboxController controller, double speedMultiplier, double turnMultiplier) {
         SwerveRequest.FieldCentric drivetrainRequest = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)

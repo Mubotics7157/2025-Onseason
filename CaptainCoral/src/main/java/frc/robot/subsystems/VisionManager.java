@@ -55,7 +55,7 @@ public class VisionManager extends SubsystemBase {
     SmartDashboard.putNumber("FBPOSE", Math.round(pose.getZ() * 100000.0) / 100000.0);
 
     if (pose.getRotation() != null) {
-      SmartDashboard.putNumber("ROTPOSE", Math.toDegrees(pose.getRotation().getY())); // Math.toDegrees(pose.getRotation().getAngle()
+      SmartDashboard.putNumber("ROTPOSE", Math.toDegrees(pose.getRotation().getY()));
     } else {
       SmartDashboard.putNumber("ROTPOSE", 0);
     }

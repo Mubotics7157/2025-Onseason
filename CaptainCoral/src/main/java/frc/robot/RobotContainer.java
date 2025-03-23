@@ -1,12 +1,9 @@
 package frc.robot;
-
-//Drivetrain Imports
 import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,8 +12,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.subsystems.Drivetrain;
-
-//Intake Imports
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.VisionManager;
 import frc.robot.commands.RobotHome;
@@ -24,7 +19,6 @@ import frc.robot.commands.IntakeRunCmd;
 import frc.robot.commands.IntakeWristJog;
 import frc.robot.commands.RobotAlgaeIntake;
 import frc.robot.commands.RobotAutoPrepScore;
-//End Effector Imports
 import frc.robot.subsystems.EndEffector;
 import frc.robot.commands.EndEffectorWristJog;
 import frc.robot.commands.RobotIntakeGround;
@@ -36,18 +30,13 @@ import frc.robot.commands.ZeroElevator;
 import frc.robot.commands.ZeroEndEffectorWrist;
 import frc.robot.commands.ZeroIntakeWrist;
 import frc.robot.commands.EndEffectorScore;
-//Elevator Imports
 import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJog;
-//Climb Imports
 import frc.robot.subsystems.Climb;
 import frc.robot.commands.AlgaeNetScore;
 import frc.robot.commands.ClimbRun;
-
-
-//Limelight Imports
 import frc.robot.commands.DrivetrainLeftAlign;
-import frc.robot.commands.DrivetrainPoseAlign;
+//Limelight Imports
 import frc.robot.commands.DrivetrainRightAlign;
 
 public class RobotContainer {
@@ -68,18 +57,18 @@ public class RobotContainer {
     public RobotContainer() {
         //====================AUTONOMOUS SETUP====================
         //====================Alignment Commands====================
-        NamedCommands.registerCommand("DrivetrainLeftAlign", new DrivetrainLeftAlign(drivetrain));
-        NamedCommands.registerCommand("DrivetrainRightAlign", new DrivetrainRightAlign(drivetrain));
+        //NamedCommands.registerCommand("DrivetrainLeftAlign", new DrivetrainLeftAlign(drivetrain));
+        //NamedCommands.registerCommand("DrivetrainRightAlign", new DrivetrainRightAlign(drivetrain));
 
         //====================Actions====================
-        NamedCommands.registerCommand("RobotAutoPrepScoreL4", new RobotAutoPrepScore(EndEffector.getInstance(), Constants.End_Effector_Wrist_L4_Score_Setpoint, Elevator.getInstance(), Constants.Elevator_L4_Setpoint));
-        NamedCommands.registerCommand("EndEffectorScore", new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L2_L3_L4_Speed));
-        NamedCommands.registerCommand("GroundIntake", new RobotIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint));
+        //NamedCommands.registerCommand("RobotAutoPrepScoreL4", new RobotAutoPrepScore(EndEffector.getInstance(), Constants.End_Effector_Wrist_L4_Score_Setpoint, Elevator.getInstance(), Constants.Elevator_L4_Setpoint));
+        //NamedCommands.registerCommand("EndEffectorScore", new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L2_L3_L4_Speed));
+        //NamedCommands.registerCommand("GroundIntake", new RobotIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint));
 
         //====================Zeroing====================
-        NamedCommands.registerCommand("RobotHome", new RobotHome(EndEffector.getInstance(), Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
-        NamedCommands.registerCommand("EndEffectorStop", new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
-        NamedCommands.registerCommand("GroundIntakeStop", new RobotIntakeGround(EndEffector.getInstance(), Constants.Absolute_Zero, Constants.Absolute_Zero, Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
+        //NamedCommands.registerCommand("RobotHome", new RobotHome(EndEffector.getInstance(), Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
+        //NamedCommands.registerCommand("EndEffectorStop", new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
+        //NamedCommands.registerCommand("GroundIntakeStop", new RobotIntakeGround(EndEffector.getInstance(), Constants.Absolute_Zero, Constants.Absolute_Zero, Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero, Elevator.getInstance(), Constants.Absolute_Zero));
 
         configureBindings();
 
@@ -104,7 +93,8 @@ public class RobotContainer {
         //====================Swerve Heading Reset====================
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
-        driverController.leftBumper().whileTrue(new DrivetrainPoseAlign(drivetrain, VisionManager.getInstance()));
+        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
+        driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Left====================
         //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain));

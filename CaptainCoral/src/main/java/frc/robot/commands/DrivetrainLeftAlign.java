@@ -13,7 +13,7 @@ import frc.robot.TunerConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.VisionManager;
 
-public class DrivetrainPoseAlign extends Command {
+public class DrivetrainLeftAlign extends Command {
     private final Drivetrain drivetrain;
     private final VisionManager visionManager;
 
@@ -21,7 +21,7 @@ public class DrivetrainPoseAlign extends Command {
     ProfiledPIDController LRPIDController = new ProfiledPIDController(3.35, 0, 0, new Constraints(4.0, 4.0)); //-3.35
     ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0)); // +-on P term                                 
 
-    public DrivetrainPoseAlign(Drivetrain drivetrain, VisionManager visionManager) {
+    public DrivetrainLeftAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
         this.visionManager = visionManager;
     
@@ -72,7 +72,7 @@ public class DrivetrainPoseAlign extends Command {
         //LR Speed Calculation
         double LRSpeed;
         if (visionManager.deriveLRPose() != 0.0) {
-            LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.17); //-0.17 for left
+            LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), -0.17); //-0.17 for left
         } else {
             LRSpeed = 0.0;
         }
@@ -92,8 +92,8 @@ public class DrivetrainPoseAlign extends Command {
                 .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
                 .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-                .withVelocityX(FBSpeed)
-                .withVelocityY(LRSpeed)
+                .withVelocityX(FBSpeed) //FBSpeed
+                .withVelocityY(LRSpeed) //LRSpeed
                 .withRotationalRate(RotSpeed)); //RotSpeed
     }
 
@@ -130,8 +130,4 @@ public class DrivetrainPoseAlign extends Command {
     //     rotationPIDController.setConstraints(new Constraints(SmartDashboard.getNumber("RotAlign kVelo", 0.0), SmartDashboard.getNumber("RotAlign kAccel", 0.0)));
     //     System.out.println("HotRefreshRotAlignPID Complete");
     // }
-
-    //CONSTRUCTOR
-           
-    //INITIALIZE
 }
