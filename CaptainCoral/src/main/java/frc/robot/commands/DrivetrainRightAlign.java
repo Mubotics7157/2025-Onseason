@@ -28,7 +28,7 @@ public class DrivetrainRightAlign extends Command {
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
         .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
-        .withVelocityX(xSpeed)
+        .withVelocityX(0.0)
         .withVelocityY(ySpeed)
         .withRotationalRate(Constants.Absolute_Zero));
         }

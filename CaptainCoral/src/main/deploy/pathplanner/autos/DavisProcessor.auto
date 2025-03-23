@@ -7,13 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "IntakeTest1"
+            "pathName": "DavisProcessor1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "IntakeTest2"
+            "pathName": "DavisProcessor2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "DavisProcessor3"
           }
         }
       ]
