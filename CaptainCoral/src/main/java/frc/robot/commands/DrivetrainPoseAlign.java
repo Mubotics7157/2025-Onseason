@@ -1,10 +1,8 @@
 package frc.robot.commands;
-
 import static edu.wpi.first.units.Units.MetersPerSecond;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
@@ -19,42 +17,18 @@ public class DrivetrainPoseAlign extends Command {
     private final Drivetrain drivetrain;
     private final VisionManager visionManager;
 
+    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0)); //-3.5
+    ProfiledPIDController LRPIDController = new ProfiledPIDController(3.35, 0, 0, new Constraints(4.0, 4.0)); //-3.35
+    ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0)); // +-on P term                                 
+
     public DrivetrainPoseAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
         this.visionManager = visionManager;
     
         addRequirements(drivetrain);
         addRequirements(visionManager);
-    }    
 
-    @Override
-    public void initialize() {
-        System.out.println("DrivetrainPoseAlign Online");
-    }
-
-    @Override
-    public void execute() {
-        SwerveRequest.RobotCentric drivetrainRequest = new SwerveRequest.RobotCentric()
-                .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
-                .withSteerRequestType(SteerRequestType.MotionMagicExpo);
-        drivetrain.setControl(drivetrainRequest
-                .withVelocityX(visionManager.calculateFBSpeed()) //CHANGE
-                .withVelocityY(visionManager.calculateLRSpeed()) //CHANGE
-                .withRotationalRate(visionManager.calculateRotSpeed())); //CHANGE
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        System.out.println("DrivetrainPoseAlign Offline");
-    }
-
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
-
-    //CONSTRUCTOR
-          //HotRefreshFBAlignPID
+        //HotRefreshFBAlignPID
         // SmartDashboard.putNumber("FBAlign kP", 0.0);
         // SmartDashboard.putNumber("FBAlign kI", 0.0);
         // SmartDashboard.putNumber("FBAlign kD", 0.0);
@@ -74,11 +48,64 @@ public class DrivetrainPoseAlign extends Command {
         // SmartDashboard.putNumber("RotAlign kD", 0.0);
         // SmartDashboard.putNumber("RotAlign kVelo", 0.0);
         // SmartDashboard.putNumber("RotAlign kAccel", 0.0);
+    }    
 
-    //INITIALIZE
-         //HotRefreshFBAlignPID();
+    @Override
+    public void initialize() {
+        System.out.println("DrivetrainPoseAlign Online");
+
+        //HotRefreshFBAlignPID();
         //HotRefreshLRAlignPID();
         //HotRefreshRotAlignPID();
+    }
+
+    @Override
+    public void execute() {
+        //FB Speed Calculation
+        double FBSpeed;
+        if (visionManager.deriveFBPose() != 0.0) {
+            FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -0.55);
+        } else {
+            FBSpeed = 0.0;
+        }
+
+        //LR Speed Calculation
+        double LRSpeed;
+        if (visionManager.deriveLRPose() != 0.0) {
+            LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.17); //-0.17 for left
+        } else {
+            LRSpeed = 0.0;
+        }
+
+        // Rot Speed Calculation
+        double RotSpeed;
+        if (visionManager.deriveRotPose() != 0.0) {
+            RotSpeed = rotationPIDController.calculate(visionManager.deriveRotPose(), 0.0);
+        } else {
+            RotSpeed = 0.0;
+        }
+
+        // Negate to ensure the correct direction
+        RotSpeed = -RotSpeed; 
+
+        SwerveRequest.RobotCentric drivetrainRequest = new SwerveRequest.RobotCentric()
+                .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
+                .withSteerRequestType(SteerRequestType.MotionMagicExpo);
+        drivetrain.setControl(drivetrainRequest
+                .withVelocityX(FBSpeed)
+                .withVelocityY(LRSpeed)
+                .withRotationalRate(RotSpeed)); //RotSpeed
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        System.out.println("DrivetrainPoseAlign Offline");
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 
     // public void HotRefreshFBAlignPID() {
     //     FBPIDController.setP(SmartDashboard.getNumber("FBAlign kP", 0.0));
@@ -103,4 +130,8 @@ public class DrivetrainPoseAlign extends Command {
     //     rotationPIDController.setConstraints(new Constraints(SmartDashboard.getNumber("RotAlign kVelo", 0.0), SmartDashboard.getNumber("RotAlign kAccel", 0.0)));
     //     System.out.println("HotRefreshRotAlignPID Complete");
     // }
+
+    //CONSTRUCTOR
+           
+    //INITIALIZE
 }
