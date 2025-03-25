@@ -18,7 +18,7 @@ public class DrivetrainLeftAlign extends Command {
     private final VisionManager visionManager;
 
     ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0)); //-3.5
-    ProfiledPIDController LRPIDController = new ProfiledPIDController(3.35, 0, 0, new Constraints(4.0, 4.0)); //-3.35
+    ProfiledPIDController LRPIDController = new ProfiledPIDController(3.45, 0, 0, new Constraints(4.0, 4.0)); //-3.35
     ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0)); // +-on P term                                 
 
     public DrivetrainLeftAlign(Drivetrain drivetrain, VisionManager visionManager) {

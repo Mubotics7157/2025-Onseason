@@ -93,16 +93,11 @@ public class RobotContainer {
         //====================Swerve Heading Reset====================
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
-        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
-        driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
-
         //====================Align Left====================
-        //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain));
+        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Right====================
-        //driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain));
-
-        //
+        driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Ground Intake====================
         // driverController.leftTrigger().whileTrue(new RobotTeleIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint, driverController.getHID()));
