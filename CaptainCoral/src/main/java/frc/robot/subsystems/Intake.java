@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -29,18 +32,18 @@ public class Intake extends SubsystemBase {
     public Intake() {
         System.out.println("====================Intake Subsystem Online====================");
 
-        // //HotRegreshIntakeConfig
-        // SmartDashboard.putNumber("Intake kG", 0.0);
-        // SmartDashboard.putNumber("Intake kP", 0.0);
-        // SmartDashboard.putNumber("Intake kI", 0.0);
-        // SmartDashboard.putNumber("Intake kD", 0.0);
-        // SmartDashboard.putNumber("Intake kVelo", 0.0);
-        // SmartDashboard.putNumber("Intake kAccel", 0.0);
+        //HotRegreshIntakeConfig
+        SmartDashboard.putNumber("Intake kG", 0.0);
+        SmartDashboard.putNumber("Intake kP", 0.0);
+        SmartDashboard.putNumber("Intake kI", 0.0);
+        SmartDashboard.putNumber("Intake kD", 0.0);
+        SmartDashboard.putNumber("Intake kVelo", 0.0);
+        SmartDashboard.putNumber("Intake kAccel", 0.0);
 
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        encoder.setInverted(true);
+        encoder.setInverted(false);
         encoder.setOffset(Rotation2d.fromRotations(Constants.Intake_Wrist_Through_Bore_Offset));
 
         //Brake Mode
@@ -54,8 +57,8 @@ public class Intake extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
-        // motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
+        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
+        motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
@@ -121,7 +124,7 @@ public class Intake extends SubsystemBase {
 
     //====================Intake Roller Methods====================
     public void setIntakeRollerMotorSpeed(double speed) {
-        Intake_Roller_Motor.set(speed);
+        Intake_Roller_Motor.set(-1 * speed);
     }
 
     //====================Indexer Methods====================
@@ -129,23 +132,23 @@ public class Intake extends SubsystemBase {
         Intake_Indexer_Master_Motor.set(speed);
     }
 
-    //  public void HotRegreshIntakeConfig() {
-    //     //General Configurations
-    //     var generalSlotConfigs = new Slot0Configs();
-    //     generalSlotConfigs.kG = SmartDashboard.getNumber("Intake kG", 0.0);
-    //     generalSlotConfigs.kP = SmartDashboard.getNumber("Intake kP", 0.0);
-    //     generalSlotConfigs.kI = SmartDashboard.getNumber("Intake kI", 0.0);
-    //     generalSlotConfigs.kD = SmartDashboard.getNumber("Intake kD", 0.0);
+    public void HotRegreshIntakeConfig() {
+        //General Configurations
+        var generalSlotConfigs = new Slot0Configs();
+        generalSlotConfigs.kG = SmartDashboard.getNumber("Intake kG", 0.0);
+        generalSlotConfigs.kP = SmartDashboard.getNumber("Intake kP", 0.0);
+        generalSlotConfigs.kI = SmartDashboard.getNumber("Intake kI", 0.0);
+        generalSlotConfigs.kD = SmartDashboard.getNumber("Intake kD", 0.0);
 
-    //     //Motion Magic
-    //     var motionMagicConfigs = new MotionMagicConfigs();
-    //     motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Intake kVelo", 0.0);
-    //     motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Intake kAccel", 0.0);
+        //Motion Magic
+        var motionMagicConfigs = new MotionMagicConfigs();
+        motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Intake kVelo", 0.0);
+        motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Intake kAccel", 0.0);
 
-    //     //Applies Configs
-    //     Intake_Wrist_Motor.getConfigurator().apply(generalSlotConfigs);
-    //     Intake_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
+        //Applies Configs
+        Intake_Wrist_Motor.getConfigurator().apply(generalSlotConfigs);
+        Intake_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
 
-    //     System.out.println("HotRegreshIntakeConfig Complete");
-    // }
+        System.out.println("HotRegreshIntakeConfig Complete");
+    }
 }
