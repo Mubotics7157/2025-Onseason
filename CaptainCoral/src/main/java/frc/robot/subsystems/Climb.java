@@ -9,7 +9,8 @@ import frc.robot.Devices;
 import frc.robot.Constants;
 
 public class Climb extends SubsystemBase {
-    private final TalonFX Climb_Motor = new TalonFX(Devices.CLIMB_MOTOR);
+    private final TalonFX Climb_Wrist_Motor = new TalonFX(Devices.CLIMB_WRIST_MOTOR);
+    private final TalonFX Climb_Roller_Motor = new TalonFX(Devices.CLIMB_ROLLER_MOTOR);
 
     public static Climb getInstance() {
         return instance;
@@ -28,28 +29,33 @@ public class Climb extends SubsystemBase {
         //Current Limits
         var climbLimitConfigs = climbMotorConfigs.CurrentLimits;
         climbLimitConfigs.StatorCurrentLimit = Constants.Climb_Current_Limit;
-        climbLimitConfigs.StatorCurrentLimitEnable = true;    
+        climbLimitConfigs.StatorCurrentLimitEnable = true; 
 
         //Applies Configs
-        Climb_Motor.getConfigurator().apply(climbMotorConfigs);
+        Climb_Wrist_Motor.getConfigurator().apply(climbMotorConfigs);
+        Climb_Roller_Motor.getConfigurator().apply(climbMotorConfigs);
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Climb Motor Encoder", getClimbEncoder());
-        SmartDashboard.putNumber("Climb Stator Current", getClimbStatorCurrent());   
+        //SmartDashboard.putNumber("Climb Motor Encoder", getClimbWristEncoder());
+        //SmartDashboard.putNumber("Climb Stator Current", getClimbWristStatorCurrent());   
     }
 
     //====================Climb Methods====================
-    public void setClimbMotorSpeed(double speed) {
-        Climb_Motor.set(speed);
+    public void setClimbWristMotorSpeed(double speed) {
+        Climb_Wrist_Motor.set(speed);
     }
 
-    public double getClimbEncoder() {
-        return Climb_Motor.getPosition().getValueAsDouble();
+    public void setClimbRollerSpeed(double speed) {
+        Climb_Roller_Motor.set(speed);
     }
 
-    public double getClimbStatorCurrent() {
-        return Climb_Motor.getStatorCurrent().getValueAsDouble();
-    }
+    // public double getClimbWristEncoder() {
+    //     return Climb_Wrist_Motor.getPosition().getValueAsDouble();
+    // }
+
+    // public double getClimbWristStatorCurrent() {
+    //     return Climb_Wrist_Motor.getStatorCurrent().getValueAsDouble();
+    // }
 }
