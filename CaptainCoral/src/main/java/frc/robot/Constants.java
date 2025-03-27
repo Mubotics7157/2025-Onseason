@@ -1,6 +1,9 @@
 package frc.robot;
 import static edu.wpi.first.units.Units.*;
 
+import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
+
 public class Constants {
     //====================General====================
     public static final double Absolute_Zero = 0.0;
@@ -13,25 +16,40 @@ public class Constants {
     public static final double Drivetrain_Speed_Multiplier = 1.0;
     public static final double Drivetrain_Turn_Multiplier = 1.0;
 
-    //Auto Align
-    public static final double Drivetrain_X_Pose_kP = 0.01;
-    public static final double Drivetrain_FB_kP = 0.015;
-    public static final double Drivetrain_LR_kP = 0.0055;
-    public static final double Drivetrain_Rot_kP = 0.02;
-    public static final double Left_Pole_Setpoint = 25.0;
-    public static final double Right_Pole_Setpoint = -30.0;
-    public static final double Square_Up_Setpoint = 0.0;
-    public static final double Drivetrain_Auto_Align_Tolerance = 0.025;
-
     //Elevator Placement
     public static final double Drivetrain_Elevator_Speed_Multiplier = 0.15;
     public static final double Drivetrain_Elevator_Turn_Multiplier = 0.7;
     public static final double Drivetrain_Elevator_Tolerance = 1.0;
 
+    //FBPIDController
+    public static final double FB_kP = 2.75;
+    public static final double FB_kI = 0.0;
+    public static final double FB_kD = 0.0;
+    public static final double FB_kVelo = 4.0;
+    public static final double FB_kAccel = 4.0;
+    public static final double FB_Setpoint = 0.55;
+
+    //LRPIDController
+    public static final double LR_kP = 3.45;
+    public static final double LR_kI = 0.0;
+    public static final double LR_kD = 0.0;
+    public static final double LR_kVelo = 4.0;
+    public static final double LR_kAccel = 4.0;
+    public static final double L_Setpoint = -0.16;
+    public static final double R_Setpoint = 0.16;
+
+    //LRPIDController
+    public static final double Rot_kP = 0.00775;
+    public static final double Rot_kI = 0.0;
+    public static final double Rot_kD = 0.0;
+    public static final double Rot_kVelo = 1.0;
+    public static final double Rot_kAccel = 1.0;
+    public static final double Rot_Setpoint = 0.0;
+
     //====================Intake====================
     //Through Bore Encoder
     public static final double Intake_Wrist_Through_Bore_Gear_Ratio = (50/8) * (62/16);
-    public static final double Intake_Wrist_Through_Bore_Offset = 0.3; //0.94312122289
+    public static final double Intake_Wrist_Through_Bore_Offset = 0.94312122289; //0.94312122289
 
     //Intake Motion Magic
     public static final double Intake_Wrist_kG = 0.0; //2.0
@@ -58,21 +76,20 @@ public class Constants {
     public static final double End_Effector_Wrist_kP = 2.0;
     public static final double End_Effector_Wrist_kI = 0.0;
     public static final double End_Effector_Wrist_kD = 0.03;
-    public static final double End_Effector_Wrist_Velocity = 150.0; //75
-    public static final double End_Effector_Wrist_Acceleration = 300.0; //150
+    public static final double End_Effector_Wrist_Velocity = 75.0; //150
+    public static final double End_Effector_Wrist_Acceleration = 150.0; //300
 
     //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
     public static final double End_Effector_Roller_Current_Limit = 120.0;
 
     //~~~~~End Effector Speeds~~~~~
-    //TEMPORARY
     //Coral
     public static final double End_Effector_Ground_Intake_Speed = 0.3;
     public static final double End_Effector_Ground_Outake_Speed = -0.4;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.0;
     public static final double End_Effector_Score_L1_Coral_Speed = 0.3;
-    public static final double End_Effector_Score_L2_L3_L4_Speed = 0.75; //0.175
+    public static final double End_Effector_Score_L2_L3_L4_Speed = 0.35; //0.175
 
     //Algae
     public static final double End_Effector_Algae_Intake_Speed = 1.0;
@@ -83,19 +100,19 @@ public class Constants {
     public static final double End_Effector_Wrist_Zero_Setpoint = 0.0;
     public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 2.56;
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
-    public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 14.5;
+    public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 11.5;
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 15.5;
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.02;
 
     //Algae  
-    public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 31.0;
+    public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 36.0;
     public static final double End_Effector_Wrist_Algae_Ground_Setpoint = 37.0;
     public static final double End_Effector_Wrist_Algae_Stow_Setpoint = 15.5; //4.0
     public static final double End_Effector_Wrist_Processor_Score_Setpoint = 31.0;
     public static final double End_Effector_Wrist_Net_Score_Setpoint = 21.0;
 
-    public static final double End_Effector_Wrist_Climb_Start_Setpoint = 1.0;
-    public static final double End_Effector_Wrist_Climb_End_Setpoint = 12.00;
+    public static final double End_Effector_Wrist_Climb_Start_Setpoint = 0.0;
+    public static final double End_Effector_Wrist_Climb_End_Setpoint = 30.0;
 
     //====================Elevator====================
     //Elevator Motion Magic
@@ -115,18 +132,18 @@ public class Constants {
     public static final double Elevator_Ground_Coral_Setpoint = 0.0;
     public static final double Elevator_Coral_Station_Setpoint = 6.5;
     public static final double Elevator_L1_Setpoint = 3.5;
-    public static final double Elevator_L2_Setpoint = 4.0; //6.15
-    public static final double Elevator_L3_Setpoint = 18.0; //13.5
-    public static final double Elevator_L4_Setpoint = 24.14; //25.85
+    public static final double Elevator_L2_Setpoint = 4.5;
+    public static final double Elevator_L3_Setpoint = 11.5;
+    public static final double Elevator_L4_Setpoint = 24.14;
 
     //Algae
-    public static final double Elevator_Bottom_Algae_Setpoint = 13.5;
-    public static final double Elevator_Top_Algae_Setpoint = 21.0;
+    public static final double Elevator_Bottom_Algae_Setpoint = 13.0;
+    public static final double Elevator_Top_Algae_Setpoint = 19.5;
     public static final double Elevator_Ground_Algae_Setpoint = 0.0;
     public static final double Elevator_Processor_Score_Setpoint = 0.0;
     public static final double Elevator_Net_Score_Setpoint = 24.14;
 
-    public static final double Elevator_Climb_Setpoint = 16.5;
+    public static final double Elevator_Climb_Setpoint = 0.0;
 
     //====================Climb====================
     //Climb Current Limit

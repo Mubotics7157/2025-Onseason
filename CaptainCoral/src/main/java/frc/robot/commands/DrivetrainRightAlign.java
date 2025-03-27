@@ -17,9 +17,9 @@ public class DrivetrainRightAlign extends Command {
     private final Drivetrain drivetrain;
     private final VisionManager visionManager;
 
-    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0)); //-3.5
-    ProfiledPIDController LRPIDController = new ProfiledPIDController(3.45, 0, 0, new Constraints(4.0, 4.0)); //-3.35
-    ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0)); // +-on P term                                 
+    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0));
+    ProfiledPIDController LRPIDController = new ProfiledPIDController(7.75, 0, 0.075, new Constraints(0.2, 0.2));
+    ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));                                
 
     public DrivetrainRightAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
@@ -72,7 +72,7 @@ public class DrivetrainRightAlign extends Command {
         //LR Speed Calculation
         double LRSpeed;
         if (visionManager.deriveLRPose() != 0.0) {
-            LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.17); //-0.17 for left
+            LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.1775);
         } else {
             LRSpeed = 0.0;
         }
