@@ -19,13 +19,14 @@ public final class Devices {
     public static final int END_EFFECTOR_WRIST_MOTOR = 17;
     public static final int END_EFFECTOR_ROLLER_MOTOR = 18;
     public static final int END_EFFECTOR_WRIST_THROUGH_BORE_PORT = 0;
-    public static final int END_EFFECTOR_PHOTOELECTRIC_FRONT_PORT = 8;
-    public static final int END_EFFECTOR_PHOTOELECTRIC_BACK_PORT = 1;
+    public static final int END_EFFECTOR_PHOTOELECTRIC_FRONT_PORT = 1;
+    public static final int END_EFFECTOR_PHOTOELECTRIC_BACK_PORT = 8; //0, 1, 7, 8
     
     //====================Elevator====================
     public static final int ELEVATOR_MASTER_MOTOR = 19;
     public static final int ELEVATOR_SLAVE_MOTOR = 20;
 
     //====================Climb====================
-    public static final int CLIMB_MOTOR = 21;
+    public static final int CLIMB_WRIST_MOTOR = 21;
+    public static final int CLIMB_ROLLER_MOTOR = 22;
 }
