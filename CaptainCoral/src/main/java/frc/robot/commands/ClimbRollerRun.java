@@ -3,11 +3,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Climb;
 
-public class ClimbRun extends Command {
+public class ClimbRollerRun extends Command {
     private final double speed;
     private final Climb climb;
 
-    public ClimbRun(Climb climb, double speed) {
+    public ClimbRollerRun(Climb climb, double speed) {
         this.speed = speed;
         this.climb = Climb.getInstance();
         addRequirements(climb);
@@ -15,19 +15,19 @@ public class ClimbRun extends Command {
 
     @Override
     public void initialize() {
-        System.out.println("ClimbRun Online");
+        System.out.println("ClimbRollerRun Online");
     }
 
     @Override
     public void execute() {
         double motorSpeed = speed;
-        climb.setClimbMotorSpeed(motorSpeed);
+        climb.setClimbRollerSpeed(motorSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        climb.setClimbMotorSpeed(Constants.Absolute_Zero);
-        System.out.println("ClimbRun Offline");
+        climb.setClimbRollerSpeed(Constants.Absolute_Zero);
+        System.out.println("ClimbRollerRun Offline");
     }
 
     @Override
