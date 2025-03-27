@@ -35,8 +35,10 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.commands.ElevatorJog;
 import frc.robot.subsystems.Climb;
 import frc.robot.commands.AlgaeNetScore;
-import frc.robot.commands.ClimbRun;
+import frc.robot.commands.ClimbRollerRun;
+import frc.robot.commands.ClimbWristRun;
 import frc.robot.commands.DrivetrainLeftAlign;
+//import frc.robot.commands.DrivetrainLeftAlign;
 //Limelight Imports
 import frc.robot.commands.DrivetrainRightAlign;
 
@@ -95,10 +97,10 @@ public class RobotContainer {
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
+        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Right====================
-        //driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
+        driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Ground Intake====================
         driverController.leftTrigger().whileTrue(new RobotTeleIntakeGround(EndEffector.getInstance(), Constants.End_Effector_Ground_Intake_Speed, Constants.End_Effector_Wrist_Coral_Ground_Setpoint, Intake.getInstance(), Constants.Intake_Ground_Deploy_Setpoint, Constants.Intake_Ground_Run_Speed, Elevator.getInstance(), Constants.Elevator_Ground_Coral_Setpoint, driverController.getHID()));
@@ -165,24 +167,32 @@ public class RobotContainer {
         //driverController.leftBumper().onTrue(new InstantCommand(Elevator.getInstance()::HotRefreshElevatorConfig));
 
         //====================Intake Hot PID Refresh====================
-        driverController.leftBumper().onTrue(new InstantCommand(Intake.getInstance()::HotRegreshIntakeConfig));
+        //driverController.leftBumper().onTrue(new InstantCommand(Intake.getInstance()::HotRegreshIntakeConfig));
 
         //====================OPERATOR CONTROLLER BINDINGS====================
         //====================Elevator Climb + End Effector=====================
-        operatorController.leftTrigger().whileTrue(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_Start_Setpoint, Elevator.getInstance(), Constants.Elevator_Climb_Setpoint));
-        operatorController.leftTrigger().onFalse(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_End_Setpoint, Elevator.getInstance(), Constants.Absolute_Zero));
+        operatorController.a().whileTrue(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_Start_Setpoint, Elevator.getInstance(), Constants.Elevator_Climb_Setpoint));
+        operatorController.a().onFalse(new RobotHome(EndEffector.getInstance(), Constants.End_Effector_Wrist_Climb_End_Setpoint, Elevator.getInstance(), Constants.Absolute_Zero));
 
-        //====================Climb Up=====================
-        operatorController.leftBumper().whileTrue(new ClimbRun(Climb.getInstance(), Constants.Climb_Up_Speed));
-        operatorController.leftBumper().onFalse(new ClimbRun(Climb.getInstance(), Constants.Absolute_Zero));
+        //====================Climb Wrist Up=====================
+        operatorController.rightTrigger().whileTrue(new ClimbWristRun(Climb.getInstance(), Constants.Climb_Up_Speed));
+        operatorController.rightTrigger().onFalse(new ClimbWristRun(Climb.getInstance(), Constants.Absolute_Zero));
 
-        //====================Climb Down=====================
-        operatorController.rightBumper().whileTrue(new ClimbRun(Climb.getInstance(), Constants.Climb_Down_Speed));
-        operatorController.rightBumper().onFalse(new ClimbRun(Climb.getInstance(), Constants.Absolute_Zero));
+        //====================Climb Wrist Down=====================
+        operatorController.rightBumper().whileTrue(new ClimbWristRun(Climb.getInstance(), Constants.Climb_Down_Speed));
+        operatorController.rightBumper().onFalse(new ClimbWristRun(Climb.getInstance(), Constants.Absolute_Zero));
+
+        //====================Climb Roller Clockwise=====================
+        operatorController.leftTrigger().whileTrue(new ClimbRollerRun(Climb.getInstance(), Constants.Climb_Up_Speed));
+        operatorController.leftTrigger().onFalse(new ClimbRollerRun(Climb.getInstance(), Constants.Absolute_Zero));
+
+        //====================Climb Roller CounterClockwise=====================
+        operatorController.leftBumper().whileTrue(new ClimbRollerRun(Climb.getInstance(), Constants.Climb_Down_Speed));
+        operatorController.leftBumper().onFalse(new ClimbRollerRun(Climb.getInstance(), Constants.Absolute_Zero));
 
         //====================Processor=====================
-        operatorController.rightTrigger().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Processor_Score_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Processor_Score_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
-        operatorController.rightTrigger().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Stow_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
+        //operatorController.rightTrigger().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Processor_Score_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Processor_Score_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
+        //operatorController.rightTrigger().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Stow_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
         //====================Elevator Jog=====================
         operatorController.povUp().whileTrue(new ElevatorJog(Elevator.getInstance(), () -> operatorController.getRightY() * Devices.JOYSTICK_JOG_SPEED_MULTIPLIER));
@@ -207,8 +217,8 @@ public class RobotContainer {
         // operatorController.a().onFalse(new SuperIntake(Intake.getInstance(), Constants.Intake_Zero_Setpoint, Constants.Absolute_Zero));
 
         //====================Spit L1=====================
-        operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L1_Coral_Speed));
-        operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
+        // operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.End_Effector_Score_L1_Coral_Speed));
+        // operatorController.a().whileTrue(new EndEffectorScore(EndEffector.getInstance(), Constants.Absolute_Zero));
     }
 
         public Command getAutonomousCommand() {
