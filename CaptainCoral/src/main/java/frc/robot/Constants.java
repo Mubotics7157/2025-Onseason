@@ -102,7 +102,7 @@ public class Constants {
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 11.5;
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 15.5;
-    public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.02;
+    public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.0;
 
     //Algae  
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 36.0;
