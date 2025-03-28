@@ -23,7 +23,7 @@ public class DrivetrainRightAlign extends Command {
 
     public DrivetrainRightAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
-        this.visionManager = visionManager;
+        this.visionManager = VisionManager.getInstance();
     
         addRequirements(drivetrain);
         addRequirements(visionManager);

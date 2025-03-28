@@ -33,7 +33,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-
     //Match Time Log
     double matchTime = Timer.getMatchTime();
     SmartDashboard.putNumber("Match Time", matchTime);

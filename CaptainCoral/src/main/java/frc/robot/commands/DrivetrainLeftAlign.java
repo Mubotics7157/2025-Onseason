@@ -23,7 +23,7 @@ public class DrivetrainLeftAlign extends Command {
 
     public DrivetrainLeftAlign(Drivetrain drivetrain, VisionManager visionManager) {
         this.drivetrain = drivetrain;
-        this.visionManager = visionManager;
+        this.visionManager = VisionManager.getInstance();
     
         addRequirements(drivetrain);
         addRequirements(visionManager);
