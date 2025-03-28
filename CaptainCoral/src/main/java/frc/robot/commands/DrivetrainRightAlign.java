@@ -17,7 +17,7 @@ public class DrivetrainRightAlign extends Command {
     private final Drivetrain drivetrain;
     private final VisionManager visionManager;
 
-    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0));
+    ProfiledPIDController FBPIDController = new ProfiledPIDController(5.0, 0, 0.01, new Constraints(0.2, 0.2)); //2.75, 0, 0, 4
     ProfiledPIDController LRPIDController = new ProfiledPIDController(7.75, 0, 0.075, new Constraints(0.2, 0.2));
     ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));                                
 
@@ -64,7 +64,7 @@ public class DrivetrainRightAlign extends Command {
         //FB Speed Calculation
         double FBSpeed;
         if (visionManager.deriveFBPose() != 0.0) {
-            FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -0.55);
+            FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -1.0); //-0.55
         } else {
             FBSpeed = 0.0;
         }
@@ -93,8 +93,12 @@ public class DrivetrainRightAlign extends Command {
                 .withSteerRequestType(SteerRequestType.MotionMagicExpo);
         drivetrain.setControl(drivetrainRequest
                 .withVelocityX(FBSpeed) //FBSpeed
-                .withVelocityY(LRSpeed) //LRSpeed
+                .withVelocityY(0.0) //LRSpeed
                 .withRotationalRate(RotSpeed)); //RotSpeed
+
+        SmartDashboard.putNumber("FBSpeed", FBSpeed);
+        SmartDashboard.putNumber("LRSpeed", LRSpeed);
+        SmartDashboard.putNumber("RotSpeed", RotSpeed);
     }
 
     @Override

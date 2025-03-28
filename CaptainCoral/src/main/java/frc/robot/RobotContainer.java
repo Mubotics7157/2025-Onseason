@@ -97,7 +97,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
+        //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Right====================
         driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
