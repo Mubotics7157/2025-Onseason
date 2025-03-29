@@ -33,12 +33,12 @@ public class Intake extends SubsystemBase {
         System.out.println("====================Intake Subsystem Online====================");
 
         //HotRegreshIntakeConfig
-        SmartDashboard.putNumber("Intake kG", 0.0);
-        SmartDashboard.putNumber("Intake kP", 0.0);
-        SmartDashboard.putNumber("Intake kI", 0.0);
-        SmartDashboard.putNumber("Intake kD", 0.0);
-        SmartDashboard.putNumber("Intake kVelo", 0.0);
-        SmartDashboard.putNumber("Intake kAccel", 0.0);
+        // SmartDashboard.putNumber("Intake kG", 0.0);
+        // SmartDashboard.putNumber("Intake kP", 0.0);
+        // SmartDashboard.putNumber("Intake kI", 0.0);
+        // SmartDashboard.putNumber("Intake kD", 0.0);
+        // SmartDashboard.putNumber("Intake kVelo", 0.0);
+        // SmartDashboard.putNumber("Intake kAccel", 0.0);
 
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
@@ -119,7 +119,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void setIntakeWristSpeed(double speed) {
-        Intake_Wrist_Motor.set(speed);
+        Intake_Wrist_Motor.set(-speed);
     }
 
     //====================Intake Roller Methods====================
@@ -132,23 +132,23 @@ public class Intake extends SubsystemBase {
         Intake_Indexer_Master_Motor.set(speed);
     }
 
-    public void HotRegreshIntakeConfig() {
-        //General Configurations
-        var generalSlotConfigs = new Slot0Configs();
-        generalSlotConfigs.kG = SmartDashboard.getNumber("Intake kG", 0.0);
-        generalSlotConfigs.kP = SmartDashboard.getNumber("Intake kP", 0.0);
-        generalSlotConfigs.kI = SmartDashboard.getNumber("Intake kI", 0.0);
-        generalSlotConfigs.kD = SmartDashboard.getNumber("Intake kD", 0.0);
+    // public void HotRegreshIntakeConfig() {
+    //     //General Configurations
+    //     var generalSlotConfigs = new Slot0Configs();
+    //     generalSlotConfigs.kG = SmartDashboard.getNumber("Intake kG", 0.0);
+    //     generalSlotConfigs.kP = SmartDashboard.getNumber("Intake kP", 0.0);
+    //     generalSlotConfigs.kI = SmartDashboard.getNumber("Intake kI", 0.0);
+    //     generalSlotConfigs.kD = SmartDashboard.getNumber("Intake kD", 0.0);
 
-        //Motion Magic
-        var motionMagicConfigs = new MotionMagicConfigs();
-        motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Intake kVelo", 0.0);
-        motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Intake kAccel", 0.0);
+    //     //Motion Magic
+    //     var motionMagicConfigs = new MotionMagicConfigs();
+    //     motionMagicConfigs.MotionMagicCruiseVelocity = SmartDashboard.getNumber("Intake kVelo", 0.0);
+    //     motionMagicConfigs.MotionMagicAcceleration = SmartDashboard.getNumber("Intake kAccel", 0.0);
 
-        //Applies Configs
-        Intake_Wrist_Motor.getConfigurator().apply(generalSlotConfigs);
-        Intake_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
+    //     //Applies Configs
+    //     Intake_Wrist_Motor.getConfigurator().apply(generalSlotConfigs);
+    //     Intake_Wrist_Motor.getConfigurator().apply(motionMagicConfigs);
 
-        System.out.println("HotRegreshIntakeConfig Complete");
-    }
+    //     System.out.println("HotRegreshIntakeConfig Complete");
+    // }
 }

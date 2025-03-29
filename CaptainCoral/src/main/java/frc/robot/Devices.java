@@ -12,15 +12,14 @@ public final class Devices {
     public static final int INTAKE_WRIST_MOTOR = 14;
     public static final int INTAKE_ROLLER_MOTOR = 15;
     public static final int INDEXER_MOTOR = 16;
-    public static final int INTAKE_WRIST_THROUGH_BORE_PORT = 7;
+    public static final int INTAKE_WRIST_THROUGH_BORE_PORT = 7; //THIS IS CORRECT
     //public static final int INDEXER_PHOTOELECTRIC_PORT = 7; 
 
     //====================End Effector====================
     public static final int END_EFFECTOR_WRIST_MOTOR = 17;
     public static final int END_EFFECTOR_ROLLER_MOTOR = 18;
-    public static final int END_EFFECTOR_WRIST_THROUGH_BORE_PORT = 0;
-    public static final int END_EFFECTOR_PHOTOELECTRIC_FRONT_PORT = 1;
-    public static final int END_EFFECTOR_PHOTOELECTRIC_BACK_PORT = 8;
+    public static final int END_EFFECTOR_PHOTOELECTRIC_FRONT_PORT = 0; //0, 1, 8
+    public static final int END_EFFECTOR_PHOTOELECTRIC_BACK_PORT = 1;
     
     //====================Elevator====================
     public static final int ELEVATOR_MASTER_MOTOR = 19;

@@ -52,12 +52,12 @@ public class Constants {
     public static final double Intake_Wrist_Through_Bore_Offset = 0.94312122289; //0.94312122289
 
     //Intake Motion Magic
-    public static final double Intake_Wrist_kG = 0.0; //2.0
+    public static final double Intake_Wrist_kG = 2.0; //2.0
     public static final double Intake_Wrist_kP = 0.0;
-    public static final double Intake_Wrist_kI = 0.0; //0.03
+    public static final double Intake_Wrist_kI = 0.03; //0.03
     public static final double Intake_Wrist_kD = 0.0;
-    public static final double Intake_Wrist_Velocity = 0.0; //75.0
-    public static final double Intake_Wrist_Acceleration = 0.0; //150
+    public static final double Intake_Wrist_Velocity = 100.0; //75.0
+    public static final double Intake_Wrist_Acceleration = 200.0; //150
 
     //Intake Current Limits
     public static final double Intake_Wrist_Current_Limit = 80.0;
@@ -68,8 +68,8 @@ public class Constants {
     public static final double Outake_Ground_Run_Speed = -0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 8.8; // OLD: 28
-    public static final double Intake_Ground_Deploy_Setpoint = 0.8; // OLD: 18
+    public static final double Intake_Zero_Setpoint = 20.0; // OLD: 39
+    public static final double Intake_Ground_Deploy_Setpoint = 9.0; // OLD: 30
 
     //====================End Effector====================
     //End Effector Motion Magic
@@ -85,7 +85,7 @@ public class Constants {
 
     //~~~~~End Effector Speeds~~~~~
     //Coral
-    public static final double End_Effector_Ground_Intake_Speed = 0.3;
+    public static final double End_Effector_Ground_Intake_Speed = 0.6;
     public static final double End_Effector_Ground_Outake_Speed = -0.4;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.0;
     public static final double End_Effector_Score_L1_Coral_Speed = 0.3;
