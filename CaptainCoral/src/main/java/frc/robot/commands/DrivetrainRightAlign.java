@@ -65,38 +65,48 @@ package frc.robot.commands;
      @Override
      public void execute() {
         double FB_Reading = visionManager.deriveFBPose();
+        double LR_Reading = visionManager.deriveLRPose();
+        double Rot_Reading = visionManager.deriveRotPose();
 
+        //====================PID Position Error Checks (On Startup)====================
+        if (!LRPositionHasReset && LR_Reading!= 0) {
+            LRPIDController.reset(LR_Reading);
+            LRPositionHasReset = true;
+        } 
+        
         if (!FBPositionHasReset && FB_Reading!= 0) {
             FBPIDController.reset(FB_Reading);
             FBPositionHasReset = true;
         } 
 
-         //FB Speed Calculation
-         double FBSpeed;
-         if (visionManager.deriveFBPose() != 0.0) {
-             FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -0.575);
-         } else {
-             FBSpeed = 0.0;
-         }
- 
-         //LR Speed Calculation
-         double LRSpeed;
-         if (visionManager.deriveLRPose() != 0.0) {
-             LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.2);
-         } else {
-             LRSpeed = 0.0;
-         }
- 
-         // Rot Speed Calculation
-         double RotSpeed;
-         if (visionManager.deriveRotPose() != 0.0) {
-             RotSpeed = rotationPIDController.calculate(visionManager.deriveRotPose(), 1.0);
-         } else {
-             RotSpeed = 0.0;
-         }
- 
-         // Negate to ensure the correct direction
-         RotSpeed = -RotSpeed; 
+        if (!RotPositionHasReset && Rot_Reading!= 0) {
+            ROTPIDController.reset(Rot_Reading);
+            RotPositionHasReset = true;
+        } 
+
+        //====================PID Speed Calculations====================
+        double LRSpeed;
+        if (LR_Reading != 0.0) {
+            LRSpeed = -LRPIDController.calculate(LR_Reading, -0.14); //0.2
+        } else {
+            LRSpeed = 0.0;
+        }
+
+        double FBSpeed;
+        if (FB_Reading != 0.0) {
+            FBSpeed = FBPIDController.calculate(FB_Reading, -0.45); //-0.55
+        } else {
+            FBSpeed = 0.0;
+        }
+
+        double RotSpeed;
+        if (Rot_Reading != 0.0) {
+            RotSpeed = ROTPIDController.calculate(Rot_Reading, 0.0); //1.0
+        } else {
+            RotSpeed = 0.0;
+        }
+
+        RotSpeed = -RotSpeed; 
  
          SwerveRequest.RobotCentric drivetrainRequest = new SwerveRequest.RobotCentric()
                  .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
