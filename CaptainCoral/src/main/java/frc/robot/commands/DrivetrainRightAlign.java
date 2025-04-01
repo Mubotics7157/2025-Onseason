@@ -124,9 +124,9 @@ package frc.robot.commands;
                  .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
                  .withSteerRequestType(SteerRequestType.MotionMagicExpo);
          drivetrain.setControl(drivetrainRequest
-                 .withVelocityX(FBSpeed) //FBSpeed
+                 .withVelocityX(0.0) //FBSpeed
                  .withVelocityY(LRSpeed) //LRSpeed
-                 .withRotationalRate(RotSpeed)); //RotSpeed
+                 .withRotationalRate(0.0)); //RotSpeed
  
          SmartDashboard.putNumber("FBSpeed", FBSpeed);
          SmartDashboard.putNumber("LRSpeed", LRSpeed);
