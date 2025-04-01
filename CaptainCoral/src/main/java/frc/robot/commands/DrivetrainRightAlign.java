@@ -110,6 +110,8 @@ package frc.robot.commands;
      @Override
      public void end(boolean interrupted) {
          System.out.println("DrivetrainPoseAlign Offline");
+
+        FBPositionHasReset = false;
      }
  
      @Override
