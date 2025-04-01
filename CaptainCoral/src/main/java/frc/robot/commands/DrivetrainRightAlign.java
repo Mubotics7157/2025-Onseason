@@ -24,6 +24,8 @@ package frc.robot.commands;
           boolean FBPositionHasReset = false;
           boolean LRPositionHasReset = false;
           boolean RotPositionHasReset = false;
+
+          Pose3d pose;
       
           public DrivetrainRightAlign(Drivetrain drivetrain, VisionManager visionManager) {
               this.drivetrain = drivetrain;
@@ -66,9 +68,31 @@ package frc.robot.commands;
  
      @Override
      public void execute() {
-        double FB_Reading = visionManager.deriveFBPose();
-        double LR_Reading = visionManager.deriveLRPose();
-        double Rot_Reading = visionManager.deriveRotPose();
+        pose = visionManager.getPose();
+
+        double FB_Reading = 0.0;
+        double LR_Reading = 0.0;
+        double Rot_Reading = 0.0;
+
+        if (pose != null) {
+            FB_Reading = pose.getX();
+            LR_Reading = pose.getZ();
+
+            if (pose.getRotation() != null) {
+                Rot_Reading = Math.toDegrees(pose.getRotation().getY());
+              } else {
+                Rot_Reading = 0.0;
+              }
+        }
+
+        SmartDashboard.putNumber("LRPOSE", Math.round(pose.getX() * 100000.0) / 100000.0);
+        SmartDashboard.putNumber("FBPOSE", Math.round(pose.getZ() * 100000.0) / 100000.0);
+
+        if (pose.getRotation() != null) {
+        SmartDashboard.putNumber("ROTPOSE", Math.toDegrees(pose.getRotation().getY()));
+        } else {
+        SmartDashboard.putNumber("ROTPOSE", 0);
+        }
 
         //====================PID Position Error Checks (On Startup)====================
         if (!LRPositionHasReset && LR_Reading!= 0) {
@@ -96,7 +120,7 @@ package frc.robot.commands;
 
         double FBSpeed;
         if (FB_Reading != 0.0) {
-            FBSpeed = FBPIDController.calculate(FB_Reading, -0.45); //-0.55
+            FBSpeed = FBPIDController.calculate(FB_Reading, -0.575); //-0.55
         } else {
             FBSpeed = 0.0;
         }
@@ -114,9 +138,9 @@ package frc.robot.commands;
                  .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
                  .withSteerRequestType(SteerRequestType.MotionMagicExpo);
          drivetrain.setControl(drivetrainRequest
-                 .withVelocityX(FBSpeed) //FBSpeed
-                 .withVelocityY(LRSpeed) //LRSpeed
-                 .withRotationalRate(RotSpeed)); //RotSpeed
+                 .withVelocityX(-FBSpeed) //FBSpeed
+                 .withVelocityY(-LRSpeed) //LRSpeed
+                 .withRotationalRate(0.0)); //RotSpeed
      }
  
      @Override

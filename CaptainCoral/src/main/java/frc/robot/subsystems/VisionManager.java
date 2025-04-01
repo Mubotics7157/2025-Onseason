@@ -27,7 +27,7 @@ public class VisionManager extends SubsystemBase {
 
   @Override
   public void periodic() {
-    logPose();
+    //logPose();
   }
 
   public Pose3d getPose() {
