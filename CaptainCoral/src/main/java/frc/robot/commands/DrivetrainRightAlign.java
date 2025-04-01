@@ -19,9 +19,11 @@ package frc.robot.commands;
       
           ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0));
           ProfiledPIDController LRPIDController = new ProfiledPIDController(7.75, 0, 0.075, new Constraints(0.2, 0.2));
-          ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));
+          ProfiledPIDController ROTPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));
           
           boolean FBPositionHasReset = false;
+          boolean LRPositionHasReset = false;
+          boolean RotPositionHasReset = false;
       
           public DrivetrainRightAlign(Drivetrain drivetrain, VisionManager visionManager) {
               this.drivetrain = drivetrain;
@@ -87,7 +89,7 @@ package frc.robot.commands;
         //====================PID Speed Calculations====================
         double LRSpeed;
         if (LR_Reading != 0.0) {
-            LRSpeed = -LRPIDController.calculate(LR_Reading, -0.14); //0.2
+            LRSpeed = -LRPIDController.calculate(LR_Reading, 0.2); //0.2
         } else {
             LRSpeed = 0.0;
         }
@@ -122,6 +124,8 @@ package frc.robot.commands;
          System.out.println("DrivetrainPoseAlign Offline");
 
         FBPositionHasReset = false;
+        LRPositionHasReset = false;
+        RotPositionHasReset = false;
      }
  
      @Override
