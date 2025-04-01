@@ -43,8 +43,10 @@ public class Intake extends SubsystemBase {
         //====================Intake Wrist====================
         var intakeWristMotorConfigs = new TalonFXConfiguration();
 
-        encoder.setInverted(false);
-        encoder.setOffset(Rotation2d.fromRotations(Constants.Intake_Wrist_Through_Bore_Offset));
+        Intake_Wrist_Motor.setPosition(Constants.Absolute_Zero);
+
+        //encoder.setInverted(false);
+        //encoder.setOffset(Rotation2d.fromRotations(Constants.Intake_Wrist_Through_Bore_Offset));
 
         //Brake Mode
         intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
@@ -57,8 +59,8 @@ public class Intake extends SubsystemBase {
 
         //Motion Magic
         var motionMagicConfigs = intakeWristMotorConfigs.MotionMagic;
-        motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
-        motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
+        // motionMagicConfigs.MotionMagicCruiseVelocity = Constants.Intake_Wrist_Velocity;
+        // motionMagicConfigs.MotionMagicAcceleration = Constants.Intake_Wrist_Acceleration;
 
         //Current Limits
         var intakeWristLimitConfigs = intakeWristMotorConfigs.CurrentLimits;
@@ -83,7 +85,7 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Intake Through Bore Rotations", getIntakeWristThroughBoreWithOffset());
+        //SmartDashboard.putNumber("Intake Through Bore Rotations", getIntakeWristThroughBoreWithOffset());
         SmartDashboard.putNumber("Intake Wrist Encoder", getIntakeWristEncoder());
         SmartDashboard.putNumber("Intake Wrist Velocity", getIntakeWristVelocity());
     }
@@ -101,13 +103,13 @@ public class Intake extends SubsystemBase {
         return Intake_Wrist_Motor.getVelocity().getValueAsDouble();
     }
 
-    public void zeroIntakeWristWithAbsolute() {
-        Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
-    }
+    // public void zeroIntakeWristWithAbsolute() {
+    //     Intake_Wrist_Motor.setPosition(getIntakeWristThroughBoreWithOffset());
+    // }
 
-    public double getIntakeWristThroughBoreWithOffset() {
-        return encoder.getPosition().getRotations() * Constants.Intake_Wrist_Through_Bore_Gear_Ratio;
-    }
+    // public double getIntakeWristThroughBoreWithOffset() {
+    //     return encoder.getPosition().getRotations() * Constants.Intake_Wrist_Through_Bore_Gear_Ratio; //getPosition OR getRawPosition
+    // }
 
     public void setIntakeWristSetpoint(double setpoint) {
         this.setpoint = setpoint;

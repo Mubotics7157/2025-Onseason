@@ -10,6 +10,16 @@ public class Constants {
     public static final double PID_Setpoint_Tolerance = 0.12;
 
     //====================Drivetrain====================
+
+
+    //    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0.0, new Constraints(4.0, 4.0)); //2.75, 0, 0, 4
+    //ProfiledPIDController LRPIDController = new ProfiledPIDController(6.0, 0, 0.1, new Constraints(0.2, 0.2));
+    //ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.1, 0, 0, new Constraints(1.0, 1.0)); 
+    //tolerance
+    //front back setpoint
+    //lr setpoint
+    //rotation setpoint     
+
     //Default
     public static final double DrivetrainMaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     public static final double DrivetrainMaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
@@ -49,11 +59,11 @@ public class Constants {
     //====================Intake====================
     //Through Bore Encoder
     public static final double Intake_Wrist_Through_Bore_Gear_Ratio = (50/8) * (62/16);
-    public static final double Intake_Wrist_Through_Bore_Offset = 0.94312122289; //0.94312122289
+    public static final double Intake_Wrist_Through_Bore_Offset = 0.0; //0.94312122289
 
     //Intake Motion Magic
-    public static final double Intake_Wrist_kG = 2.0; //2.0
-    public static final double Intake_Wrist_kP = 0.0;
+    public static final double Intake_Wrist_kG = 0.0;
+    public static final double Intake_Wrist_kP = 2.0; //2.0
     public static final double Intake_Wrist_kI = 0.03; //0.03
     public static final double Intake_Wrist_kD = 0.0;
     public static final double Intake_Wrist_Velocity = 100.0; //75.0
@@ -68,16 +78,16 @@ public class Constants {
     public static final double Outake_Ground_Run_Speed = -0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 20.0; // OLD: 39
-    public static final double Intake_Ground_Deploy_Setpoint = 9.0; // OLD: 30
+    public static final double Intake_Zero_Setpoint = 0.0; // OLD: 39
+    public static final double Intake_Ground_Deploy_Setpoint = -11.0; // OLD: 30
 
     //====================End Effector====================
     //End Effector Motion Magic
     public static final double End_Effector_Wrist_kP = 2.0;
     public static final double End_Effector_Wrist_kI = 0.0;
     public static final double End_Effector_Wrist_kD = 0.03;
-    public static final double End_Effector_Wrist_Velocity = 75.0; //150
-    public static final double End_Effector_Wrist_Acceleration = 150.0; //300
+    public static final double End_Effector_Wrist_Velocity = 300.0; //150
+    public static final double End_Effector_Wrist_Acceleration = 600.0; //300
 
     //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
@@ -89,7 +99,7 @@ public class Constants {
     public static final double End_Effector_Ground_Outake_Speed = -0.4;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.0;
     public static final double End_Effector_Score_L1_Coral_Speed = 0.3;
-    public static final double End_Effector_Score_L2_L3_L4_Speed = 0.35; //0.175
+    public static final double End_Effector_Score_L2_L3_L4_Speed = 0.5; //0.35
 
     //Algae
     public static final double End_Effector_Algae_Intake_Speed = 1.0;
@@ -100,8 +110,8 @@ public class Constants {
     public static final double End_Effector_Wrist_Zero_Setpoint = 0.0;
     public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 2.56;
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
-    public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 11.5;
-    public static final double End_Effector_Wrist_L4_Score_Setpoint = 15.5;
+    public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 12.5;
+    public static final double End_Effector_Wrist_L4_Score_Setpoint = 13.5; //15.5
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.0;
 
     //Algae  
@@ -116,12 +126,12 @@ public class Constants {
 
     //====================Elevator====================
     //Elevator Motion Magic
-    public static final double Elevator_kG = -0.3;
-    public static final double Elevator_kP = 2.25;
-    public static final double Elevator_kI = 0.0;
-    public static final double Elevator_kD = 0.03;
-    public static final double Elevator_Velocity = 100.0;
-    public static final double Elevator_Acceleration = 200.0;
+    public static final double Elevator_kG = -0.3; //-0.3
+    public static final double Elevator_kP = 1.9; //2.25
+    public static final double Elevator_kI = 0.0; //0.0
+    public static final double Elevator_kD = 0.03; //0.03
+    public static final double Elevator_Velocity = 150.0; //100
+    public static final double Elevator_Acceleration = 300.0; //200
 
     //Elevator Curent Limit
     public static final double Elevator_Current_Limit = 80.0;
@@ -132,7 +142,7 @@ public class Constants {
     public static final double Elevator_Ground_Coral_Setpoint = 0.0;
     public static final double Elevator_Coral_Station_Setpoint = 6.5;
     public static final double Elevator_L1_Setpoint = 3.5;
-    public static final double Elevator_L2_Setpoint = 4.5;
+    public static final double Elevator_L2_Setpoint = 5.25;
     public static final double Elevator_L3_Setpoint = 11.5;
     public static final double Elevator_L4_Setpoint = 24.14;
 
@@ -147,7 +157,8 @@ public class Constants {
 
     //====================Climb====================
     //Climb Current Limit
-    public static final double Climb_Current_Limit = 120.0;
+    public static final double Climb_Roller_Current_Limit = 80.0;
+    public static final double Climb_Wrist_Current_Limit = 120.0;
 
     //Climb Speeds
     public static final double Climb_Up_Speed = 1.0;

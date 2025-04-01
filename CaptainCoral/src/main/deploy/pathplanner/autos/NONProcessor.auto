@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "MushroomProcessor1"
+            "pathName": "NONProcessor1"
           }
         },
         {
@@ -17,13 +17,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 1.5
+                  "waitTime": 5.0
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "DrivetrainLeftAlign"
+                  "name": "DrivetrainRightAlign"
                 }
               }
             ]
@@ -36,13 +36,13 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.75
+                  "waitTime": 0.65
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "EndEffectorScore"
+                  "name": "RobotAutoPrepScoreL4"
                 }
               }
             ]
@@ -55,82 +55,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.001
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "EndEffectorStop"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.001
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "RobotHome"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "MushroomProcessor2"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "MushroomProcessor3"
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 1.5
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "DrivetrainLeftAlign"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "race",
-          "data": {
-            "commands": [
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 0.75
+                  "waitTime": 0.35
                 }
               },
               {
@@ -149,7 +74,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.001
+                  "waitTime": 0
                 }
               },
               {
@@ -168,7 +93,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 0.001
+                  "waitTime": 0.65
                 }
               },
               {
@@ -178,12 +103,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
           }
         }
       ]

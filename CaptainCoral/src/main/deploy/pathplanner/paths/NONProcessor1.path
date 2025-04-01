@@ -3,42 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.115426136363636,
-        "y": 2.963025568181818
+        "x": 7.15,
+        "y": 6.175
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.4001105872365938,
-        "y": -0.1544943387978983
+        "x": 6.448320051717217,
+        "y": 6.101497634733442
       },
       "isLocked": false,
-      "linkedName": "DP1E"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.7192052980132444,
-        "y": 3.052
+        "x": 5.251924668874173,
+        "y": 5.092818708609271
       },
       "prevControl": {
-        "x": -0.25368211678836605,
-        "y": 0.27015428369742756
+        "x": 5.411142826317691,
+        "y": 5.285560967442905
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "DP2E"
+      "linkedName": "NP1E"
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.15,
-      "rotationDegrees": 57.5
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.21,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
@@ -46,14 +41,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0.5,
-    "rotation": 59.99999999999999
+    "velocity": 0,
+    "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "DavisProcessor",
+  "folder": "NONProcessor",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 119.99999999999999
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

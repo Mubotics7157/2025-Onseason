@@ -21,12 +21,16 @@ public class ClimbWristRun extends Command {
     @Override
     public void execute() {
         double motorSpeed = speed;
+
         climb.setClimbWristMotorSpeed(motorSpeed);
+        climb.setClimbRollerSpeed(-Math.abs(motorSpeed));
     }
+    
 
     @Override
     public void end(boolean interrupted) {
         climb.setClimbWristMotorSpeed(Constants.Absolute_Zero);
+        climb.setClimbRollerSpeed(Constants.Absolute_Zero);
         System.out.println("ClimbWristRun Offline");
     }
 

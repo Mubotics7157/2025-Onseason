@@ -22,24 +22,35 @@ public class Climb extends SubsystemBase {
         System.out.println("====================Climb Subsystem Online====================");
 
         //====================Climb Subsystem====================
-        var climbMotorConfigs = new TalonFXConfiguration();
+        var climbRollerMotorConfigs = new TalonFXConfiguration();
 
-        climbMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        climbRollerMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
 
         //Current Limits
-        var climbLimitConfigs = climbMotorConfigs.CurrentLimits;
-        climbLimitConfigs.StatorCurrentLimit = Constants.Climb_Current_Limit;
-        climbLimitConfigs.StatorCurrentLimitEnable = true; 
+        var climbRollerLimitConfigs = climbRollerMotorConfigs.CurrentLimits;
+        climbRollerLimitConfigs.StatorCurrentLimit = Constants.Climb_Roller_Current_Limit;
+        climbRollerLimitConfigs.StatorCurrentLimitEnable = true; 
 
         //Applies Configs
-        Climb_Wrist_Motor.getConfigurator().apply(climbMotorConfigs);
-        Climb_Roller_Motor.getConfigurator().apply(climbMotorConfigs);
+        Climb_Roller_Motor.getConfigurator().apply(climbRollerMotorConfigs);
+
+        //========================================
+        var climbWristMotorConfigs = new TalonFXConfiguration();
+
+        climbWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+        //Current Limits
+        var climbWristLimitConfigs = climbWristMotorConfigs.CurrentLimits;
+        climbWristLimitConfigs.StatorCurrentLimit = Constants.Climb_Wrist_Current_Limit;
+        climbWristLimitConfigs.StatorCurrentLimitEnable = true; 
+
+        //Applies Configs
+        Climb_Wrist_Motor.getConfigurator().apply(climbWristMotorConfigs);
     }
 
     @Override
     public void periodic() {
-        //SmartDashboard.putNumber("Climb Motor Encoder", getClimbWristEncoder());
-        //SmartDashboard.putNumber("Climb Stator Current", getClimbWristStatorCurrent());   
+        SmartDashboard.putNumber("Climb Wrist Motor Stator Current", getClimbWristStatorCurrent());   
     }
 
     //====================Climb Methods====================
@@ -51,11 +62,7 @@ public class Climb extends SubsystemBase {
         Climb_Roller_Motor.set(speed);
     }
 
-    // public double getClimbWristEncoder() {
-    //     return Climb_Wrist_Motor.getPosition().getValueAsDouble();
-    // }
-
-    // public double getClimbWristStatorCurrent() {
-    //     return Climb_Wrist_Motor.getStatorCurrent().getValueAsDouble();
-    // }
+    public double getClimbWristStatorCurrent() {
+        return Climb_Wrist_Motor.getStatorCurrent().getValueAsDouble();
+    }
 }

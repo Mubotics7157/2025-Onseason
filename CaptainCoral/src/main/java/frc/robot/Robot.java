@@ -26,22 +26,22 @@ public class Robot extends TimedRobot {
   public void robotInit() {
       super.robotInit();
 
-      Intake.getInstance().zeroIntakeWristWithAbsolute();
+      //Intake.getInstance().zeroIntakeWristWithAbsolute();
 
       VisionManager.getInstance();
   }
 
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
+
     //Match Time Log
     double matchTime = Timer.getMatchTime();
     SmartDashboard.putNumber("Match Time", matchTime);
-
+   
     //Battery Voltage Log
     double batteryVoltage = RobotController.getBatteryVoltage();
     SmartDashboard.putNumber("Battery Voltage", batteryVoltage);
-
-    CommandScheduler.getInstance().run();
   }
 
   @Override
