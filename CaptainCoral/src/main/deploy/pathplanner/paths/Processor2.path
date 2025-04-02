@@ -1,0 +1,100 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 5.222868377483444,
+        "y": 2.761051324503311
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.675620860927152,
+        "y": 1.656912251655628
+      },
+      "isLocked": false,
+      "linkedName": "P1E"
+    },
+    {
+      "anchor": {
+        "x": 3.0218543046357613,
+        "y": 2.0201158940397352
+      },
+      "prevControl": {
+        "x": 3.8209023178807944,
+        "y": 2.4486961920529793
+      },
+      "nextControl": {
+        "x": 2.502353678403113,
+        "y": 1.7414746490604056
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 1.0896109271523178,
+        "y": 0.7416390728476813
+      },
+      "prevControl": {
+        "x": 1.8957993623557456,
+        "y": 1.8456088219550781
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "P2E"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": 59.99999999999999
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "GroundIntake",
+      "waypointRelativePos": 0.7504737839545167,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.75
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "GroundIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.428,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 59.99999999999999
+  },
+  "reversed": false,
+  "folder": "Processor",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 119.99999999999999
+  },
+  "useDefaultConstraints": true
+}

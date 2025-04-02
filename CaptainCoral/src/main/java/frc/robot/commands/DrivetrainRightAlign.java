@@ -16,14 +16,12 @@ package frc.robot.commands;
  public class DrivetrainRightAlign extends Command {
      private final Drivetrain drivetrain;
      private final VisionManager visionManager;
-
-     ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0.01, new Constraints(4.0, 4.0)); //2.75, 0, 0, 4
+ 
+     ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0, new Constraints(4.0, 4.0));
      ProfiledPIDController LRPIDController = new ProfiledPIDController(7.75, 0, 0.075, new Constraints(0.2, 0.2));
-     ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));   
+     ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.0775, 0, 0, new Constraints(1.0, 1.0));
      
      boolean FBPositionHasReset = false;
-     boolean LRPositionHasReset = false;
-     boolean RotPositionHasReset = false;
  
      public DrivetrainRightAlign(Drivetrain drivetrain, VisionManager visionManager) {
          this.drivetrain = drivetrain;
@@ -31,6 +29,10 @@ package frc.robot.commands;
  
          addRequirements(drivetrain);
          addRequirements(visionManager);
+
+         FBPIDController.setTolerance(0.02);
+         LRPIDController.setTolerance(0.02);
+         rotationPIDController.setTolerance(0.02);
  
          //HotRefreshFBAlignPID
          // SmartDashboard.putNumber("FBAlign kP", 0.0);
@@ -61,42 +63,21 @@ package frc.robot.commands;
          //HotRefreshFBAlignPID();
          //HotRefreshLRAlignPID();
          //HotRefreshRotAlignPID();
-
-        FBPositionHasReset = false;
-        LRPositionHasReset = false;
-        RotPositionHasReset = false;
-
-        FBPIDController.reset(0);
-        LRPIDController.reset(0);
-        rotationPIDController.reset(0);
-    
      }
  
      @Override
      public void execute() {
-        double FB_Reading = visionManager.deriveFBPose();
-        double LR_Reading = visionManager.deriveLRPose();
-        double Rot_Reading = visionManager.deriveRotPose();
-
-        if (!FBPositionHasReset && FB_Reading!= 0) {
-            FBPIDController.reset(FB_Reading);
-            FBPositionHasReset = true;
-        } 
-
-        if (!LRPositionHasReset && LR_Reading!= 0) {
-            LRPIDController.reset(LR_Reading);
-            LRPositionHasReset = true;
-        } 
-
-        if (!RotPositionHasReset && Rot_Reading!= 0) {
-            rotationPIDController.reset(Rot_Reading);
-            RotPositionHasReset = true;
-        } 
-
+         double FB_Reading = visionManager.deriveFBPose();
+      
+         if (!FBPositionHasReset && FB_Reading!= 0) {
+             FBPIDController.reset(FB_Reading);
+             FBPositionHasReset = true;
+         } 
+ 
          //FB Speed Calculation
          double FBSpeed;
          if (visionManager.deriveFBPose() != 0.0) {
-             FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -0.55);
+             FBSpeed = FBPIDController.calculate(visionManager.deriveFBPose(), -0.43);
          } else {
              FBSpeed = 0.0;
          }
@@ -104,7 +85,7 @@ package frc.robot.commands;
          //LR Speed Calculation
          double LRSpeed;
          if (visionManager.deriveLRPose() != 0.0) {
-             LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.1775);
+             LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), 0.21);
          } else {
              LRSpeed = 0.0;
          }
@@ -124,13 +105,13 @@ package frc.robot.commands;
                  .withDriveRequestType(DriveRequestType.OpenLoopVoltage)
                  .withSteerRequestType(SteerRequestType.MotionMagicExpo);
          drivetrain.setControl(drivetrainRequest
-                 .withVelocityX(0.0) //FBSpeed
+                 .withVelocityX(FBSpeed) //FBSpeed
                  .withVelocityY(LRSpeed) //LRSpeed
-                 .withRotationalRate(0.0)); //RotSpeed
+                 .withRotationalRate(RotSpeed)); //RotSpeed
  
-         SmartDashboard.putNumber("FBSpeed", FBSpeed);
-         SmartDashboard.putNumber("LRSpeed", LRSpeed);
-         SmartDashboard.putNumber("RotSpeed", RotSpeed);
+        //  SmartDashboard.putNumber("FBSpeed", FBSpeed);
+        //  SmartDashboard.putNumber("LRSpeed", LRSpeed);
+        //  SmartDashboard.putNumber("RotSpeed", RotSpeed);
      }
  
      @Override
@@ -166,4 +147,4 @@ package frc.robot.commands;
      //     rotationPIDController.setConstraints(new Constraints(SmartDashboard.getNumber("RotAlign kVelo", 0.0), SmartDashboard.getNumber("RotAlign kAccel", 0.0)));
      //     System.out.println("HotRefreshRotAlignPID Complete");
      // }
- }
+    }

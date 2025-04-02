@@ -37,6 +37,7 @@ import frc.robot.subsystems.Climb;
 import frc.robot.commands.AlgaeNetScore;
 import frc.robot.commands.ClimbRollerRun;
 import frc.robot.commands.ClimbWristRun;
+import frc.robot.commands.DrivetrainLeftAlign;
 //import frc.robot.commands.DrivetrainLeftAlign;
 //Limelight Imports
 import frc.robot.commands.DrivetrainRightAlign;
@@ -54,12 +55,18 @@ public class RobotContainer {
     private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
-    public static final Drivetrain drivetrain = TunerConstants.createDrivetrain();    
+    public static final Drivetrain drivetrain = TunerConstants.createDrivetrain();   
+
+    //====================COMMAND OBJECTS====================
+    //private final DrivetrainRightAlign MyCommand = new DrivetrainRightAlign(drivetrain, VisionManager.getInstance());
+
+    
+    //driverController.rightBumper().whileTrue(MyCommand);
 
     public RobotContainer() {
         //====================AUTONOMOUS SETUP====================
         //====================Alignment Commands====================
-        //NamedCommands.registerCommand("DrivetrainLeftAlign", new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
+        NamedCommands.registerCommand("DrivetrainLeftAlign", new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
         NamedCommands.registerCommand("DrivetrainRightAlign", new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Actions====================
@@ -74,7 +81,7 @@ public class RobotContainer {
 
         configureBindings();
 
-        autoChooser = AutoBuilder.buildAutoChooser("DavisProcessor");
+        autoChooser = AutoBuilder.buildAutoChooser("Processor");
         SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
@@ -96,7 +103,7 @@ public class RobotContainer {
         driverController.povDown().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         //====================Align Left====================
-        //driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
+        driverController.leftBumper().whileTrue(new DrivetrainLeftAlign(drivetrain, VisionManager.getInstance()));
 
         //====================Align Right====================
         driverController.rightBumper().whileTrue(new DrivetrainRightAlign(drivetrain, VisionManager.getInstance()));

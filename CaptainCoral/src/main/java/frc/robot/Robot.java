@@ -25,9 +25,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
       super.robotInit();
-
-      //Intake.getInstance().zeroIntakeWristWithAbsolute();
-
+      Intake.getInstance().zeroIntakeWristWithAbsolute();
       VisionManager.getInstance();
   }
 
@@ -45,7 +43,9 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    Intake.getInstance().zeroIntakeWristWithAbsolute();
+  }
 
   @Override
   public void disabledPeriodic() {
@@ -61,6 +61,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+    Intake.getInstance().zeroIntakeWristWithAbsolute();
   }
 
   @Override
@@ -76,6 +78,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    Intake.getInstance().zeroIntakeWristWithAbsolute();
   }
 
   @Override

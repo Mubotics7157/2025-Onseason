@@ -1,0 +1,79 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.7046771523178808,
+        "y": 2.7029387417218538
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.5470591861147502,
+        "y": 1.381291806408367
+      },
+      "isLocked": false,
+      "linkedName": "P3E"
+    },
+    {
+      "anchor": {
+        "x": 0.9370653973509934,
+        "y": 0.8506001655629132
+      },
+      "prevControl": {
+        "x": 1.7019544107760112,
+        "y": 1.6975949754257287
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "P4E"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "GroundIntake",
+      "waypointRelativePos": 0.1,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "race",
+        "data": {
+          "commands": [
+            {
+              "type": "wait",
+              "data": {
+                "waitTime": 2.0
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "GroundIntake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.428,
+    "maxAcceleration": 2.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 60.26008353186424
+  },
+  "reversed": false,
+  "folder": "Processor",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 59.99999999999999
+  },
+  "useDefaultConstraints": true
+}

@@ -74,12 +74,12 @@ public class Constants {
     public static final double Intake_Roller_Current_Limit = 100.0;
 
     //Intake Speeds
-    public static final double Intake_Ground_Run_Speed = 0.75;
+    public static final double Intake_Ground_Run_Speed = .9; //0.75 with x60 JONNY HERE
     public static final double Outake_Ground_Run_Speed = -0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 0.0; // OLD: 39
-    public static final double Intake_Ground_Deploy_Setpoint = -11.0; // OLD: 30
+    public static final double Intake_Zero_Setpoint = 5.5; // OLD: 5.5
+    public static final double Intake_Ground_Deploy_Setpoint = -4.0; // OLD: -4.0
 
     //====================End Effector====================
     //End Effector Motion Magic
@@ -108,10 +108,10 @@ public class Constants {
     //~~~~~End Effector Setpoints~~~~~
     //Coral
     public static final double End_Effector_Wrist_Zero_Setpoint = 0.0;
-    public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 2.56;
+    public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 1.75; // 2.56
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 12.5;
-    public static final double End_Effector_Wrist_L4_Score_Setpoint = 13.5; //15.5
+    public static final double End_Effector_Wrist_L4_Score_Setpoint = 14.25; //13.75
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.0;
 
     //Algae  
