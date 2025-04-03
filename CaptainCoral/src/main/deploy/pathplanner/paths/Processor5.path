@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.020871049048627,
-        "y": 1.9623001671568756
+        "x": 1.884630681818182,
+        "y": 1.6866619318181812
       },
       "isLocked": false,
       "linkedName": "P4E"
     },
     {
       "anchor": {
-        "x": 3.5230753311258276,
-        "y": 2.7537872516556297
+        "x": 3.5897727272727273,
+        "y": 2.7436505681818177
       },
       "prevControl": {
-        "x": 2.46970940597729,
-        "y": 1.6678124121711821
+        "x": 1.9145454545454543,
+        "y": 1.756463068181819
       },
       "nextControl": null,
       "isLocked": false,
@@ -57,7 +57,7 @@
       }
     },
     {
-      "name": "",
+      "name": "GroundIntakeStop",
       "waypointRelativePos": 0.5,
       "endWaypointRelativePos": null,
       "command": {
@@ -73,7 +73,7 @@
             {
               "type": "named",
               "data": {
-                "name": null
+                "name": "GroundIntakeStop"
               }
             }
           ]

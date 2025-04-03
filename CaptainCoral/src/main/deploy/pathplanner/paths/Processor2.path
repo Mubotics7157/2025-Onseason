@@ -8,36 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.675620860927152,
-        "y": 1.656912251655628
+        "x": 3.9288068181818185,
+        "y": 2.255042613636364
       },
       "isLocked": false,
       "linkedName": "P1E"
     },
     {
       "anchor": {
-        "x": 3.0218543046357613,
-        "y": 2.0201158940397352
+        "x": 2.6723863636363636,
+        "y": 1.7863778409090911
       },
       "prevControl": {
-        "x": 3.8209023178807944,
-        "y": 2.4486961920529793
+        "x": 2.9223863636363654,
+        "y": 1.7863778409090911
       },
       "nextControl": {
-        "x": 2.502353678403113,
-        "y": 1.7414746490604056
+        "x": 2.4223863636363636,
+        "y": 1.7863778409090911
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.0896109271523178,
-        "y": 0.7416390728476813
+        "x": 1.09,
+        "y": 0.742
       },
       "prevControl": {
-        "x": 1.8957993623557456,
-        "y": 1.8456088219550781
+        "x": 1.7151136363636361,
+        "y": 1.7664346590909088
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,7 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.5,
+      "waypointRelativePos": 0.7284345047923353,
       "rotationDegrees": 59.99999999999999
     }
   ],
@@ -55,7 +55,7 @@
   "eventMarkers": [
     {
       "name": "GroundIntake",
-      "waypointRelativePos": 0.7504737839545167,
+      "waypointRelativePos": 0.4,
       "endWaypointRelativePos": null,
       "command": {
         "type": "race",

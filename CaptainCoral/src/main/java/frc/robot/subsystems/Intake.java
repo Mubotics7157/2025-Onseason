@@ -49,7 +49,7 @@ public class Intake extends SubsystemBase {
         encoder.setOffset(Rotation2d.fromRotations(Constants.Intake_Wrist_Through_Bore_Offset));
 
         //Brake Mode
-        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake; //BRAKE
+        intakeWristMotorConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast; //BRAKE
 
         //General Configurations
         var generalSlotConfigs = intakeWristMotorConfigs.Slot0;

@@ -166,14 +166,14 @@ public class RobotContainer {
         driverController.leftStick().whileTrue(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Net_Score_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Elevator_Net_Score_Setpoint, drivetrain, Constants.Drivetrain_Elevator_Speed_Multiplier, Constants.Drivetrain_Elevator_Turn_Multiplier, driverController.getHID()));
         driverController.leftStick().onFalse(new RobotAlgaeIntake(EndEffector.getInstance(), Constants.End_Effector_Wrist_Algae_Stow_Setpoint, Constants.End_Effector_Algae_Intake_Speed, Elevator.getInstance(), Constants.Absolute_Zero, drivetrain, Constants.Drivetrain_Speed_Multiplier, Constants.Drivetrain_Turn_Multiplier, driverController.getHID()));
 
-        //====================End Effector Hot PID Refresh====================
-        //driverController.leftBumper().onTrue(new InstantCommand(EndEffector.getInstance()::HotRefreshEndEffectorConfig));
+        //====================Intake Hot PID Refresh====================
+        //driverController.leftBumper().onTrue(new InstantCommand(Intake.getInstance()::HotRegreshIntakeConfig));
 
         //====================Elevator Hot PID Refresh====================
         //driverController.leftBumper().onTrue(new InstantCommand(Elevator.getInstance()::HotRefreshElevatorConfig));
 
-        //====================Intake Hot PID Refresh====================
-        //driverController.leftBumper().onTrue(new InstantCommand(Intake.getInstance()::HotRegreshIntakeConfig));
+        //====================End Effector Hot PID Refresh====================
+        //driverController.leftBumper().onTrue(new InstantCommand(EndEffector.getInstance()::HotRefreshEndEffectorConfig));
 
         //====================OPERATOR CONTROLLER BINDINGS====================
         //====================Climb Wrist Up=====================

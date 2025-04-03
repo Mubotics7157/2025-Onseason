@@ -10,16 +10,6 @@ public class Constants {
     public static final double PID_Setpoint_Tolerance = 0.12;
 
     //====================Drivetrain====================
-
-
-    //    ProfiledPIDController FBPIDController = new ProfiledPIDController(2.75, 0, 0.0, new Constraints(4.0, 4.0)); //2.75, 0, 0, 4
-    //ProfiledPIDController LRPIDController = new ProfiledPIDController(6.0, 0, 0.1, new Constraints(0.2, 0.2));
-    //ProfiledPIDController rotationPIDController = new ProfiledPIDController(0.1, 0, 0, new Constraints(1.0, 1.0)); 
-    //tolerance
-    //front back setpoint
-    //lr setpoint
-    //rotation setpoint     
-
     //Default
     public static final double DrivetrainMaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     public static final double DrivetrainMaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
@@ -70,16 +60,16 @@ public class Constants {
     public static final double Intake_Wrist_Acceleration = 200.0; //150
 
     //Intake Current Limits
-    public static final double Intake_Wrist_Current_Limit = 80.0;
+    public static final double Intake_Wrist_Current_Limit = 40.0;
     public static final double Intake_Roller_Current_Limit = 100.0;
 
     //Intake Speeds
-    public static final double Intake_Ground_Run_Speed = .9; //0.75 with x60 JONNY HERE
+    public static final double Intake_Ground_Run_Speed = 0.9; //0.75 with x60 JONNY HERE
     public static final double Outake_Ground_Run_Speed = -0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 5.5; // OLD: 5.5
-    public static final double Intake_Ground_Deploy_Setpoint = -4.0; // OLD: -4.0
+    public static final double Intake_Zero_Setpoint = 11.5; // OLD: 5.5
+    public static final double Intake_Ground_Deploy_Setpoint = 3.0; // OLD: -4.0
 
     //====================End Effector====================
     //End Effector Motion Magic
@@ -89,13 +79,17 @@ public class Constants {
     public static final double End_Effector_Wrist_Velocity = 300.0; //150
     public static final double End_Effector_Wrist_Acceleration = 600.0; //300
 
+    public static final double End_Effector_Algae_Setpoint_Limit = 15.0;
+    public static final double End_Effector_Wrist_Algae_Velocity = 75.0;
+    public static final double End_Effector_Wrist_Algae_Acceleration = 150.0;
+    
     //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
     public static final double End_Effector_Roller_Current_Limit = 120.0;
 
     //~~~~~End Effector Speeds~~~~~
     //Coral
-    public static final double End_Effector_Ground_Intake_Speed = 0.6;
+    public static final double End_Effector_Ground_Intake_Speed = 0.75;
     public static final double End_Effector_Ground_Outake_Speed = -0.4;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.0;
     public static final double End_Effector_Score_L1_Coral_Speed = 0.3;
@@ -108,7 +102,7 @@ public class Constants {
     //~~~~~End Effector Setpoints~~~~~
     //Coral
     public static final double End_Effector_Wrist_Zero_Setpoint = 0.0;
-    public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 1.75; // 2.56
+    public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 1.6; // 1.75
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 12.5;
     public static final double End_Effector_Wrist_L4_Score_Setpoint = 14.25; //13.75

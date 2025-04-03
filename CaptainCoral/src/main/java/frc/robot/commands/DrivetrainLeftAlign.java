@@ -85,7 +85,7 @@ package frc.robot.commands;
          //LR Speed Calculation
          double LRSpeed;
          if (visionManager.deriveLRPose() != 0.0) {
-             LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), -0.155);
+             LRSpeed = -LRPIDController.calculate(visionManager.deriveLRPose(), -0.145);
          } else {
              LRSpeed = 0.0;
          }

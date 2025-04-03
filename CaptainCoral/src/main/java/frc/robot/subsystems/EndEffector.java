@@ -100,8 +100,21 @@ public class EndEffector extends SubsystemBase {
         this.setpoint = setpoint;
     }
 
+    // public void goToEndEffectorWristSetpoint() {
+    //     final MotionMagicVoltage m_request = new MotionMagicVoltage(Constants.Absolute_Zero).withEnableFOC(true);
+    //     End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
+    // }
+
     public void goToEndEffectorWristSetpoint() {
         final MotionMagicVoltage m_request = new MotionMagicVoltage(Constants.Absolute_Zero).withEnableFOC(true);
+        
+        if (this.setpoint > Constants.End_Effector_Algae_Setpoint_Limit) {
+            var newMotionMagicConfigs = new MotionMagicConfigs();
+            newMotionMagicConfigs.MotionMagicCruiseVelocity = Constants.End_Effector_Wrist_Algae_Velocity;
+            newMotionMagicConfigs.MotionMagicAcceleration = Constants.End_Effector_Wrist_Algae_Acceleration;
+            End_Effector_Wrist_Motor.getConfigurator().apply(newMotionMagicConfigs);
+        }
+
         End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
     }
 
