@@ -113,6 +113,11 @@ public class EndEffector extends SubsystemBase {
             newMotionMagicConfigs.MotionMagicCruiseVelocity = Constants.End_Effector_Wrist_Algae_Velocity;
             newMotionMagicConfigs.MotionMagicAcceleration = Constants.End_Effector_Wrist_Algae_Acceleration;
             End_Effector_Wrist_Motor.getConfigurator().apply(newMotionMagicConfigs);
+        } else {
+            var newerMotionMagicConfigs = new MotionMagicConfigs();
+            newerMotionMagicConfigs.MotionMagicCruiseVelocity = Constants.End_Effector_Wrist_Velocity;
+            newerMotionMagicConfigs.MotionMagicAcceleration = Constants.End_Effector_Wrist_Acceleration;
+            End_Effector_Wrist_Motor.getConfigurator().apply(newerMotionMagicConfigs);
         }
 
         End_Effector_Wrist_Motor.setControl(m_request.withPosition(-1 * this.setpoint));
