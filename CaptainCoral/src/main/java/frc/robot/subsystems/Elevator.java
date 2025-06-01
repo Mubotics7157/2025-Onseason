@@ -16,6 +16,7 @@ public class Elevator extends SubsystemBase {
     private final TalonFX Elevator_Slave_Motor = new TalonFX(Devices.ELEVATOR_SLAVE_MOTOR);
 
     private double setpoint;
+    private double elevatorAdjustment;
 
     public static Elevator getInstance() {
         return instance;
@@ -33,6 +34,10 @@ public class Elevator extends SubsystemBase {
         // SmartDashboard.putNumber("Elevator kD", 0.0);
         // SmartDashboard.putNumber("Elevator kVelo", 0.0);
         // SmartDashboard.putNumber("Elevator kAccel", 0.0);
+
+        //Hot Switch Setpoints
+        SmartDashboard.putNumber("Elevator Adjustment", 0.0);
+        elevatorAdjustment = 0.0;
 
         //====================Elevator Subsystem====================
         var elevatorMotorConfigs = new TalonFXConfiguration();
@@ -97,7 +102,8 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setElevatorSetpoint(double setpoint) {
-        this.setpoint = setpoint;
+        elevatorAdjustment = SmartDashboard.getNumber("Elevator Adjustment", 0.0);
+        this.setpoint = setpoint + elevatorAdjustment;
     }
 
     public void goToElevatorSetpoint() {
@@ -133,4 +139,6 @@ public class Elevator extends SubsystemBase {
 
     //     System.out.println("HotRefreshElevatorConfig Complete");
     // }
+
+
 }

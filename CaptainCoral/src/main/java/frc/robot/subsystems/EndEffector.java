@@ -20,6 +20,7 @@ public class EndEffector extends SubsystemBase {
     private final DigitalInput End_Effector_Back_Photoelectric = new DigitalInput(Devices.END_EFFECTOR_PHOTOELECTRIC_BACK_PORT);
 
     private double setpoint;
+    private double endEffectorAdjustment;
 
     public static EndEffector getInstance() {
         return instance;
@@ -37,6 +38,10 @@ public class EndEffector extends SubsystemBase {
         // SmartDashboard.putNumber("End Effector kD", 0.0);
         // SmartDashboard.putNumber("End Effector kVelo", 0.0);
         // SmartDashboard.putNumber("End Effector kAccel", 0.0);
+
+        //Hot Switch Setpoints
+        SmartDashboard.putNumber("End Effector Adjustment", 0.0);
+        endEffectorAdjustment = 0.0;
 
         //====================End Effector Wrist====================
         var endEffectorWristMotorConfigs = new TalonFXConfiguration();
@@ -95,9 +100,9 @@ public class EndEffector extends SubsystemBase {
         return End_Effector_Wrist_Motor.getVelocity().getValueAsDouble();
     }
 
-
     public void setEndEffectorWristSetpoint(double setpoint) {
-        this.setpoint = setpoint;
+        endEffectorAdjustment = SmartDashboard.getNumber("End Effector Adjustment", 0.0);
+        this.setpoint = setpoint + endEffectorAdjustment;
     }
 
     // public void goToEndEffectorWristSetpoint() {

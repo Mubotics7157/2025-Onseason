@@ -60,7 +60,7 @@ public class Constants {
     public static final double Intake_Wrist_Acceleration = 200.0; //150
 
     //Intake Current Limits
-    public static final double Intake_Wrist_Current_Limit = 40.0;
+    public static final double Intake_Wrist_Current_Limit = 20.0;
     public static final double Intake_Roller_Current_Limit = 100.0;
 
     //Intake Speeds
@@ -68,8 +68,8 @@ public class Constants {
     public static final double Outake_Ground_Run_Speed = -0.2;
 
     //Intake Setpoints
-    public static final double Intake_Zero_Setpoint = 11.5; // OLD: 5.5
-    public static final double Intake_Ground_Deploy_Setpoint = 3.0; // OLD: -4.0
+    public static final double Intake_Zero_Setpoint = 0.0; //
+    public static final double Intake_Ground_Deploy_Setpoint = -12.0; //
 
     //====================End Effector====================
     //End Effector Motion Magic
@@ -80,8 +80,8 @@ public class Constants {
     public static final double End_Effector_Wrist_Acceleration = 600.0; //300
 
     public static final double End_Effector_Algae_Setpoint_Limit = 15.0;
-    public static final double End_Effector_Wrist_Algae_Velocity = 75.0;
-    public static final double End_Effector_Wrist_Algae_Acceleration = 150.0;
+    public static final double End_Effector_Wrist_Algae_Velocity = 37.5;
+    public static final double End_Effector_Wrist_Algae_Acceleration = 75.0;
     
     //End Effector Current Limits
     public static final double End_Effector_Wrist_Current_Limit = 80.0;
@@ -89,7 +89,7 @@ public class Constants {
 
     //~~~~~End Effector Speeds~~~~~
     //Coral
-    public static final double End_Effector_Ground_Intake_Speed = 0.75;
+    public static final double End_Effector_Ground_Intake_Speed = 0.69375;
     public static final double End_Effector_Ground_Outake_Speed = -0.4;
     public static final double End_Effector_Coral_Station_Intake_Speed = 0.0;
     public static final double End_Effector_Score_L1_Coral_Speed = 0.3;
@@ -105,15 +105,15 @@ public class Constants {
     public static final double End_Effector_Wrist_Coral_Ground_Setpoint = 1.6; // 1.75
     public static final double End_Effector_Wrist_L1_Score_Setpoint = 3.0;
     public static final double End_Effector_Wrist_L2_L3_Score_Setpoint = 12.5;
-    public static final double End_Effector_Wrist_L4_Score_Setpoint = 14.25; //13.75
+    public static final double End_Effector_Wrist_L4_Score_Setpoint = 14.9; //13.75
     public static final double End_Effector_Wrist_Coral_Station_Setpoint = 0.0;
 
     //Algae  
     public static final double End_Effector_Wrist_Algae_Remove_Setpoint = 36.0;
-    public static final double End_Effector_Wrist_Algae_Ground_Setpoint = 37.0;
+    public static final double End_Effector_Wrist_Algae_Ground_Setpoint = 37.5;
     public static final double End_Effector_Wrist_Algae_Stow_Setpoint = 15.5; //4.0
     public static final double End_Effector_Wrist_Processor_Score_Setpoint = 31.0;
-    public static final double End_Effector_Wrist_Net_Score_Setpoint = 21.0;
+    public static final double End_Effector_Wrist_Net_Score_Setpoint = 22.5;
 
     public static final double End_Effector_Wrist_Climb_Start_Setpoint = 0.0;
     public static final double End_Effector_Wrist_Climb_End_Setpoint = 30.0;
@@ -138,14 +138,14 @@ public class Constants {
     public static final double Elevator_L1_Setpoint = 3.5;
     public static final double Elevator_L2_Setpoint = 5.25;
     public static final double Elevator_L3_Setpoint = 11.5;
-    public static final double Elevator_L4_Setpoint = 24.14;
+    public static final double Elevator_L4_Setpoint = 23.14;
 
     //Algae
     public static final double Elevator_Bottom_Algae_Setpoint = 13.0;
-    public static final double Elevator_Top_Algae_Setpoint = 19.5;
+    public static final double Elevator_Top_Algae_Setpoint = 20.5;
     public static final double Elevator_Ground_Algae_Setpoint = 0.0;
     public static final double Elevator_Processor_Score_Setpoint = 0.0;
-    public static final double Elevator_Net_Score_Setpoint = 24.14;
+    public static final double Elevator_Net_Score_Setpoint = 25.2;
 
     public static final double Elevator_Climb_Setpoint = 0.0;
 
