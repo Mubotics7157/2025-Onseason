@@ -11,6 +11,6 @@ Code for FRC 7157's 2025 Robot, Ghidorah.
 - Deep Climb
 
 ## **Major Directories**
-- Subsystems Folder (Contains mechanism initalization protocol)
+- Subsystems Folder (Contains mechanism initialization protocol)
 - Commands Folder (Contains robot super states for major game actions)
 - RobotContainer File (Contains Driver/Operator Keybinds)
