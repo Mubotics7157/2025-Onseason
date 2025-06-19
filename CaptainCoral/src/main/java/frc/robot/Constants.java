@@ -163,4 +163,6 @@ public class Constants {
     //Climb Speeds
     public static final double Climb_Up_Speed = 1.0;
     public static final double Climb_Down_Speed = -1.0;
+
+    public static final double FINAL = 0.0;
 }
